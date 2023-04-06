@@ -62,7 +62,49 @@ FitnessTracker will also provide a web interface for users to manage their fitne
 
 ### 6.1. Public Models
 
-_Define the data models your service will expose in its responses via your *`-Model`* package. These will be equivalent to the *`PlaylistModel`* and *`SongModel`* from the Unit 3 project._
+```
+// WaterLogModel
+
+String customerId
+LocalDateTime timestamp
+String customerName
+Double ounces
+```
+
+```
+// MealLogModel
+
+String customerId
+LocalDateTime timestamp
+String name
+String type
+Double calories
+Double carbs
+Double protein
+Double fat
+```
+
+```
+// ExerciseLogModel
+
+String customerId
+LocalDateTime timestamp
+String exerciseType
+String description
+Double caloriesBurned
+Integer numReps
+Double numSets
+Double duration
+Double distance
+```
+
+```
+// WeightLogModel
+
+String customerId
+LocalDateTime timestamp
+Double weight
+```
 
 ### 6.2. _First Endpoint_
 
