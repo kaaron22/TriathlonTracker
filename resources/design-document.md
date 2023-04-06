@@ -106,15 +106,15 @@ LocalDateTime timestamp
 Double weight
 ```
 
-### 6.2. _First Endpoint_
+### 6.2. CreateExerciseLog Endpoint
 
-_Describe the behavior of the first endpoint you will build into your service API. This should include what data it requires, what data it returns, and how it will handle any known failure cases. You should also include a sequence diagram showing how a user interaction goes from user to website to service to database, and back. This first endpoint can serve as a template for subsequent endpoints. (If there is a significant difference on a subsequent endpoint, review that with your team before building it!)_
+* Accepts `POST` requests to `/exercise-logs`
+* Accepts data to create a new ExerciseLog with the required fields (customerId, timestamp, exerciseType) and optional fields (description, caloriesBurned, numReps, numSets, duration, distance)
 
-_(You should have a separate section for each of the endpoints you are expecting to build...)_
+### 6.3. GetExerciseLogs Endpoint
 
-### 6.3 _Second Endpoint_
-
-_(repeat, but you can use shorthand here, indicating what is different, likely primarily the data in/out and error conditions. If the sequence diagram is nearly identical, you can say in a few words how it is the same/different from the first endpoint)_
+* Accepts `GET` requests to `/exercise-logs/:customerId `
+* Accepts a customerId and returns the corresponding list of ExerciseLog objects for the specified customer
 
 ## 7. Tables
 
