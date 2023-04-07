@@ -35,6 +35,12 @@ The following guide might be helpful as you work through your teams charter:
 
 ### Dependability, Structure, Clarity
 
+* **How long should we allow ourselves to struggle on a task before seeking assistance from team members and/or instructors? We think an hour maximum is a proper limit**
+
+* **As much as is possible, don't interrupt when others are speaking/sharing ideas. If needed, we can use the raise hand feature in instances where one team member's thoughts cause another member to think of something pertinent**
+
+* **Don't make light of others when they make mistakes**
+
 * **How can we count on each other to do high quality work on time?**
   _E.g., estimate task size, break down large tasks, call out tasks at risk early, ask each other for help, how to ensure timely code reviews, how to share knowledge, help each other hold accountability give frequent, scheduled updates_
 
