@@ -111,6 +111,11 @@ Double weight
 * Accepts `POST` requests to `/exercise-logs`
 * Accepts data to create a new ExerciseLog with the required fields (customerId, timestamp, exerciseType) and optional fields (description, caloriesBurned, numReps, numSets, duration, distance)
 
+![Client sends submit playlist update form to Website Playlist page. Website
+playlist page sends an update request to UpdatePlaylistActivity.
+UpdatePlaylistActivity saves updates to the playlists
+database.](images/design_document/CreateExerciseLog.png)
+
 ### 6.3. GetExerciseLogs Endpoint
 
 * Accepts `GET` requests to `/exercise-logs/:customerId `
