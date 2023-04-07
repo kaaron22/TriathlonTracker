@@ -109,14 +109,17 @@ Double weight
 ![Client sends create exercise log form to Website Exercise Log page. Website
 Exercise Log page sends a create request to CreateExerciseLogActivity.
 CreateExerciseLogActivity saves updates to the exercise logs
-database.](images/design_document/CreateExerciseLog.png)
+database.](images/design_document/CreateExerciseLogSD.png)
 
 ### 6.3. GetExerciseLogs Endpoint
 
 * Accepts `GET` requests to `/exercise-logs/:customerId`
 * Accepts a customerId and returns the corresponding list of ExerciseLog objects for the specified customer
 
-
+![Client sends get exercise logs form to Website Exercise Log page. Website
+Exercise Log page sends a get request to getExerciseLogsActivity.
+GetExerciseLogsActivity obtains list of Exercise Logs from
+database.](images/design_document/GetExerciseLogsSD.png)
 
 ### 6.4. CreateMealLog Endpoint
 
