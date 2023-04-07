@@ -178,6 +178,7 @@ fat // number
 ```
 
 ### 7.3. `exercise_logs`
+
 ```
 customerId // partition key, string
 timestamp // sort key, string
@@ -190,7 +191,8 @@ Double duration // number
 Double distance // number
 ```
 
-### 7.4. `exercise_logs`
+### 7.4. `weight_logs`
+
 ```
 customerId // partition key, string
 timestamp // sort key, string
