@@ -1,8 +1,8 @@
-# Fitness Tracker (to be determined)
+# Fitness Tracker
 
 ## 1. Problem Statement
 
-Fitness Tracker Unlimited is a service featuring several ways to track your personal fitness goals. Our goal is to design and develop a web-based Java application that is easy to use, reliable, and provides users with the tools they need to achieve their fitness goals. The application should allow users to track their workouts and nutrition, set and monitor their progress towards their goals, and view analytics and insights to help them make data-driven decisions about their fitness routines.
+Fitness Tracker is a service featuring several ways to track your personal health and fitness goals. Our goal is to design and develop a web-based Java application that is easy to use, reliable, and provides users with the tools they need to achieve their fitness goals. The application should allow users to track their workouts and nutrition, and view history to help them make data-driven decisions about their health and fitness routines.
 
 ## 2. Top Questions to Resolve in Review
 
@@ -20,15 +20,13 @@ U2. As a Fitness Tracker customer, I want to track my weight
 
 U3. As a Fitness Tracker customer, I want to view my workout history
 
-U4. As a Fitness Tracker customer, I want to know when I reach a milestone or new personal best
+U4. As a Fitness Tracker customer, I want to log nutritional details of my meals (i.e. carbs, calories)
 
-U5. As a Fitness Tracker customer, I want to log nutritional details of my meals (i.e. carbs, calories)
+U5. As a Fitness Tracker customer, I want to be able to log my water intake
 
-U6. As a Fitness Tracker customer, I want to be able to log my water intake
+U6. As a Fitness Tracker customer, I want to be able to view my water intake history
 
-U7. As a Fitness Tracker customer, I want to be able to view my water intake history
-
-U8. As a Fitness Tracker customer, I want to view a history of meals
+U7. As a Fitness Tracker customer, I want to view a history of meals
 
 ## 4. Project Scope
 
@@ -36,7 +34,6 @@ U8. As a Fitness Tracker customer, I want to view a history of meals
 
 * Creating completed exercise events and retrieving all exercises a customer has created
 * Creating current weight values and retrieving a list of weights by date
-* Tracking milestones (specifics TBD)
 * Creating and retrieving logs with nutritional details of meals 
 * Creating and retrieving logs of water intake
 
@@ -52,11 +49,9 @@ U8. As a Fitness Tracker customer, I want to view a history of meals
 
 This initial iteration will provide the minimum lovable product (MLP) including creating and retrieving several health and nutrition related statistics for a user.
 
-We will use API Gateway and Lambda to create nine endpoints (CreateExerciseLog, GetExerciseLogs, CreateWeightLog, GetWeightLogs, CreateMealLog, GetMealLogs, CreateWaterIntakeLog, GetWaterIntakeLogs, GetMilestones) that will handle the creation and/or retrieval of the corresponding health information to satisfy our requirements.
+We will use API Gateway and Lambda to create nine endpoints (CreateExerciseLog, GetExerciseLogs, CreateWeightLog, GetWeightLogs, CreateMealLog, GetMealLogs, CreateWaterIntakeLog, GetWaterIntakeLogs) that will handle the creation and/or retrieval of the corresponding health information to satisfy our requirements.
 
 We will store completed exercise, meal, and water intake logs each in a separate table in DynamoDB.
-
-FitnessTracker will also provide a web interface for users to manage their fitness logs. A main page providing a list view of all of their fitness events will let them create new logs and link off to pages per-log to update metadata or delete log.
 
 ## 6. API
 

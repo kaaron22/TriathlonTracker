@@ -1,11 +1,5 @@
 # Team Charter
 
-## Instructions
-
-_Answer the questions below and fill out the process sections with your team’s mechanisms to follow your answers. Remove the italicized examples text as you go._
-
-_On real world software teams, you will often create a document like this via a process called [reteaming](https://www.agilealliance.org/resources/experience-reports/dynamic-reteaming-how-we-thrive-by-rebuilding-teams/). Having something that captures the goals and concerns of everyone on a team helps the team work more efficiently together._
-
 ## Purpose
 
 Highly performing teams have the following qualities:
@@ -26,10 +20,10 @@ The following guide might be helpful as you work through your teams charter:
 
 ### Team Members
 
-- _Team Member A_
-- _Team Member B_
-- _Team Member C_
-- _Team Member D_
+- Aaron Kaye
+- James Smead
+- Leo Mott
+- Zach Green
 
 ### Psychological safety
 
