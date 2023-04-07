@@ -16,17 +16,19 @@ _This is where we work backwards from the customer and define what our customers
 
 U1. As a Fitness Tracker customer, I want to log exercise sessions as I complete them
 
-U2. As a Fitness Tracker customer, I want to track my weight
+U2. As a Fitness Tracker customer, I want to view my workout history
 
-U3. As a Fitness Tracker customer, I want to view my workout history
+U3. As a Fitness Tracker customer, I want to log my weight
 
-U4. As a Fitness Tracker customer, I want to log nutritional details of my meals (i.e. carbs, calories)
+U4. As a Fitness Tracker customer, I was to view my weight history
 
-U5. As a Fitness Tracker customer, I want to be able to log my water intake
+U5. As a Fitness Tracker customer, I want to log nutritional details of my meals (i.e. carbs, calories)
 
-U6. As a Fitness Tracker customer, I want to be able to view my water intake history
+U6. As a Fitness Tracker customer, I want to view a history of meals
 
-U7. As a Fitness Tracker customer, I want to view a history of meals
+U7. As a Fitness Tracker customer, I want to be able to log my water intake
+
+U8. As a Fitness Tracker customer, I want to be able to view my water intake history
 
 ## 4. Project Scope
 
@@ -47,11 +49,11 @@ U7. As a Fitness Tracker customer, I want to view a history of meals
 
 ## 5. Proposed Architecture Overview
 
-This initial iteration will provide the minimum lovable product (MLP) including creating and retrieving several health and nutrition related statistics for a user.
+This initial iteration will provide the minimum viable product (MVP) including creating and retrieving several health and nutrition related statistics for a user.
 
-We will use API Gateway and Lambda to create nine endpoints (CreateExerciseLog, GetExerciseLogs, CreateWeightLog, GetWeightLogs, CreateMealLog, GetMealLogs, CreateWaterIntakeLog, GetWaterIntakeLogs) that will handle the creation and/or retrieval of the corresponding health information to satisfy our requirements.
+We will use API Gateway and Lambda to create eight endpoints (CreateExerciseLog, GetExerciseLogs, CreateWeightLog, GetWeightLogs, CreateMealLog, GetMealLogs, CreateWaterIntakeLog, GetWaterIntakeLogs) that will handle the creation and/or retrieval of the corresponding health information to satisfy our requirements.
 
-We will store completed exercise, meal, and water intake logs each in a separate table in DynamoDB.
+We will store completed exercise, meal, weight, and water intake logs each in a separate table in DynamoDB.
 
 ## 6. API
 
@@ -62,7 +64,6 @@ We will store completed exercise, meal, and water intake logs each in a separate
 
 String customerId
 LocalDateTime timestamp
-String customerName
 Double ounces
 ```
 
@@ -199,4 +200,8 @@ weight // number
 
 ## 8. Pages
 
-_Include mock-ups of the web pages you expect to build. These can be as sophisticated as mockups/wireframes using drawing software, or as simple as hand-drawn pictures that represent the key customer-facing components of the pages. It should be clear what the interactions will be on the page, especially where customers enter and submit data. You may want to accompany the mockups with some description of behaviors of the page (e.g. “When customer submits the submit-dog-photo button, the customer is sent to the doggie detail page”)_
+![](images/design_document/LoginPageMarkdown.png)
+
+![](images/design_document/MarkdownDataSheet.png)
+
+![](images/design_document/SiteMapMarkdown.png)
