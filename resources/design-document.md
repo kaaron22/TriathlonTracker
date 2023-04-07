@@ -155,7 +155,47 @@ database.](images/design_document/CreateExerciseLog.png)
 
 ## 7. Tables
 
-_Define the DynamoDB tables you will need for the data your service will use. It may be helpful to first think of what objects your service will need, then translate that to a table structure, like with the *`Playlist` POJO* versus the `playlists` table in the Unit 3 project._
+### 7.1. `water_logs`
+
+```
+customerId // partition key, string
+timestamp // sort key, string
+customerName // string
+ounces // number
+```
+
+### 7.2. `meal_logs`
+
+```
+customerId // partition key, string
+timestamp // sort key, string
+name // string
+type // string
+calories // number
+carbs // number
+protein // number
+fat // number
+```
+
+### 7.3. `exercise_logs`
+```
+customerId // partition key, string
+timestamp // sort key, string
+String exerciseType // string
+String description // string
+Double caloriesBurned // number
+Integer numReps // number
+Double numSets // number
+Double duration // number
+Double distance // number
+```
+
+### 7.4. `exercise_logs`
+```
+customerId // partition key, string
+timestamp // sort key, string
+weight // number
+```
 
 ## 8. Pages
 
