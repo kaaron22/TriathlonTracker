@@ -111,15 +111,47 @@ Double weight
 * Accepts `POST` requests to `/exercise-logs`
 * Accepts data to create a new ExerciseLog with the required fields (customerId, timestamp, exerciseType) and optional fields (description, caloriesBurned, numReps, numSets, duration, distance)
 
-![Client sends submit playlist update form to Website Playlist page. Website
-playlist page sends an update request to UpdatePlaylistActivity.
-UpdatePlaylistActivity saves updates to the playlists
+![Client sends create exercise log form to Website Exercise Log page. Website
+Exercise Log page sends a create request to CreateExerciseLogActivity.
+CreateExerciseLogActivity saves updates to the exercise logs
 database.](images/design_document/CreateExerciseLog.png)
 
 ### 6.3. GetExerciseLogs Endpoint
 
-* Accepts `GET` requests to `/exercise-logs/:customerId `
+* Accepts `GET` requests to `/exercise-logs/:customerId`
 * Accepts a customerId and returns the corresponding list of ExerciseLog objects for the specified customer
+
+
+
+### 6.4. CreateMealLog Endpoint
+
+* Accepts `POST` requests to `/meal-logs`
+* Accepts data to create a new MealLog with the required fields (customerId, timestamp, name, type) and optional fields (calories, carbs, protein, fat)
+
+### 6.5. GetMealLogs Endpoint
+
+* Accepts `GET` requests to `/meal-logs/:customerId`
+* Accepts a customerId and returns the corresponding list of MealLog objects for the specified customer
+
+### 6.6. CreateWaterLog Endpoint
+
+* Accepts `POST` requests to `/water-logs`
+* Accepts data to create a new ExerciseLog with the required fields (customerId, timestamp, ounces)
+
+### 6.7. GetWaterLogs Endpoint
+
+* Accepts `GET` requests to `/water-logs/:customerId`
+* Accepts a customerId and returns the corresponding list of WaterLog objects for the specified customer
+
+### 6.8. CreateWeightLog Endpoint
+
+* Accepts `POST` requests to `/weight-logs`
+* Accepts data to create a new ExerciseLog with the required fields (customerId, timestamp, weight)
+
+### 6.9. GetWeightLogs Endpoint
+
+* Accepts `GET` requests to `/weight-logs/:customerId`
+* Accepts a customerId and returns the corresponding list of WeightLog objects for the specified customer
 
 ## 7. Tables
 
