@@ -1,11 +1,5 @@
 # Team Charter
 
-## Instructions
-
-_Answer the questions below and fill out the process sections with your team’s mechanisms to follow your answers. Remove the italicized examples text as you go._
-
-_On real world software teams, you will often create a document like this via a process called [reteaming](https://www.agilealliance.org/resources/experience-reports/dynamic-reteaming-how-we-thrive-by-rebuilding-teams/). Having something that captures the goals and concerns of everyone on a team helps the team work more efficiently together._
-
 ## Purpose
 
 Highly performing teams have the following qualities:
@@ -26,10 +20,10 @@ The following guide might be helpful as you work through your teams charter:
 
 ### Team Members
 
-- _Team Member A_
-- _Team Member B_
-- _Team Member C_
-- _Team Member D_
+- Aaron Kaye
+- James Smead
+- Leo Mott
+- Zach Green
 
 ### Psychological safety
 
@@ -40,6 +34,12 @@ The following guide might be helpful as you work through your teams charter:
   _E.g., communicate when there is a misunderstanding, don’t move forward until the situation is resolved, directly address and resolve negativity, give and receive feedback with a positive, strength-building mindset, if necessary, escalate to an instructor 
 
 ### Dependability, Structure, Clarity
+
+* **How long should we allow ourselves to struggle on a task before seeking assistance from team members and/or instructors? We think an hour maximum is a proper limit**
+
+* **As much as is possible, don't interrupt when others are speaking/sharing ideas. If needed, we can use the raise hand feature in instances where one team member's thoughts cause another member to think of something pertinent**
+
+* **Don't make light of others when they make mistakes**
 
 * **How can we count on each other to do high quality work on time?**
   _E.g., estimate task size, break down large tasks, call out tasks at risk early, ask each other for help, how to ensure timely code reviews, how to share knowledge, help each other hold accountability give frequent, scheduled updates_
