@@ -12,8 +12,6 @@ Triathlon Trainer is a service featuring several ways to track your personal fit
 
 ## 3. Use Cases
 
-_This is where we work backwards from the customer and define what our customers would like to do (and why). You may also include use cases for yourselves (as developers), or for the organization providing the product to customers._
-
 User would like to add a workout to the workout history.
 
 User would like to view history of workouts by types.
@@ -30,7 +28,6 @@ User would like to see a summary of workout (total number of sessions per workou
 
 User would like to be notified that they successfully added a workout
 
-
 ## 4. Project Scope
 
 ### 4.1. In Scope
@@ -40,14 +37,12 @@ User would like to be notified that they successfully added a workout
 * filtering user data by date 
 * filtering user data by workout type
 
-
 ### 4.2. Out of Scope
 
 * let the user see progress over time
 * let the user set goals 
 * track weight 
-* track nutrition 
-* 
+* track nutrition
 
 ## 5. Proposed Architecture Overview
 
@@ -62,10 +57,6 @@ We will store completed exercise logs each in a table in DynamoDB.
 ### 6.1. Public Models
 
 ```
-
-```
-
-```
 // WorkoutLogModel
 
 String customerId
@@ -75,10 +66,6 @@ Integer durationInHours
 Integer durationInMin
 Integer durationInSeconds
 Double distance
-```
-
-```
-
 ```
 
 ### 6.2. CreateExerciseLog Endpoint
@@ -113,8 +100,6 @@ database.](images/design_document/GetExerciseLogsSD.png)
 
 ## 7. Tables
 
-```
-
 ### 7.1. `workout_logs`
 
 ```
@@ -130,13 +115,12 @@ Indexes -
 user_name-index  //  Partition key user_name
 workout_type-index //  Partition key  workout_type
 date-index // Partition key date
-
 ```
 
 ## 8. Pages
 
 ![](images/design_document/front_end_workflow.png)
 
-![](images/design_document/dashboard_overview_page.png)
+![](images/design_document/dashboard_overview_page.jpg)
 
-![](images/design_document/add_workoutPage.png)
+![](images/design_document/add_workout_page.png)
