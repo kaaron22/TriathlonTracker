@@ -12,21 +12,25 @@ Triathlon Trainer is a service featuring several ways to track your personal fit
 
 ## 3. Use Cases
 
-User would like to add a workout to the workout history.
+U1. As a user of Triathlon Tracker, I want to record a triathlon workout, so that I have a saved history of my triathlon workouts.
+
+U2. As a user of Triathlon Tracker, I want confirmation of the workout being recorded, so that I know it was stored successfully.
+
+U3. As a user of Triathlon Tracker, I want to be able to modify a previously recorded workout, so that I can correct mistakes.
+
+U4. As a user of Triathlon Tracker, I want to be able to delete a previously recorded workout, so that I can remove a workout added in error.
+
+U5. 
 
 User would like to view history of workouts by types.
 
 User would like to view workout history between specified dates.
 
-User would like to edit workout entries
-
-User would like to delete workout entries
-
 User would like to see a brief workout history by default in the landing page.
 
-User would like to see a summary of workout (total number of sessions per workout type).
+***User would like to see a summary of workout (total number of sessions per workout type).
 
-User would like to be notified that they successfully added a workout
+
 
 ## 4. Project Scope
 
