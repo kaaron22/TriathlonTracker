@@ -68,9 +68,9 @@ Integer durationInSeconds
 Double distance
 ```
 
-### 6.2. CreateExerciseLog Endpoint
+### 6.2. CreateWorkout Endpoint
 
-* Accepts `POST` requests to `/workout-logs`
+* Accepts `POST` requests to `/workouts`
 * Accepts data to create a new WorkoutLog with the required fields (date, exerciseType) with optional fields (durationInHours, durationInMin, durationInSec, distance)
 
 ![Client sends create exercise log form to Website Exercise Log page. Website
@@ -80,7 +80,7 @@ database.](images/design_document/CreateExerciseLogSD.png)
 
 ### 6.3. GetWorkoutLogs Endpoint
 
-* Accepts `GET` requests to `/workout-logs/:customerId`
+* Accepts `GET` requests to `/workouts`
 * Accepts a customerId and returns the corresponding list of WorkoutLog objects for the specified customer
 
 ![Client sends get exercise logs form to Website Exercise Log page. Website
@@ -90,13 +90,25 @@ database.](images/design_document/GetExerciseLogsSD.png)
 
 ### 6.4. EditWorkoutLogs Endpoint
 
-* Accepts `PUT` requests to `/workout-logs/:workoutId`
+* Accepts `PUT` requests to `/workouts/:workout_id`
 * Accepts a workoutId and edits existing WorkoutLog for the specified customer
 
 ### 6.5. DeleteWorkoutLogs Endpoint
 
-* Accepts `DELETE` requests to `/workout-logs/:workoutId`
+* Accepts `DELETE` requests to `/workouts/:workout_id`
 * Accepts a workoutId and deletes existing WorkoutLog for the specified customer
+
+### 6.5. GetRecentWorkoutsSummary Endpoint
+
+* Accepts `GET` requests to `/workouts/summary/recent`
+* Returns a summary of recent workouts for the user
+
+### 6.6. GetRecentWorkoutsSummaryByType Endpoint
+
+* Accepts `GET` requests to `/workouts/summary/type`
+* Returns a summary of recent workout type for the user
+
+
 
 ## 7. Tables
 
