@@ -120,7 +120,7 @@ database.](images/design_document/GetExerciseLogsSD.png)
 ```
 String workout_id (Primary Key ) - UUID
 String userName(GSI) - user who performed the workout
-Stringdate (GSI) - The date when the workout was performed. ( standard format?)
+String date (GSI) - The date when the workout was performed. ( standard format?)
 String workoutType(GSI)   // ENUM "RUNNING", "BIKING", "SWIMMING"
 Number hours
 Number minutes
@@ -135,4 +135,8 @@ date-index // Partition key date
 
 ## 8. Pages
 
+![](images/design_document/front_end_workflow.png)
 
+![](images/design_document/dashboard_overview_page.png)
+
+![](images/design_document/add_workoutPage.png)
