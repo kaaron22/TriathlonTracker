@@ -14,23 +14,23 @@ Triathlon Trainer is a service featuring several ways to track your personal fit
 
 U1. As a user of Triathlon Tracker, I want to record a triathlon workout, so that I have a saved history of my triathlon workouts.
 
-U2. As a user of Triathlon Tracker, I want confirmation of the workout being recorded, so that I know it was stored successfully.
+U2. As a user of Triathlon Tracker, I want to see a message indicating the success/failure of recording the workout, so that I know whether it was stored or not.
 
 U3. As a user of Triathlon Tracker, I want to be able to modify a previously recorded workout, so that I can correct mistakes.
 
-U4. As a user of Triathlon Tracker, I want to be able to delete a previously recorded workout, so that I can remove a workout added in error.
+U4. As a user of Triathlon Tracker, I want to see a message indicating the success/failure of updating the workout, so that I know whether it was updated or not.
 
-U5. 
+U5. As a user of Triathlon Tracker, I want to be able to delete a previously recorded workout, so that I can remove any unwanted workouts.
 
-User would like to view history of workouts by types.
+U6. As a user of Triathlon Tracker, I want to see a message indicating the success/failure of deleting the workout, so that I know whether it was deleted or not.
 
-User would like to view workout history between specified dates.
+U7. As a user of Triathlon Tracker, I want to search a history of workouts between specified dates and have it displayed, so that I can see what my progress is over the given period of time.
 
-User would like to see a brief workout history by default in the landing page.
+U8. As a user of Triathlon Tracker, I want to search a history of workouts by type and have it displayed, so that I can view my workouts in specific categories
 
-***User would like to see a summary of workout (total number of sessions per workout type).
+U9. As a user of Triathlon Tracker, I want to see my workout history for the last 7 days displayed by default in the landing page, so that I can quickly review my recent workouts without having to search
 
-
+U10. As a user of Triathlon Tracker, I want to see the total number of workouts by type displayed by default in the landing page, so that I can quickly review my overall workouts without having to search
 
 ## 4. Project Scope
 
@@ -38,6 +38,8 @@ User would like to see a brief workout history by default in the landing page.
 
 * logging completed workout events 
 * retrieving workouts a customer has created
+* updating/modifying a workout record
+* deleting a workout record
 * filtering user data by date 
 * filtering user data by workout type
 
@@ -50,9 +52,9 @@ User would like to see a brief workout history by default in the landing page.
 
 ## 5. Proposed Architecture Overview
 
-This initial iteration will provide the minimum viable product (MVP) including creating and retrieving workout data and related statistics for a user.
+This initial iteration will provide the minimum viable product (MVP) including creating and retrieving workout data for a user.
 
-We will use API Gateway and Lambda to create 4 endpoints (CreateWorkoutLog, GetWorkoutLogs, UpdateWorkoutLog, DeleteWorkoutLog) that will handle the creation and/or retrieval of the corresponding workout information to satisfy our requirements.
+We will use API Gateway and Lambda to create six endpoints (CreateWorkoutLog, GetWorkoutLogs, EditWorkoutLog, DeleteWorkoutLog, GetRecentWorkoutsSummary, GetRecentWorkoutsSummaryByType) that will handle the creation, modification, deletion and/or retrieval of the corresponding workout information to satisfy our requirements.
 
 We will store completed exercise logs each in a table in DynamoDB.
 
@@ -72,7 +74,7 @@ Integer durationInSeconds
 Double distance
 ```
 
-### 6.2. CreateWorkout Endpoint
+### 6.2. CreateWorkoutLog Endpoint
 
 * Accepts `POST` requests to `/workouts`
 * Accepts data to create a new WorkoutLog with the required fields (date, exerciseType) with optional fields (durationInHours, durationInMin, durationInSec, distance)
@@ -92,12 +94,12 @@ Exercise Log page sends a get request to getExerciseLogsActivity.
 GetExerciseLogsActivity obtains list of Exercise Logs from
 database.](images/design_document/GetExerciseLogsSD.png)
 
-### 6.4. EditWorkoutLogs Endpoint
+### 6.4. EditWorkoutLog Endpoint
 
 * Accepts `PUT` requests to `/workouts/:workout_id`
 * Accepts a workoutId and edits existing WorkoutLog for the specified customer
 
-### 6.5. DeleteWorkoutLogs Endpoint
+### 6.5. DeleteWorkoutLog Endpoint
 
 * Accepts `DELETE` requests to `/workouts/:workout_id`
 * Accepts a workoutId and deletes existing WorkoutLog for the specified customer
@@ -111,8 +113,6 @@ database.](images/design_document/GetExerciseLogsSD.png)
 
 * Accepts `GET` requests to `/workouts/summary/type`
 * Returns a summary of recent workout type for the user
-
-
 
 ## 7. Tables
 
