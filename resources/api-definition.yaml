@@ -4,10 +4,15 @@ info:
        description: "This is the API definition for the Triathlon Tracker Service."
        version: 1.0.0
 
-     servers:
-  @@ -14,8 +14,61 @@ tags:
-       - name: Songs
-         description: View and add songs to playlists
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: Playlists
+    description: Create, view, and update playlists
+
+  - name: Songs
+    description: View and add songs to playlists
 
        - name: Triathlon
          descriptions: Create, view, and update triathlon workouts
