@@ -352,31 +352,51 @@ Resources:
   # DynamoDB Configuration
   #-----------------------------------------------------
 
+  PlaylistsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "playlists"
+
+  AlbumTracksTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "asin"
+          AttributeType: "S"
+        - AttributeName: "track_number"
+          AttributeType: "N"
+      KeySchema:
+        - AttributeName: "asin"
+          KeyType: "HASH"
+        - AttributeName: "track_number"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "album_tracks"
+
   TriathlonTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "user_id"
-          AttributeType: "S"
         - AttributeName: "workout_id"
+          AttributeType: "S"
+        - AttributeName: "user_id"
           AttributeType: "S"
         - AttributeName: "date_of_workout"
           AttributeType: "S"
         - AttributeName: "workout_type"
           AttributeType: "S"
-        - AttributeName: "hours"
-          AttributeType: "N"
-        - AttributeName: "minutes"
-          AttributeType: "N"
-        - AttributeName: "seconds"
-          AttributeType: "N"
-        - AttributeName: "workout_distance"
-          AttributeType: "N"
       KeySchema:
         - AttributeName: "workout_id"
           KeyType: "HASH"
-      TableName: "triathlon_table"
       BillingMode: "PAY_PER_REQUEST"
+      TableName: "triathlon_table"
       GlobalSecondaryIndexes:
         - IndexName: "user_id-index"
           KeySchema:
