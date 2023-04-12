@@ -32,6 +32,8 @@ U9. As a user of Triathlon Tracker, I want to see my workout history for the las
 
 U10. As a user of Triathlon Tracker, I want to see the total number of workouts by type displayed by default in the landing page, so that I can quickly review my overall workouts without having to search
 
+U11. As a user of Triathlon Tracker, I want to see a complete list of my workout history, so that I can review my total progress from my first workout to my last
+
 ## 4. Project Scope
 
 ### 4.1. In Scope
