@@ -1,9 +1,6 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 @DynamoDBTable(tableName = "triathlon")
 public class Triathlon {
@@ -18,6 +15,7 @@ public class Triathlon {
 
 
     @DynamoDBHashKey(attributeName = "user_id")
+    @DynamoDBIndexHashKey(attributeName = "user_id")
     public String getUserId() {
         return userId;
     }
@@ -36,6 +34,7 @@ public class Triathlon {
     }
 
     @DynamoDBRangeKey(attributeName = "date_of_workout")
+    @DynamoDBIndexHashKey(attributeName = "date_of_workout")
     public String getDate() {
         return date;
     }
@@ -44,7 +43,7 @@ public class Triathlon {
         this.date = date;
     }
 
-    @DynamoDBAttribute(attributeName = "workout_type")
+    @DynamoDBIndexHashKey(attributeName = "workout_type")
     public String getWorkoutType() {
         return workoutType;
     }
