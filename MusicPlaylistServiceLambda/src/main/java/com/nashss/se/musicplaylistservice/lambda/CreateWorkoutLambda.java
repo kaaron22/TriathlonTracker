@@ -21,6 +21,7 @@ public class CreateWorkoutLambda
                                     .withDurationInHours(unauthenticatedRequest.getDurationInHours())
                                     .withDurationInMinutes(unauthenticatedRequest.getDurationInMinutes())
                                     .withDurationInSeconds(unauthenticatedRequest.getDurationInSeconds())
+                                    .withDistance(unauthenticatedRequest.getDistance())
                                     .withCustomerId(claims.get("email"))
                                     .build());
                 },
