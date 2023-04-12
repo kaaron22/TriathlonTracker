@@ -379,25 +379,25 @@ Resources:
       BillingMode: "PAY_PER_REQUEST"
       TableName: "album_tracks"
 
-  ExerciseTable:
+  TriathlonTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "customer_id"
+        - AttributeName: "user_id"
           AttributeType: "S"
-        - AttributeName: "timestamp"
+        - AttributeName: "workout_id"
           AttributeType: "S"
-        - AttributeName: "description"
+        - AttributeName: "date_of_workout"
           AttributeType: "S"
-        - AttributeName: "calories_burned"
+        - AttributeName: "workout_type"
+            AttributeType: "S"
+        - AttributeName: "hours"
             AttributeType: "N"
-        - AttributeName: "repetitions"
+        - AttributeName: "minutes"
             AttributeType: "N"
-        - AttributeName: "set_number"
+        - AttributeName: "seconds"
             AttributeType: "N"
-        - AttributeName: "duration"
-            AttributeType: "N"
-        - AttributeName: "distance"
+        - AttributeName: "workout_distance"
             AttributeType: "N"
       KeySchema:
         - AttributeName: "customer_id"
@@ -406,72 +406,6 @@ Resources:
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "exercise_log"
-
-  MealTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "customer_id"
-          AttributeType: "S"
-        - AttributeName: "timestamp"
-          AttributeType: "S"
-        - AttributeName: "name"
-          AttributeType: "S"
-        - AttributeName: "type"
-            AttributeType: "S"
-        - AttributeName: "calories"
-            AttributeType: "N"
-        - AttributeName: "carbs"
-            AttributeType: "N"
-        - AttributeName: "protein"
-            AttributeType: "N"
-        - AttributeName: "fat"
-            AttributeType: "N"
-      KeySchema:
-        - AttributeName: "customer_id"
-          KeyType: "HASH"
-        - AttributeName: "timestamp"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "meal_log"
-
-  WaterTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "customer_id"
-          AttributeType: "S"
-        - AttributeName: "timestamp"
-          AttributeType: "S"
-        - AttributeName: "customer_name"
-          AttributeType: "S"
-        - AttributeName: "ounces"
-            AttributeType: "N"
-      KeySchema:
-        - AttributeName: "customer_id"
-          KeyType: "HASH"
-        - AttributeName: "timestamp"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "water_log"
-
-  WeightTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "customer_id"
-          AttributeType: "S"
-        - AttributeName: "timestamp"
-          AttributeType: "S"
-        - AttributeName: "weight"
-          AttributeType: "N"
-      KeySchema:
-        - AttributeName: "customer_id"
-          KeyType: "HASH"
-        - AttributeName: "timestamp"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "weight_log"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed

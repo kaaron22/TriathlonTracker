@@ -11,10 +11,8 @@ public class Triathlon {
     private Integer hours;
     private Integer minutes;
     private Integer seconds;
-    private String distance; //distance traveled
+    private Double distance; //distance traveled
 
-
-    @DynamoDBHashKey(attributeName = "user_id")
     @DynamoDBIndexHashKey(attributeName = "user_id")
     public String getUserId() {
         return userId;
@@ -24,7 +22,7 @@ public class Triathlon {
         this.userId = userId;
     }
 
-    @DynamoDBAttribute(attributeName = "workout_id")
+    @DynamoDBHashKey(attributeName = "workout_id")
     public String getWorkoutId() {
         return workoutId;
     }
@@ -79,11 +77,11 @@ public class Triathlon {
         this.seconds = seconds;
     }
     @DynamoDBAttribute(attributeName = "workout_distance")
-    public String getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 }
