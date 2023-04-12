@@ -2,18 +2,19 @@ package com.nashss.se.musicplaylistservice.activity.requests;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
 @JsonDeserialize(builder = CreatePlaylistRequest.Builder.class)
 public class CreateWorkoutRequest {
     private final String customerId;
     private final String date;
-    private final String workoutType;
+    private final WorkoutType workoutType;
     private final Integer durationInHours;
     private final Integer durationInMinutes;
     private final Integer durationInSeconds;
     private final Double distance;
 
-    public CreateWorkoutRequest(String customerId, String date, String workoutType, Integer durationInHours,
+    public CreateWorkoutRequest(String customerId, String date, WorkoutType workoutType, Integer durationInHours,
                                 Integer durationInMinutes, Integer durationInSeconds, Double distance) {
         this.customerId = customerId;
         this.date = date;
@@ -32,7 +33,7 @@ public class CreateWorkoutRequest {
         return date;
     }
 
-    public String getWorkoutType() {
+    public WorkoutType getWorkoutType() {
         return workoutType;
     }
 
@@ -74,7 +75,7 @@ public class CreateWorkoutRequest {
     public static class Builder {
         private String customerId;
         private String date;
-        private String workoutType;
+        private WorkoutType workoutType;
         private Integer durationInHours;
         private Integer durationInMinutes;
         private Integer durationInSeconds;
@@ -91,7 +92,7 @@ public class CreateWorkoutRequest {
             return this;
         }
 
-        public Builder withWorkoutType(String workoutType) {
+        public Builder withWorkoutType(WorkoutType workoutType) {
             this.workoutType = workoutType;
             return this;
         }
@@ -108,6 +109,7 @@ public class CreateWorkoutRequest {
 
         public Builder withDurationInSeconds(Integer durationInSeconds) {
             this.durationInSeconds = durationInSeconds;
+            return this;
         }
 
         public Builder withDistance(Double distance) {
