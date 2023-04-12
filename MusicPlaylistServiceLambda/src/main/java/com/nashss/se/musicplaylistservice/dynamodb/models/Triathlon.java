@@ -13,7 +13,7 @@ public class Triathlon {
     private Integer seconds;
     private Double distance; //distance traveled
 
-    @DynamoDBIndexHashKey(attributeName = "user_id")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "user_id-index", attributeName = "user_id")
     public String getUserId() {
         return userId;
     }
@@ -32,7 +32,7 @@ public class Triathlon {
     }
 
     @DynamoDBRangeKey(attributeName = "date_of_workout")
-    @DynamoDBIndexHashKey(attributeName = "date_of_workout")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "date_of_workout-index", attributeName = "date_of_workout")
     public String getDate() {
         return date;
     }
@@ -41,7 +41,7 @@ public class Triathlon {
         this.date = date;
     }
 
-    @DynamoDBIndexHashKey(attributeName = "workout_type")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "workout_type-index", attributeName = "workout_type")
     public String getWorkoutType() {
         return workoutType;
     }

@@ -350,34 +350,6 @@ Resources:
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------
-  
-  PlaylistsTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "id"
-          AttributeType: "S"
-      KeySchema:
-        - AttributeName: "id"
-          KeyType: "HASH"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "playlists"
-
-  AlbumTracksTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "asin"
-          AttributeType: "S"
-        - AttributeName: "track_number"
-          AttributeType: "N"
-      KeySchema:
-        - AttributeName: "asin"
-          KeyType: "HASH"
-        - AttributeName: "track_number"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "album_tracks"
 
   TriathlonTable:
     Type: AWS::DynamoDB::Table
@@ -390,15 +362,15 @@ Resources:
         - AttributeName: "date_of_workout"
           AttributeType: "S"
         - AttributeName: "workout_type"
-            AttributeType: "S"
+          AttributeType: "S"
         - AttributeName: "hours"
-            AttributeType: "N"
+          AttributeType: "N"
         - AttributeName: "minutes"
-            AttributeType: "N"
+          AttributeType: "N"
         - AttributeName: "seconds"
-            AttributeType: "N"
+          AttributeType: "N"
         - AttributeName: "workout_distance"
-            AttributeType: "N"
+          AttributeType: "N"
       KeySchema:
         - AttributeName: "workout_id"
           KeyType: "HASH"
@@ -420,11 +392,11 @@ Resources:
           Projection:
             ProjectionType: "KEYS_ONLY"
         - IndexName: "date_of_workout-index"
-            KeySchema:
-              - AttributeName: "date_of_workout"
-                KeyType: "HASH"
-            Projection:
-              ProjectionType: "KEYS_ONLY"
+          KeySchema:
+            - AttributeName: "date_of_workout"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: "KEYS_ONLY"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
