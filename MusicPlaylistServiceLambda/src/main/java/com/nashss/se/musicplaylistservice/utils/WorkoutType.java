@@ -1,6 +1,6 @@
 package com.nashss.se.musicplaylistservice.utils;
 
-public enum WorkoutTypes {
+public enum WorkoutType {
     RUNNING,
     BIKING,
     SWIMMING;
