@@ -1,6 +1,7 @@
 package com.nashss.se.musicplaylistservice.activity;
 
 import com.nashss.se.musicplaylistservice.activity.requests.CreatePlaylistRequest;
+import com.nashss.se.musicplaylistservice.activity.requests.CreateWorkoutRequest;
 import com.nashss.se.musicplaylistservice.activity.results.CreatePlaylistResult;
 import com.nashss.se.musicplaylistservice.activity.results.CreateWorkoutResult;
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
@@ -67,12 +68,12 @@ public class CreateWorkoutActivity {
 
         Triathlon newTriathlon = new Triathlon();
         newTriathlon.setWorkoutId(MusicPlaylistServiceUtils.generatePlaylistId());
-        newTriathlon.setUserId(createWorkoutRequest.getUserId());
+        newTriathlon.setUserId(createWorkoutRequest.getCustomerId());
         newTriathlon.setDate(createWorkoutRequest.getDate());
         newTriathlon.setWorkoutType(createWorkoutRequest.getWorkoutType());
-        newTriathlon.setDurationinHours(createWorkoutRequest.getDurationinHours());
-        newTriathlon.setDurationinMinutes(createWorkoutRequest.getDurationinMinutes());
-        newTriathlon.setDurationinSeconds(createWorkoutRequest.getDurationinSeconds());
+        newTriathlon.setHours(createWorkoutRequest.getDurationInHours());
+        newTriathlon.setMinutes(createWorkoutRequest.getDurationInMinutes());
+        newTriathlon.setSeconds(createWorkoutRequest.getDurationInSeconds());
         newTriathlon.setDistance(createWorkoutRequest.getDistance());
 //        newTriathlon.setSongCount(0);
 //        newTriathlon.setTags(playlistTags);

@@ -41,11 +41,11 @@ public class WorkoutDao {
     public Triathlon getTriathlon(String workoutId) {
         Triathlon workout = this.dynamoDbMapper.load(Triathlon.class, workoutId);
 
-        if (workout == null) {
-            metricsPublisher.addCount(MetricsConstants.GETPLAYLIST_PLAYLISTNOTFOUND_COUNT, 1);
-            throw new PlaylistNotFoundException("Could not find playlist with id " + id);
-        }
-        metricsPublisher.addCount(MetricsConstants.GETPLAYLIST_PLAYLISTNOTFOUND_COUNT, 0);
+//        if (workout == null) {
+//            metricsPublisher.addCount(MetricsConstants.GETPLAYLIST_PLAYLISTNOTFOUND_COUNT, 1);
+//            throw new PlaylistNotFoundException("Could not find playlist with id " + id);
+//        }
+//        metricsPublisher.addCount(MetricsConstants.GETPLAYLIST_PLAYLISTNOTFOUND_COUNT, 0);
         return workout;
     }
 
@@ -71,41 +71,41 @@ public class WorkoutDao {
      * @param criteria an array of String containing search criteria.
      * @return a List of Playlist objects that match the search criteria.
      */
-    public List<Triathlon> searchTriathlon(String[] criteria) {
-        DynamoDBScanExpression dynamoDBScanExpression = new DynamoDBScanExpression();
-
-        if (criteria.length > 0) {
-            Map<String, AttributeValue> valueMap = new HashMap<>();
-            String valueMapNamePrefix = ":c";
-
-            StringBuilder nameFilterExpression = new StringBuilder();
-            StringBuilder tagsFilterExpression = new StringBuilder();
-
-            for (int i = 0; i < criteria.length; i++) {
-                valueMap.put(valueMapNamePrefix + i,
-                        new AttributeValue().withS(criteria[i]));
-                nameFilterExpression.append(
-                        filterExpressionPart("playlistName", valueMapNamePrefix, i));
-                tagsFilterExpression.append(
-                        filterExpressionPart("tags", valueMapNamePrefix, i));
-            }
-
-            dynamoDBScanExpression.setExpressionAttributeValues(valueMap);
-            dynamoDBScanExpression.setFilterExpression(
-                    "(" + nameFilterExpression + ") or (" + tagsFilterExpression + ")");
-        }
-
-        return this.dynamoDbMapper.scan(Playlist.class, dynamoDBScanExpression);
-    }
-
-    private StringBuilder filterExpressionPart(String target, String valueMapNamePrefix, int position) {
-        String possiblyAnd = position == 0 ? "" : "and ";
-        return new StringBuilder()
-                .append(possiblyAnd)
-                .append("contains(")
-                .append(target)
-                .append(", ")
-                .append(valueMapNamePrefix).append(position)
-                .append(") ");
-    }
+//    public List<Triathlon> searchTriathlon(String[] criteria) {
+//        DynamoDBScanExpression dynamoDBScanExpression = new DynamoDBScanExpression();
+//
+//        if (criteria.length > 0) {
+//            Map<String, AttributeValue> valueMap = new HashMap<>();
+//            String valueMapNamePrefix = ":c";
+//
+//            StringBuilder nameFilterExpression = new StringBuilder();
+//            StringBuilder tagsFilterExpression = new StringBuilder();
+//
+//            for (int i = 0; i < criteria.length; i++) {
+//                valueMap.put(valueMapNamePrefix + i,
+//                        new AttributeValue().withS(criteria[i]));
+//                nameFilterExpression.append(
+//                        filterExpressionPart("playlistName", valueMapNamePrefix, i));
+//                tagsFilterExpression.append(
+//                        filterExpressionPart("tags", valueMapNamePrefix, i));
+//            }
+//
+//            dynamoDBScanExpression.setExpressionAttributeValues(valueMap);
+//            dynamoDBScanExpression.setFilterExpression(
+//                    "(" + nameFilterExpression + ") or (" + tagsFilterExpression + ")");
+//        }
+//
+//        return this.dynamoDbMapper.scan(Playlist.class, dynamoDBScanExpression);
+//    }
+//
+//    private StringBuilder filterExpressionPart(String target, String valueMapNamePrefix, int position) {
+//        String possiblyAnd = position == 0 ? "" : "and ";
+//        return new StringBuilder()
+//                .append(possiblyAnd)
+//                .append("contains(")
+//                .append(target)
+//                .append(", ")
+//                .append(valueMapNamePrefix).append(position)
+//                .append(") ");
+//    }
 }

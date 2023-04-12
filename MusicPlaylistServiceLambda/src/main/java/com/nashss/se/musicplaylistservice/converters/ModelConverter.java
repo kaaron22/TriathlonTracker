@@ -23,7 +23,7 @@ public class ModelConverter {
 
         return WorkoutModel.builder()
                 .withUserId(workout.getUserId())
-                .withWorkoutId(workout.getWorkoutId())
+
                 .withTimestamp(workout.getDate())
                 .withWorkoutType(workout.getWorkoutType())
                 .withDurationInHours(workout.getHours())
