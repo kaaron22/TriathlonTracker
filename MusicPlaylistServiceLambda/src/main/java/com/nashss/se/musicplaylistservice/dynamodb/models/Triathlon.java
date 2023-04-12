@@ -31,7 +31,6 @@ public class Triathlon {
         this.workoutId = workoutId;
     }
 
-    @DynamoDBRangeKey(attributeName = "date_of_workout")
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "date_of_workout-index", attributeName = "date_of_workout")
     public String getDate() {
         return date;

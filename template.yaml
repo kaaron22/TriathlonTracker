@@ -11,6 +11,7 @@ Parameters:
     Default: "change-this-music-playlist-service-change-this"
 
   S3Bucket:
+    Default: ""
     Type: String
     Description: Parameter to specify the S3 Bucket to use for deployment
 
@@ -374,9 +375,7 @@ Resources:
       KeySchema:
         - AttributeName: "workout_id"
           KeyType: "HASH"
-        - AttributeName: "date_of_workout"
-          KeyType: "RANGE"
-      TableName: "TriathlonTable"
+      TableName: "triathlon_table"
       BillingMode: "PAY_PER_REQUEST"
       GlobalSecondaryIndexes:
         - IndexName: "user_id-index"
