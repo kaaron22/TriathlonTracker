@@ -1,0 +1,206 @@
+openapi: 3.0.0
+info:
+  title: Triathalon Training App API
+  description: "This is the API definition for the Triathalon Training App."
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: Workouts
+    description: Create, view, update, and delete workouts
+
+
+
+paths:
+
+  /workouts:
+    post:
+      tags:
+        - Workouts
+      summary: Log a new workout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_name:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                workout_type:
+                  type: string
+                  enum: ["RUNNING", "BIKING", "SWIMMING"]
+                hours:
+                  type: integer
+                minutes:
+                  type: integer
+                seconds:
+                  type: integer
+                distance:
+                  type: number
+                  format: double
+      responses:
+        "200":
+          description: A workout object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workout_id:
+                    type: string
+                  user_name:
+                    type: string
+                  date:
+                    type: string
+                    format: date
+                  workout_type:
+                    type: string
+                  duration:
+                    type: integer
+                  distance:
+                    type: number
+                    format: double
+
+    get:
+      tags:
+        - Workouts
+      summary: Get workouts based on filters
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          description: Start date for filtering workouts (inclusive)
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: true
+          description: End date for filtering workouts (inclusive)
+          schema:
+            type: string
+            format: date
+        - name: workout_type
+          in: query
+          description: Filter workouts by workout type
+          schema:
+            type: string
+            enum: ["RUNNING", "BIKING", "SWIMMING"]
+      responses:
+        "200":
+          description: A list of workout objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    workout_id:
+                      type: string
+                    user_name:
+                      type: string
+                    date:
+                      type: string
+                      format: date
+                    workout_type:
+                      type: string
+                    hours:
+                      type: integer
+                    minutes:
+                      type: integer
+                    seconds:
+                      type: integer
+                    distance:
+                      type: number
+                      format: double
+
+  /workouts/{workout_id}:
+    put:
+      tags:
+        - Workouts
+      summary: Update an existing workout
+      parameters:
+        - name: workout_id
+          in: path
+          description: ID of the workout to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                workout_type:
+                  type: string
+                  enum: ["RUNNING", "BIKING", "SWIMMING"]
+                hours:
+                  type: integer
+                minutes:
+                  type: integer
+                seconds:
+                  type: integer
+                distance:
+                  type: number
+                  format: double
+      responses:
+        "200":
+          description: Updated workout object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workout_id:
+                    type: string
+                  user_name:
+                    type: string
+                  date:
+                    type: string
+                    format: date
+                  workout_type:
+                    type: string
+                  hours:
+                    type: integer
+                  minutes:
+                    type: integer
+                  seconds:
+                    type: integer
+                  distance:
+                    type: number
+                    format: double
+
+    delete:
+      tags:
+        - Workouts
+      summary: Delete an existing workout
+      parameters:
+        - name: workout_id
+          in: path
+          description: ID of the workout to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Deleted workout object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  workout_id:
+                    type: string
+
