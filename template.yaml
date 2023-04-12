@@ -400,12 +400,31 @@ Resources:
         - AttributeName: "workout_distance"
             AttributeType: "N"
       KeySchema:
-        - AttributeName: "customer_id"
+        - AttributeName: "workout_id"
           KeyType: "HASH"
-        - AttributeName: "timestamp"
+        - AttributeName: "date_of_workout"
           KeyType: "RANGE"
+      TableName: "TriathlonTable"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "exercise_log"
+      GlobalSecondaryIndexes:
+        - IndexName: "user_id-index"
+          KeySchema:
+            - AttributeName: "user_id"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: "KEYS_ONLY"
+        - IndexName: "workout_type-index"
+          KeySchema:
+            - AttributeName: "workout_type"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: "KEYS_ONLY"
+        - IndexName: "date_of_workout-index"
+            KeySchema:
+              - AttributeName: "date_of_workout"
+                KeyType: "HASH"
+            Projection:
+              ProjectionType: "KEYS_ONLY"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
