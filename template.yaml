@@ -58,7 +58,7 @@ Resources:
             Priority: 1
       UsernameAttributes:
         - email
-      UsernameConfiguration: 
+      UsernameConfiguration:
         CaseSensitive: false
       AutoVerifiedAttributes:
         - email
@@ -81,15 +81,15 @@ Resources:
       CallbackURLs:
         - http://localhost:8000
         - !If
-            - DeployCloudFront
-            - !Sub "https://${CloudfrontDistribution.DomainName}"
-            - !Ref "AWS::NoValue"
+          - DeployCloudFront
+          - !Sub "https://${CloudfrontDistribution.DomainName}"
+          - !Ref "AWS::NoValue"
       LogoutURLs:
         - http://localhost:8000
         - !If
-            - DeployCloudFront
-            - !Sub "https://${CloudfrontDistribution.DomainName}"
-            - !Ref "AWS::NoValue"
+          - DeployCloudFront
+          - !Sub "https://${CloudfrontDistribution.DomainName}"
+          - !Ref "AWS::NoValue"
       AllowedOAuthFlows:
         - code
         - implicit
@@ -181,8 +181,8 @@ Resources:
         - 'arn:aws:iam::aws:policy/service-role/AWSLambdaRole'
         - 'arn:aws:iam::aws:policy/AWSLambdaExecute'
       AssumeRolePolicyDocument:
-        Version: "2012-10-17" 
-        Statement: 
+        Version: "2012-10-17"
+        Statement:
           - Effect: Allow
             Principal:
               Service:
@@ -194,28 +194,28 @@ Resources:
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
-            - Effect: Allow
-              Action:
-                - logs:CreateLogGroup
-                - logs:CreateLogStream
-                - logs:PutLogEvents
-                - cloudwatch:PutMetricData
-              Resource: '*'
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - cloudwatch:PutMetricData
+                Resource: '*'
         - PolicyName: 'AccessPlaylistsTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
-            - Effect: Allow
-              Action: dynamodb:*
-              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/playlists"
-                
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/playlists"
+
         - PolicyName: 'AccessAlbumTracksTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
-            - Effect: Allow
-              Action: dynamodb:*
-              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/album_tracks"
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/album_tracks"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
@@ -397,100 +397,6 @@ Resources:
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "album_tracks"
-
-  ExerciseTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "customer_id"
-          AttributeType: "S"
-        - AttributeName: "timestamp"
-          AttributeType: "S"
-        - AttributeName: "description"
-          AttributeType: "S"
-        - AttributeName: "calories_burned"
-            AttributeType: "N"
-        - AttributeName: "repetitions"
-            AttributeType: "N"
-        - AttributeName: "set_number"
-            AttributeType: "N"
-        - AttributeName: "duration"
-            AttributeType: "N"
-        - AttributeName: "distance"
-            AttributeType: "N"
-      KeySchema:
-        - AttributeName: "customer_id"
-          KeyType: "HASH"
-        - AttributeName: "timestamp"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "exercise_log"
-
-  MealTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "customer_id"
-          AttributeType: "S"
-        - AttributeName: "timestamp"
-          AttributeType: "S"
-        - AttributeName: "name"
-          AttributeType: "S"
-        - AttributeName: "type"
-            AttributeType: "S"
-        - AttributeName: "calories"
-            AttributeType: "N"
-        - AttributeName: "carbs"
-            AttributeType: "N"
-        - AttributeName: "protein"
-            AttributeType: "N"
-        - AttributeName: "fat"
-            AttributeType: "N"
-      KeySchema:
-        - AttributeName: "customer_id"
-          KeyType: "HASH"
-        - AttributeName: "timestamp"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "meal_log"
-
-  WaterTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "customer_id"
-          AttributeType: "S"
-        - AttributeName: "timestamp"
-          AttributeType: "S"
-        - AttributeName: "customer_name"
-          AttributeType: "S"
-        - AttributeName: "ounces"
-            AttributeType: "N"
-      KeySchema:
-        - AttributeName: "customer_id"
-          KeyType: "HASH"
-        - AttributeName: "timestamp"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "water_log"
-
-  WeightTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "customer_id"
-          AttributeType: "S"
-        - AttributeName: "timestamp"
-          AttributeType: "S"
-        - AttributeName: "weight"
-          AttributeType: "N"
-      KeySchema:
-        - AttributeName: "customer_id"
-          KeyType: "HASH"
-        - AttributeName: "timestamp"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "weight_log"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed

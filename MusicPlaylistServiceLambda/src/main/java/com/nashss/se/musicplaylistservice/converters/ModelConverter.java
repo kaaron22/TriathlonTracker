@@ -2,9 +2,12 @@ package com.nashss.se.musicplaylistservice.converters;
 
 import com.nashss.se.musicplaylistservice.dynamodb.models.AlbumTrack;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
 import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 import com.nashss.se.musicplaylistservice.models.SongModel;
+import com.nashss.se.musicplaylistservice.models.WorkoutModel;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,23 @@ import java.util.List;
  * Converts between Data and API models.
  */
 public class ModelConverter {
+
+    public WorkoutModel toWorkoutModel(Triathlon workout) {
+       // List<String> tags = null;
+//        if (playlist.getTags() != null) {
+//            tags = new ArrayList<>(playlist.getTags());
+//        }
+        LocalDateTime localDateTime = LocalDateTime.parse(workout.getDate());
+        return WorkoutModel.builder()
+                .withUserId(workout.getUserId())
+                .withDate(localDateTime)
+                .withWorkoutType(workout.getWorkoutType())
+                .withDurationInHours(workout.getHours())
+                .withDurationInMinutes(workout.getMinutes())
+                .withDurationInSeconds(workout.getSeconds())
+                .withDistance(workout.getDistance())
+                .build();
+    }
     /**
      * Converts a provided {@link Playlist} into a {@link PlaylistModel} representation.
      *
