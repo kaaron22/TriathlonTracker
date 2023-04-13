@@ -1,6 +1,7 @@
 package com.nashss.se.musicplaylistservice.activity;
 
 import com.nashss.se.musicplaylistservice.activity.requests.CreatePlaylistRequest;
+import com.nashss.se.musicplaylistservice.activity.requests.CreateWorkoutRequest;
 import com.nashss.se.musicplaylistservice.activity.results.CreatePlaylistResult;
 import com.nashss.se.musicplaylistservice.activity.results.CreateWorkoutResult;
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
@@ -50,34 +51,20 @@ public class CreateWorkoutActivity {
     public CreateWorkoutResult handleRequest(final CreateWorkoutRequest createWorkoutRequest) {
         log.info("Received CreateWorkoutRequest {}", createWorkoutRequest);
 
-//        if (!MusicPlaylistServiceUtils.isValidString(createWorkoutRequest.getWorkoutId())) {
-//            throw new InvalidAttributeValueException("Workout ID [" + createWorkoutRequest.getWorkoutId() +
-//                    "] contains illegal characters");
-//        }
-
-//        if (!MusicPlaylistServiceUtils.isValidString(createWorkoutRequest.getUserId())) {
-//            throw new InvalidAttributeValueException("Workout customer ID [" + createWorkoutRequest.getUserId() +
-//                    "] contains illegal characters");
-//        }
-
-//        Set<String> playlistTags = null;
-//        if (createPlaylistRequest.getTags() != null) {
-//            playlistTags = new HashSet<>(createPlaylistRequest.getTags());
-//        }
+        if (!MusicPlaylistServiceUtils.isValidString(createWorkoutRequest.getCustomerId())) {
+            throw new InvalidAttributeValueException("Workout customer ID [" + createWorkoutRequest.getCustomerId() +
+                    "] contains illegal characters");
+        }
 
         Triathlon newTriathlon = new Triathlon();
         newTriathlon.setWorkoutId(MusicPlaylistServiceUtils.generatePlaylistId());
-        newTriathlon.setUserId(createWorkoutRequest.getUserId());
+        newTriathlon.setUserId(createWorkoutRequest.getCustomerId());
         newTriathlon.setDate(createWorkoutRequest.getDate());
         newTriathlon.setWorkoutType(createWorkoutRequest.getWorkoutType());
-        newTriathlon.setDurationinHours(createWorkoutRequest.getDurationinHours());
-        newTriathlon.setDurationinMinutes(createWorkoutRequest.getDurationinMinutes());
-        newTriathlon.setDurationinSeconds(createWorkoutRequest.getDurationinSeconds());
+        newTriathlon.setHours(createWorkoutRequest.getDurationInHours());
+        newTriathlon.setMinutes(createWorkoutRequest.getDurationInMinutes());
+        newTriathlon.setSeconds(createWorkoutRequest.getDurationInSeconds());
         newTriathlon.setDistance(createWorkoutRequest.getDistance());
-//        newTriathlon.setSongCount(0);a
-//        newTriathlon.setTags(playlistTags);
-//        newTriathlon.setSongList(new ArrayList<>());
-
         workoutDao.saveTriathlon(newTriathlon);
 
         WorkoutModel workoutModel = new ModelConverter().toWorkoutModel(newTriathlon);
