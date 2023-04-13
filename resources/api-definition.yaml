@@ -1,69 +1,278 @@
 openapi: 3.0.0
 info:
-     title: Triathlon Tracker Service
-       description: "This is the API definition for the Triathlon Tracker Service."
-       version: 1.0.0
+  title: Triathlon Tracker Service
+  description: "This is the API definition for the Triathlon Tracker Service."
+  version: 1.0.0
 
-     servers:
-  @@ -14,8 +14,61 @@ tags:
-       - name: Songs
-         description: View and add songs to playlists
+servers:
+  - url: http://localhost:3000
 
-       - name: Triathlon
-         descriptions: Create, view, and update triathlon workouts
+tags:
+  - name: Playlists
+    description: Create, view, and update playlists
 
-       paths:
+  - name: Songs
+    description: View and add songs to playlists
 
-         /workouts:
-           post:
-             tags:
-               - Triathlon
-             summary: Create a new completed triathlon workout log (CreateWorkoutLambda)
-             requestBody:
-               content:
-                 application/json:
-                   schema:
-                     type: object
-                     properties:
-                       customerId:
-                         type: string
-                       date:
-                         type: string
-                       workoutType:
-                         type: enum
-                       durationInHours:
-                         type: integer
-                       durationInMin:
-                         type: integer
-                       durationInSeconds:
-                         type: integer
-                       distance:
-                         type: double
-             responses:
-               "200":
-                 description: A triathlon workout log object
-                 content:
-                   application/json:
-                     schema:
-                       type: object
-                       properties:
-                         workoutId:
-                           type: string
-                         userName:
-                           type: string
-                         date:
-                           type: string
-                         workoutType:
-                           type: enum
-                         durationInHours:
-                           type: integer
-                         durationInMin:
-                           type: integer
-                         durationInSeconds:
-                           type: integer
-                         distance:
-                           type: double
+  - name: Triathlon
+    description: Create, view, and update triathlon workouts
 
-         /playlists:
-           post:
-             tags:
+paths:
+
+  /workouts:
+    post:
+      tags:
+        - Triathlon
+      summary: Create a new completed triathlon workout log (CreateWorkoutLambda)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                workoutType:
+                  type: string
+                  enum: ["RUNNING", "BIKING", "SWIMMING"]
+                durationInHours:
+                  type: integer
+                durationInMin:
+                  type: integer
+                durationInSeconds:
+                  type: integer
+                distance:
+                  type: number
+                  format: double
+      responses:
+        "200":
+          description: A triathlon workout log object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workoutId:
+                    type: string
+                  userName:
+                    type: string
+                  date:
+                    type: string
+                    format: date
+                  workoutType:
+                    type: string
+                    enum: ["RUNNING", "BIKING", "SWIMMING"]
+                  durationInHours:
+                    type: integer
+                  durationInMin:
+                    type: integer
+                  durationInSeconds:
+                    type: integer
+                  distance:
+                    type: number
+                    format: double
+
+  /playlists:
+    post:
+      tags:
+        - Playlists
+      summary: Create a new playlist (CreatePlaylistLambda)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                customerId:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: A playlist object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  customerId:
+                    type: string
+                  songCount:
+                    type: integer
+                  tags:
+                    type: array
+                    items:
+                      type: string
+
+  /playlists/{id}:
+    get:
+      tags:
+        - Playlists
+      summary: Get an existing playlist (GetPlaylistLambda)
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: PlaylistResponse
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  customerId:
+                    type: string
+                  songCount:
+                    type: integer
+                  tags:
+                    type: array
+                    items:
+                      type: string
+        "500":
+          description: "Invalid input parameters"
+
+    put:
+      tags:
+        - Playlists
+      summary: Update the name of an existing playlist (UpdatePlaylistLambda)
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to retrieve
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                customerId:
+                  type: string
+
+      responses:
+        "200":
+          description: PlaylistResponse
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  customerId:
+                    type: string
+                  songCount:
+                    type: integer
+                  tags:
+                    type: array
+                    items:
+                      type: string
+        "500":
+          description: "Invalid input parameters"
+
+  /playlists/{id}/songs:
+    get:
+      tags:
+        - Songs
+      summary: Retrieves a list of all songs in a playlist (GetPlaylistSongsLambda)
+      operationId: getSongs
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A playlist object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  songList:
+                    type: array
+                    items:
+                      properties:
+                        asin:
+                          type: string
+                        title:
+                          type: string
+                        album:
+                          type: string
+                        trackNumber:
+                          type: integer
+
+    post:
+      tags:
+        - Songs
+      summary: Add a song to a playlist (AddSongToPlaylistLambda)
+      operationId: addSong
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to return
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                asin:
+                  type: string
+                trackNumber:
+                  type: integer
+                id:
+                  type: string
+
+      responses:
+        "200":
+          description: the song
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  songList:
+                    type: array
+                    items:
+                      properties:
+                        asin:
+                          type: string
+                        title:
+                          type: string
+                        album:
+                          type: string
+                        trackNumber:
+                          type: integer
