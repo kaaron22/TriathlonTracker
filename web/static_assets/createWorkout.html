@@ -6,26 +6,31 @@
 </head>
 <body class="background">
 Hello, friend!
-<form action="/url" method="GET">
-    <p>Workout Type:
-        <input type="text">
-    </p>
-</form>
-
-<form action="/url" method="GET">
-    <p>Date Completed:
-        <input type="text">
-    </p>
-</form>
-
-<form action="/url" method="GET">
-    Time Taken:
+<form>
     <p>
-        Hours: <input type="text">
-        Minutes: <input type="text">
-        Seconds: <input type="text">
+        <select name="workout-type" id="workoutType" required>
+            <option value="">Select a Workout Type</option>
+            <option value="RUNNING">Running</option>
+            <option value="BIKING">Biking</option>
+            <option value="SWIMMING">Swimming</option>
+        </select>
+    </p>
+
+    <p>
+        Date Completed:
+        <input type="text" name="date" id="date" placeholder="YYYY-MM-DD" required>
+    </p>
+
+    <p>
+        Time Taken:
+        Hours: <input type="text" id="hours" name="hours" value="0">
+        Minutes: <input type="text" id="minutes" name="minutes" value="0">
+        Seconds: <input type="text" id="seconds" name="seconds" value="0">
+    </p>
+
+    <p>
+        <input type="Submit" id="create" value="Submit">
     </p>
 </form>
-
 </body>
 </html>
