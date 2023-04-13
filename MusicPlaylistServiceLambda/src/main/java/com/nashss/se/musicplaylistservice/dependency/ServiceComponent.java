@@ -1,11 +1,6 @@
 package com.nashss.se.musicplaylistservice.dependency;
 
-import com.nashss.se.musicplaylistservice.activity.AddSongToPlaylistActivity;
-import com.nashss.se.musicplaylistservice.activity.CreatePlaylistActivity;
-import com.nashss.se.musicplaylistservice.activity.GetPlaylistActivity;
-import com.nashss.se.musicplaylistservice.activity.GetPlaylistSongsActivity;
-import com.nashss.se.musicplaylistservice.activity.SearchPlaylistsActivity;
-import com.nashss.se.musicplaylistservice.activity.UpdatePlaylistActivity;
+import com.nashss.se.musicplaylistservice.activity.*;
 
 import dagger.Component;
 
@@ -17,6 +12,13 @@ import javax.inject.Singleton;
 @Singleton
 @Component(modules = {DaoModule.class, MetricsModule.class})
 public interface ServiceComponent {
+
+    /**
+     * Provides the relevant activity.
+     * @return CreateWorkoutActivity
+     */
+    CreateWorkoutActivity provideCreateWorkoutActivity();
+
 
     /**
      * Provides the relevant activity.

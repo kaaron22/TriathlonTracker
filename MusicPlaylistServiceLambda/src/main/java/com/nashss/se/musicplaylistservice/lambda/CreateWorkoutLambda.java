@@ -3,6 +3,7 @@ package com.nashss.se.musicplaylistservice.lambda;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.nashss.se.musicplaylistservice.activity.requests.CreateWorkoutRequest;
+import com.nashss.se.musicplaylistservice.activity.results.CreateWorkoutResult;
 
 
 public class CreateWorkoutLambda
