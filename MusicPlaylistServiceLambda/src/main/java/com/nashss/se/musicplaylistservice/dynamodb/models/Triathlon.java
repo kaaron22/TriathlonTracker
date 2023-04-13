@@ -1,13 +1,14 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
 @DynamoDBTable(tableName = "triathlon")
 public class Triathlon {
     private String userId; //the specific user //HASH
     private String workoutId; //Specific workout HASH for GSI???
     private String date; //LocalDateTime converted //SORT
-    private String workoutType; //ENUM CLASS OF "RUNNING", "BIKING", "SWIMMING"
+    private WorkoutType workoutType; //ENUM CLASS OF "RUNNING", "BIKING", "SWIMMING"
     private Integer hours;
     private Integer minutes;
     private Integer seconds;
@@ -45,7 +46,7 @@ public class Triathlon {
         return workoutType;
     }
 
-    public void setWorkoutType(String workoutType) {
+    public void setWorkoutType(WorkoutType workoutType) {
         this.workoutType = workoutType;
     }
 
