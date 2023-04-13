@@ -23,6 +23,7 @@ module.exports = {
     usedExports: true
   },
   entry: {
+    createWorkout: path.resolve(__dirname, 'src', 'pages', 'createWorkout.js'),
     createPlaylist: path.resolve(__dirname, 'src', 'pages', 'createPlaylist.js'),
     viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
     searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
