@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @JsonDeserialize(builder = CreatePlaylistRequest.Builder.class)
 public class CreateWorkoutRequest {
     private final String customerId;
@@ -89,6 +92,8 @@ public class CreateWorkoutRequest {
 
         public Builder withDate(String date) {
             this.date = date;
+            //handle the conversion in the builder to LocalDateTime
+            LocalDateTime dateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME);
             return this;
         }
 
