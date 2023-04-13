@@ -15,7 +15,7 @@ tags:
     description: View and add songs to playlists
 
   - name: Triathlon
-    descriptions: Create, view, and update triathlon workouts
+    description: Create, view, and update triathlon workouts
 
 paths:
 
@@ -30,12 +30,14 @@ paths:
             schema:
               type: object
               properties:
-                customerId:
+                userId:
                   type: string
                 date:
                   type: string
+                  format: date
                 workoutType:
-                  type: enum
+                  type: string
+                  enum: ["RUNNING", "BIKING", "SWIMMING"]
                 durationInHours:
                   type: integer
                 durationInMin:
@@ -43,7 +45,8 @@ paths:
                 durationInSeconds:
                   type: integer
                 distance:
-                  type: double
+                  type: number
+                  format: double
       responses:
         "200":
           description: A triathlon workout log object
@@ -58,8 +61,10 @@ paths:
                     type: string
                   date:
                     type: string
+                    format: date
                   workoutType:
-                    type: enum
+                    type: string
+                    enum: ["RUNNING", "BIKING", "SWIMMING"]
                   durationInHours:
                     type: integer
                   durationInMin:
@@ -67,7 +72,8 @@ paths:
                   durationInSeconds:
                     type: integer
                   distance:
-                    type: double
+                    type: number
+                    format: double
 
   /playlists:
     post:
