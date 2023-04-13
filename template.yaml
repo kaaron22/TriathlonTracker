@@ -11,6 +11,7 @@ Parameters:
     Default: "change-this-music-playlist-service-change-this"
 
   S3Bucket:
+    Default: ""
     Type: String
     Description: Parameter to specify the S3 Bucket to use for deployment
 
@@ -369,34 +370,43 @@ Resources:
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------
-  
-  PlaylistsTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "id"
-          AttributeType: "S"
-      KeySchema:
-        - AttributeName: "id"
-          KeyType: "HASH"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "playlists"
 
-  AlbumTracksTable:
+  TriathlonTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "asin"
+        - AttributeName: "workout_id"
           AttributeType: "S"
-        - AttributeName: "track_number"
-          AttributeType: "N"
+        - AttributeName: "user_id"
+          AttributeType: "S"
+        - AttributeName: "date_of_workout"
+          AttributeType: "S"
+        - AttributeName: "workout_type"
+          AttributeType: "S"
       KeySchema:
-        - AttributeName: "asin"
+        - AttributeName: "workout_id"
           KeyType: "HASH"
-        - AttributeName: "track_number"
-          KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "album_tracks"
+      TableName: "triathlon_table"
+      GlobalSecondaryIndexes:
+        - IndexName: "user_id-index"
+          KeySchema:
+            - AttributeName: "user_id"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: "KEYS_ONLY"
+        - IndexName: "workout_type-index"
+          KeySchema:
+            - AttributeName: "workout_type"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: "KEYS_ONLY"
+        - IndexName: "date_of_workout-index"
+          KeySchema:
+            - AttributeName: "date_of_workout"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: "KEYS_ONLY"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
