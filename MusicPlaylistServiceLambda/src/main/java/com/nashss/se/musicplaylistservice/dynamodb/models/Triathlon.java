@@ -42,7 +42,7 @@ public class Triathlon {
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "workout_type-index", attributeName = "workout_type")
-    public String getWorkoutType() {
+    public WorkoutType getWorkoutType() {
         return workoutType;
     }
 
