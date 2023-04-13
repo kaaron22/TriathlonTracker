@@ -9,16 +9,16 @@ import Authenticator from "./authenticator";
  * which we could avoid using inheritance or Mixins.
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Mix-ins
  * https://javascript.info/mixins
-  */
-export default class WorkoutClient extends BindingClass {
+ */
+export default class MusicPlaylistClient extends BindingClass {
 
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createWorkout'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist', 'createWorkout'];
         this.bindClassMethods(methodsToBind, this);
 
-        this.authenticator = new Authenticator();;
+        this.authenticator = new Authenticator();
         this.props = props;
 
         axios.defaults.baseURL = process.env.API_BASE_URL;
@@ -96,6 +96,30 @@ export default class WorkoutClient extends BindingClass {
         try {
             const response = await this.axiosClient.get(`playlists/${id}/songs`);
             return response.data.songList;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    /**
+     * Create a new playlist owned by the current user.
+     * @param name The name of the playlist to create.
+     * @param tags Metadata tags to associate with a playlist.
+     * @param errorCallback (Optional) A function to execute if the call fails.
+     * @returns The playlist that has been created.
+     */
+    async createPlaylist(name, tags, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
+            const response = await this.axiosClient.post(`playlists`, {
+                name: name,
+                tags: tags
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.playlist;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
