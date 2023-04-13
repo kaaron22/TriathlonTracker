@@ -326,6 +326,7 @@ Resources:
           Type: Api
           Properties:
             Path: /workouts
+            Method: post
 
   UpdatePlaylistLambda:
     Type: AWS::Serverless::Function
