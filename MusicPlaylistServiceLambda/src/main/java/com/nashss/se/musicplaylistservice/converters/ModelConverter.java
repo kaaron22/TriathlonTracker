@@ -7,6 +7,7 @@ import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 import com.nashss.se.musicplaylistservice.models.SongModel;
 import com.nashss.se.musicplaylistservice.models.WorkoutModel;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +21,10 @@ public class ModelConverter {
 //        if (playlist.getTags() != null) {
 //            tags = new ArrayList<>(playlist.getTags());
 //        }
-
+        LocalDateTime localDateTime = LocalDateTime.parse(workout.getDate());
         return WorkoutModel.builder()
                 .withUserId(workout.getUserId())
-                .withWorkoutId(workout.getWorkoutId())
-                .withTimestamp(workout.getDate())
+                .withDate(localDateTime)
                 .withWorkoutType(workout.getWorkoutType())
                 .withDurationInHours(workout.getHours())
                 .withDurationInMinutes(workout.getMinutes())

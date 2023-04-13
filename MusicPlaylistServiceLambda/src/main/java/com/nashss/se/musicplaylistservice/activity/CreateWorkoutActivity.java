@@ -74,7 +74,7 @@ public class CreateWorkoutActivity {
         newTriathlon.setDurationinMinutes(createWorkoutRequest.getDurationinMinutes());
         newTriathlon.setDurationinSeconds(createWorkoutRequest.getDurationinSeconds());
         newTriathlon.setDistance(createWorkoutRequest.getDistance());
-//        newTriathlon.setSongCount(0);
+//        newTriathlon.setSongCount(0);a
 //        newTriathlon.setTags(playlistTags);
 //        newTriathlon.setSongList(new ArrayList<>());
 
@@ -85,5 +85,6 @@ public class CreateWorkoutActivity {
                 .withTriathlon(workoutModel)
                 .build();
     }
-} {
 }
+
+
