@@ -29,7 +29,7 @@ class CreateWorkoutActivityTest {
 
     @Test
     void handleRequest_validInformation_createsAndSavesWorkout() {
-        String expectedCustomerId = "test@test.com";
+        String expectedUserId = "test@test.com";
         LocalDateTime expectedDate = LocalDateTime.now();
         WorkoutType expectedWorkoutType = WorkoutType.RUNNING;
         Integer expectedDurationInHours = 1;
@@ -38,7 +38,7 @@ class CreateWorkoutActivityTest {
         Double expectedDistance = 5.0;
 
         CreateWorkoutRequest request = CreateWorkoutRequest.builder()
-                .withCustomerId(expectedCustomerId)
+                .withCustomerId(expectedUserId)
                 .withDate(expectedDate.toString())
                 .withWorkoutType(expectedWorkoutType)
                 .withDurationInHours(expectedDurationInHours)
@@ -52,6 +52,15 @@ class CreateWorkoutActivityTest {
 
         //THEN
         verify(workoutDao).saveTriathlon(any(Triathlon.class));
+
+        assertNotNull(result.getWorkoutModel().getDate());
+        assertNotNull(result.getWorkoutModel().getUserId());
+        assertEquals(expectedUserId, result.getWorkoutModel().getUserId());
+        assertEquals(expectedDate, result.getWorkoutModel().getDate());
+        assertEquals(expectedWorkoutType, result.getWorkoutModel().getWorkoutType());
+        assertEquals(expectedDurationInHours, result.getWorkoutModel().getDurationInHours());
+        assertEquals(expectedDurationInMinutes, result.getWorkoutModel().getDurationInMinutes());
+        assertEquals(expectedDurationInSeconds, result.getWorkoutModel().getDurationInSeconds());
 
     }
 }

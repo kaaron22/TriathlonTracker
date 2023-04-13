@@ -10,7 +10,7 @@ public class CreateWorkoutResult {
         this.workout = workout;
     }
 
-    public WorkoutModel getPlaylist() {
+    public WorkoutModel getWorkoutModel() {
         return workout;
     }
 

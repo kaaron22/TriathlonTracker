@@ -1,25 +1,21 @@
 package com.nashss.se.musicplaylistservice.activity;
 
-import com.nashss.se.musicplaylistservice.activity.requests.CreatePlaylistRequest;
 import com.nashss.se.musicplaylistservice.activity.requests.CreateWorkoutRequest;
-import com.nashss.se.musicplaylistservice.activity.results.CreatePlaylistResult;
 import com.nashss.se.musicplaylistservice.activity.results.CreateWorkoutResult;
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
-import com.nashss.se.musicplaylistservice.dynamodb.PlaylistDao;
 import com.nashss.se.musicplaylistservice.dynamodb.WorkoutDao;
-import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
 import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 import com.nashss.se.musicplaylistservice.models.WorkoutModel;
+
 import com.nashss.se.projectresources.music.playlist.servic.util.MusicPlaylistServiceUtils;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+
 
 public class CreateWorkoutActivity {
     private final Logger log = LogManager.getLogger();

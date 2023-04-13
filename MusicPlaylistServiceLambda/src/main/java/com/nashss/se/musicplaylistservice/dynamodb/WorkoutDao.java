@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@Singleton
+@Singleton
 public class WorkoutDao {
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
@@ -26,7 +26,7 @@ public class WorkoutDao {
      * @param dynamoDbMapper   the {@link DynamoDBMapper} used to interact with the triathlon table
      * @param metricsPublisher the {@link MetricsPublisher} used to record metrics.
      */
-   // @Inject
+    @Inject
     public WorkoutDao(DynamoDBMapper dynamoDbMapper, MetricsPublisher metricsPublisher) {
         this.dynamoDbMapper = dynamoDbMapper;
         this.metricsPublisher = metricsPublisher;
