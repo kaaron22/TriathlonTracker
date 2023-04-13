@@ -102,34 +102,6 @@ export default class WorkoutClient extends BindingClass {
     }
 
     /**
-     * Create a new playlist owned by the current user.
-     * @param name The name of the playlist to create.
-     * @param tags Metadata tags to associate with a playlist.
-     * @param errorCallback (Optional) A function to execute if the call fails.
-     * @returns The playlist that has been created.
-     */
-    async createWorkout(date, workoutType, hours, minutes, seconds, distance, errorCallback) {
-        try {
-            const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
-            const response = await this.axiosClient.post(`workouts`, {
-                date: date,
-                workoutType: workoutType,
-                hours: hours,
-                minutes: minutes,
-                seconds: seconds,
-                distance: distance
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            return response.data.workouts;
-        } catch (error) {
-            this.handleError(error, errorCallback)
-        }
-    }
-
-    /**
      * Add a song to a playlist.
      * @param id The id of the playlist to add a song to.
      * @param asin The asin that uniquely identifies the album.
