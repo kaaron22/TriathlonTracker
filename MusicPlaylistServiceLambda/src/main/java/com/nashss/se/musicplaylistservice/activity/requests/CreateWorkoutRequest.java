@@ -35,8 +35,6 @@ public class CreateWorkoutRequest {
         return customerId;
     }
 
-
-    @DynamoDBTypeConverted(converter = LocalDateConverter.class)
     public LocalDate getDate() {
         return date;
     }
