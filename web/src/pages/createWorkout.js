@@ -52,7 +52,7 @@ class CreateWorkout extends BindingClass {
         const totalDurationInSeconds = (durationInHours * 3600) + (durationInMin * 60) + durationInSeconds;
 
         const workout = await this.client.createWorkout(workoutType, date,
-            durationInSeconds, distance, (error) => {
+            totalDurationInSeconds, distance, (error) => {
             createButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
