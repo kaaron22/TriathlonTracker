@@ -11,7 +11,7 @@ class CreateWorkout extends BindingClass {
         super();
         this.bindClassMethods(['mount', 'submit', 'redirectToCreateWorkout'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.redirectToViewPlaylist);
+        this.dataStore.addChangeListener(this.redirectToCreateWorkout);
         this.header = new Header(this.dataStore);
     }
 
@@ -49,8 +49,8 @@ class CreateWorkout extends BindingClass {
         const durationInSeconds = document.getElementById('seconds').value;
         const distance = document.getElementById('distance').value;
 
-        const workout = await this.client.createWorkout(workoutType, date, durationInHours, durationInMin
-            , durationInSeconds, distance, (error) => {
+        const workout = await this.client.createWorkout(workoutType, date, durationInHours, durationInMin,
+            durationInSeconds, distance, (error) => {
             createButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
