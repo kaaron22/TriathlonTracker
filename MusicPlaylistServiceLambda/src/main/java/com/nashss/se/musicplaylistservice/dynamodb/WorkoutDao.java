@@ -1,11 +1,17 @@
 package com.nashss.se.musicplaylistservice.dynamodb;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDeleteExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.lambda.runtime.events.models.dynamodb.AttributeValue;
+import com.nashss.se.musicplaylistservice.activity.requests.DeleteWorkoutRequest;
+import com.nashss.se.musicplaylistservice.activity.results.DeleteWorkoutResult;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
+import com.nashss.se.musicplaylistservice.exceptions.DeleteWorkoutException;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.HashMap;
 
 @Singleton
 public class WorkoutDao {
@@ -44,4 +50,21 @@ public class WorkoutDao {
         this.dynamoDbMapper.save(workout);
         return workout;
     }
+    public void deleteTriathlon(Triathlon workout) {
+        //method may need some tweaking + metric publishing
+
+        //handling the Delete request to the Triathlon table, does this need a delete expression?
+        DeleteWorkoutRequest deleteWorkoutRequest = DeleteWorkoutRequest.builder()
+                .withCustomerId(workout.getUserId())
+                .withDate(workout.getDate())
+                .withWorkoutType(workout.getWorkoutType())
+                .build();
+        try {
+            this.dynamoDbMapper.delete(deleteWorkoutRequest);
+        } catch (DeleteWorkoutException e) {
+            //should add logging + metric publishing
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
