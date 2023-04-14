@@ -4,13 +4,11 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.nashss.se.musicplaylistservice.converters.LocalDateConverter;
 import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
-import java.time.LocalDate;
-
 @DynamoDBTable(tableName = "triathlon")
 public class Triathlon {
     private String userId;
     private String workoutId;
-    private LocalDate date;
+    private String date;
     private WorkoutType workoutType;
     private Integer durationInSeconds;
     private Double distance;
@@ -35,11 +33,11 @@ public class Triathlon {
 
     @DynamoDBTypeConverted(converter = LocalDateConverter.class)
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "date_of_workout-index", attributeName = "date_of_workout")
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,14 +32,14 @@ class CreateWorkoutActivityTest {
     void handleRequest_validInformation_createsAndSavesWorkout() {
         String expectedUserId = "test@test.com";
         String expectedDateString = "2004-12-27";
-        LocalDate expectedDate = LocalDate.parse(expectedDateString, DateTimeFormatter.ISO_DATE);
+//        String expectedDate = LocalDate.parse(expectedDateString, DateTimeFormatter.ISO_DATE);
         WorkoutType expectedWorkoutType = WorkoutType.RUNNING;
         Integer expectedDurationInSeconds = 0;
         Double expectedDistance = 5.0;
 
         CreateWorkoutRequest request = CreateWorkoutRequest.builder()
                 .withCustomerId(expectedUserId)
-                .withDate(expectedDate)
+                .withDate(expectedDateString)
                 .withWorkoutType(expectedWorkoutType.name())
                 .withDurationInSeconds(expectedDurationInSeconds)
                 .withDistance(expectedDistance)
@@ -55,7 +54,7 @@ class CreateWorkoutActivityTest {
         assertNotNull(result.getWorkoutModel().getDate());
         assertNotNull(result.getWorkoutModel().getUserId());
         assertEquals(expectedUserId, result.getWorkoutModel().getUserId());
-        assertEquals(expectedDate, result.getWorkoutModel().getDate());
+        assertEquals(expectedDateString, result.getWorkoutModel().getDate());
         assertEquals(expectedWorkoutType, result.getWorkoutModel().getWorkoutType());
         assertEquals(expectedDurationInSeconds, result.getWorkoutModel().getDurationInSeconds());
         assertEquals(expectedDistance, result.getWorkoutModel().getDistance());

@@ -5,18 +5,16 @@ import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-import java.time.LocalDate;
 
-
-@JsonDeserialize(builder = CreatePlaylistRequest.Builder.class)
+@JsonDeserialize(builder = CreateWorkoutRequest.Builder.class)
 public class CreateWorkoutRequest {
     private final String customerId;
-    private final LocalDate date;
+    private final String date;
     private final WorkoutType workoutType;
     private final Integer durationInSeconds;
     private final Double distance;
 
-    public CreateWorkoutRequest(String customerId, LocalDate date, WorkoutType workoutType,
+    public CreateWorkoutRequest(String customerId, String date, WorkoutType workoutType,
                                 Integer durationInSeconds, Double distance) {
         this.customerId = customerId;
         this.date = date;
@@ -29,7 +27,7 @@ public class CreateWorkoutRequest {
         return customerId;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -64,7 +62,7 @@ public class CreateWorkoutRequest {
     @JsonPOJOBuilder
     public static class Builder {
         private String customerId;
-        private LocalDate date;
+        private String date;
         private WorkoutType workoutType;
         private Integer durationInSeconds;
         private Double distance;
@@ -75,7 +73,7 @@ public class CreateWorkoutRequest {
             return this;
         }
 
-        public Builder withDate(LocalDate date) {
+        public Builder withDate(String date) {
             this.date = date;
             return this;
         }
