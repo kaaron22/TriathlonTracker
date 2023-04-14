@@ -41,7 +41,7 @@ class CreateWorkoutActivityTest {
         CreateWorkoutRequest request = CreateWorkoutRequest.builder()
                 .withCustomerId(expectedUserId)
                 .withDate(expectedDate)
-                .withWorkoutType(expectedWorkoutType)
+                .withWorkoutType(expectedWorkoutType.name())
                 .withDurationInSeconds(expectedDurationInSeconds)
                 .withDistance(expectedDistance)
                 .build();

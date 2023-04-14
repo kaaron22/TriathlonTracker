@@ -20,7 +20,7 @@ public class CreateWorkoutLambda
                 return input.fromUserClaims(claims ->
                             CreateWorkoutRequest.builder()
                                     .withDate(unauthenticatedRequest.getDate())
-                                    .withWorkoutType(unauthenticatedRequest.getWorkoutType())
+                                    .withWorkoutType(unauthenticatedRequest.getWorkoutType().name())
                                     .withDurationInSeconds(unauthenticatedRequest.getDurationInSeconds())
                                     .withDistance(unauthenticatedRequest.getDistance())
                                     .withCustomerId(claims.get("email"))

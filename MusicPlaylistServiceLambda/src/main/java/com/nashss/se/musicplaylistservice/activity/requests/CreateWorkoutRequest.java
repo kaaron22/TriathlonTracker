@@ -80,8 +80,8 @@ public class CreateWorkoutRequest {
             return this;
         }
 
-        public Builder withWorkoutType(WorkoutType workoutType) {
-            this.workoutType = workoutType;
+        public Builder withWorkoutType(String workoutType) {
+            this.workoutType = WorkoutType.valueOf(workoutType);
             return this;
         }
 
