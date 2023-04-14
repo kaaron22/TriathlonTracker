@@ -58,6 +58,7 @@ class CreateWorkoutActivityTest {
         assertEquals(expectedDate, result.getWorkoutModel().getDate());
         assertEquals(expectedWorkoutType, result.getWorkoutModel().getWorkoutType());
         assertEquals(expectedDurationInSeconds, result.getWorkoutModel().getDurationInSeconds());
+        assertEquals(expectedDistance, result.getWorkoutModel().getDistance());
 
     }
 }
