@@ -2,22 +2,27 @@ package com.nashss.se.musicplaylistservice.activity.requests;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.nashss.se.musicplaylistservice.utils.LocalDateDeserializer;
 import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @JsonDeserialize(builder = CreatePlaylistRequest.Builder.class)
 public class CreateWorkoutRequest {
     private final String customerId;
-    private final String date;
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private final LocalDate date;
+
     private final WorkoutType workoutType;
     private final Integer durationInHours;
     private final Integer durationInMinutes;
     private final Integer durationInSeconds;
     private final Double distance;
 
-    public CreateWorkoutRequest(String customerId, String date, WorkoutType workoutType, Integer durationInHours,
+    public CreateWorkoutRequest(String customerId, LocalDate date, WorkoutType workoutType, Integer durationInHours,
                                 Integer durationInMinutes, Integer durationInSeconds, Double distance) {
         this.customerId = customerId;
         this.date = date;
@@ -32,7 +37,7 @@ public class CreateWorkoutRequest {
         return customerId;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -77,7 +82,7 @@ public class CreateWorkoutRequest {
     @JsonPOJOBuilder
     public static class Builder {
         private String customerId;
-        private String date;
+        private LocalDate date;
         private WorkoutType workoutType;
         private Integer durationInHours;
         private Integer durationInMinutes;
@@ -90,7 +95,7 @@ public class CreateWorkoutRequest {
             return this;
         }
 
-        public Builder withDate(String date) {
+        public Builder withDate(LocalDate date) {
             this.date = date;
             return this;
         }

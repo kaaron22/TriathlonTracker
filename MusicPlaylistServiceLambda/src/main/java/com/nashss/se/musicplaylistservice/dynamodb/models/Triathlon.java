@@ -7,11 +7,13 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
+import java.time.LocalDate;
+
 @DynamoDBTable(tableName = "triathlon")
 public class Triathlon {
     private String userId;
     private String workoutId;
-    private String date;
+    private LocalDate date;
     private WorkoutType workoutType;
     private Integer hours;
     private Integer minutes;
@@ -37,11 +39,11 @@ public class Triathlon {
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "date_of_workout-index", attributeName = "date_of_workout")
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
