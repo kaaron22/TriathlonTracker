@@ -203,7 +203,7 @@ export default class WorkoutClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data;
+            return response.data.workout;
         } catch (error) {
             this.handleError(error, errorCallBack)
         }

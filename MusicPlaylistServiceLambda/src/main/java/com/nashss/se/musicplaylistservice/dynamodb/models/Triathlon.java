@@ -1,7 +1,7 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.nashss.se.musicplaylistservice.utils.LocalDateConverter;
+import com.nashss.se.musicplaylistservice.converters.LocalDateConverter;
 import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
 import java.time.LocalDate;
@@ -12,9 +12,7 @@ public class Triathlon {
     private String workoutId;
     private LocalDate date;
     private WorkoutType workoutType;
-    private Integer hours;
-    private Integer minutes;
-    private Integer seconds;
+    private Integer durationInSeconds;
     private Double distance;
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "user_id-index", attributeName = "user_id")
@@ -54,31 +52,13 @@ public class Triathlon {
         this.workoutType = workoutType;
     }
 
-    @DynamoDBAttribute(attributeName = "hours")
-    public Integer getHours() {
-        return hours;
-    }
-
-    public void setHours(Integer hours) {
-        this.hours = hours;
-    }
-
-    @DynamoDBAttribute(attributeName = "minutes")
-    public Integer getMinutes() {
-        return minutes;
-    }
-
-    public void setMinutes(Integer minutes) {
-        this.minutes = minutes;
-    }
-
     @DynamoDBAttribute(attributeName = "seconds")
-    public Integer getSeconds() {
-        return seconds;
+    public Integer getDurationInSeconds() {
+        return durationInSeconds;
     }
 
-    public void setSeconds(Integer seconds) {
-        this.seconds = seconds;
+    public void setDurationInSeconds(Integer durationInSeconds) {
+        this.durationInSeconds = durationInSeconds;
     }
     @DynamoDBAttribute(attributeName = "workout_distance")
     public Double getDistance() {

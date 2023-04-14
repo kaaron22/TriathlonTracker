@@ -38,10 +38,6 @@ paths:
                 workoutType:
                   type: string
                   enum: ["RUNNING", "BIKING", "SWIMMING"]
-                durationInHours:
-                  type: integer
-                durationInMin:
-                  type: integer
                 durationInSeconds:
                   type: integer
                 distance:
