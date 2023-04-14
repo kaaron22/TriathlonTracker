@@ -17,14 +17,9 @@ import java.util.List;
 public class ModelConverter {
 
     public WorkoutModel toWorkoutModel(Triathlon workout) {
-       // List<String> tags = null;
-//        if (playlist.getTags() != null) {
-//            tags = new ArrayList<>(playlist.getTags());
-//        }
-        LocalDateTime localDateTime = LocalDateTime.parse(workout.getDate());
         return WorkoutModel.builder()
                 .withUserId(workout.getUserId())
-                .withDate(localDateTime)
+                .withDate(workout.getDate())
                 .withWorkoutType(workout.getWorkoutType())
                 .withDurationInHours(workout.getHours())
                 .withDurationInMinutes(workout.getMinutes())

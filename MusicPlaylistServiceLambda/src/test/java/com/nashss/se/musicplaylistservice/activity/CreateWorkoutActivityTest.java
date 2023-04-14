@@ -30,7 +30,7 @@ class CreateWorkoutActivityTest {
     @Test
     void handleRequest_validInformation_createsAndSavesWorkout() {
         String expectedUserId = "test@test.com";
-        LocalDateTime expectedDate = LocalDateTime.now();
+        String expectedDate = "2004-12-27";
         WorkoutType expectedWorkoutType = WorkoutType.RUNNING;
         Integer expectedDurationInHours = 1;
         Integer expectedDurationInMinutes = 30;
@@ -39,7 +39,7 @@ class CreateWorkoutActivityTest {
 
         CreateWorkoutRequest request = CreateWorkoutRequest.builder()
                 .withCustomerId(expectedUserId)
-                .withDate(expectedDate.toString())
+                .withDate(expectedDate)
                 .withWorkoutType(expectedWorkoutType)
                 .withDurationInHours(expectedDurationInHours)
                 .withDurationInMinutes(expectedDurationInMinutes)

@@ -91,8 +91,7 @@ public class CreateWorkoutRequest {
         }
 
         public Builder withDate(String date) {
-            LocalDateTime dateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE).toLocalDate().atStartOfDay();
-            this.date = dateTime.toString();
+            this.date = date;
             return this;
         }
 

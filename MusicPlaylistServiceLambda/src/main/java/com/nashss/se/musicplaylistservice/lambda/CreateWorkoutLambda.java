@@ -1,9 +1,11 @@
 package com.nashss.se.musicplaylistservice.lambda;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.nashss.se.musicplaylistservice.activity.requests.CreateWorkoutRequest;
 import com.nashss.se.musicplaylistservice.activity.results.CreateWorkoutResult;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+
 
 
 public class CreateWorkoutLambda
@@ -12,12 +14,10 @@ public class CreateWorkoutLambda
 
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateWorkoutRequest> input, Context context) {
-        System.out.println("Request body: " + input.getBody());
         return super.runActivity(
-                () -> {
-                    CreateWorkoutRequest unauthenticatedRequest = input.fromBody(CreateWorkoutRequest.class);
-                    System.out.println("Deserialized request: " + unauthenticatedRequest);
-                    return input.fromUserClaims(claims ->
+            () -> {
+                CreateWorkoutRequest unauthenticatedRequest = input.fromBody(CreateWorkoutRequest.class);
+                return input.fromUserClaims(claims ->
                             CreateWorkoutRequest.builder()
                                     .withDate(unauthenticatedRequest.getDate())
                                     .withWorkoutType(unauthenticatedRequest.getWorkoutType())
@@ -27,8 +27,8 @@ public class CreateWorkoutLambda
                                     .withDistance(unauthenticatedRequest.getDistance())
                                     .withCustomerId(claims.get("email"))
                                     .build());
-                },
-                (request, serviceComponent) ->
+            },
+            (request, serviceComponent) ->
                         serviceComponent.provideCreateWorkoutActivity().handleRequest(request)
         );
     }

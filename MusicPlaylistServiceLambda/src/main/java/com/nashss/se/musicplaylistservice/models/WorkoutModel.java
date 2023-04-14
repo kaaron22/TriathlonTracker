@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 public class WorkoutModel {
 
     private final String customerId;
-    private final LocalDateTime date;
+    private final String date;
     private final WorkoutType workoutType;
     private final Integer durationInHours;
     private final Integer durationInMinutes;
     private final Integer durationInSeconds;
     private final Double distance;
 
-    private WorkoutModel(String customerId, LocalDateTime date, WorkoutType workoutType,
-                         Integer durationInHours, Integer durationInMinutes, Integer durationInSeconds, Double distance) {
+    private WorkoutModel(String customerId, String date, WorkoutType workoutType, Integer durationInHours,
+                         Integer durationInMinutes, Integer durationInSeconds, Double distance) {
         this.customerId = customerId;
         this.date = date;
         this.workoutType = workoutType;
@@ -29,17 +29,25 @@ public class WorkoutModel {
         return customerId;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public WorkoutType getWorkoutType() { return workoutType; }
+    public WorkoutType getWorkoutType() {
+        return workoutType;
+    }
 
-    public Integer getDurationInHours() { return durationInHours; }
+    public Integer getDurationInHours() {
+        return durationInHours;
+    }
 
-    public Integer getDurationInMinutes() { return durationInMinutes; }
+    public Integer getDurationInMinutes() {
+        return durationInMinutes;
+    }
 
-    public Integer getDurationInSeconds() { return durationInSeconds; }
+    public Integer getDurationInSeconds() {
+        return durationInSeconds;
+    }
 
     public Double getDistance() {
         return distance;
@@ -53,7 +61,7 @@ public class WorkoutModel {
 
     public static class Builder {
         private String userId;
-        private LocalDateTime date;
+        private String date;
         private WorkoutType workoutType;
         private Integer durationInHours;
         private Integer durationInMinutes;
@@ -65,7 +73,7 @@ public class WorkoutModel {
             return this;
         }
 
-        public Builder withDate(LocalDateTime date) {
+        public Builder withDate(String date) {
             this.date = date;
             return this;
         }
@@ -94,9 +102,9 @@ public class WorkoutModel {
             return this;
         }
 
-        public WorkoutModel build() { return new WorkoutModel(userId, date, workoutType, durationInHours,
+        public WorkoutModel build() {
+            return new WorkoutModel(userId, date, workoutType, durationInHours,
                 durationInMinutes, durationInSeconds, distance); }
 
     }
-
 }

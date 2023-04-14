@@ -1,18 +1,22 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.nashss.se.musicplaylistservice.utils.WorkoutType;
+
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 @DynamoDBTable(tableName = "triathlon")
 public class Triathlon {
-    private String userId; //the specific user //HASH
-    private String workoutId; //Specific workout HASH for GSI???
-    private String date; //LocalDateTime converted //SORT
-    private WorkoutType workoutType; //ENUM CLASS OF "RUNNING", "BIKING", "SWIMMING"
+    private String userId;
+    private String workoutId;
+    private String date;
+    private WorkoutType workoutType;
     private Integer hours;
     private Integer minutes;
     private Integer seconds;
-    private Double distance; //distance traveled
+    private Double distance;
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "user_id-index", attributeName = "user_id")
     public String getUserId() {
