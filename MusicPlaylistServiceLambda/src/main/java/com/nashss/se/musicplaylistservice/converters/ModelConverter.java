@@ -21,9 +21,7 @@ public class ModelConverter {
                 .withUserId(workout.getUserId())
                 .withDate(workout.getDate())
                 .withWorkoutType(workout.getWorkoutType())
-                .withDurationInHours(workout.getHours())
-                .withDurationInMinutes(workout.getMinutes())
-                .withDurationInSeconds(workout.getSeconds())
+                .withDurationInSeconds(workout.getDurationInSeconds())
                 .withDistance(workout.getDistance())
                 .build();
     }

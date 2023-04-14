@@ -35,8 +35,6 @@ class CreateWorkoutActivityTest {
         String expectedDateString = "2004-12-27";
         LocalDate expectedDate = LocalDate.parse(expectedDateString, DateTimeFormatter.ISO_DATE);
         WorkoutType expectedWorkoutType = WorkoutType.RUNNING;
-        Integer expectedDurationInHours = 1;
-        Integer expectedDurationInMinutes = 30;
         Integer expectedDurationInSeconds = 0;
         Double expectedDistance = 5.0;
 
@@ -44,8 +42,6 @@ class CreateWorkoutActivityTest {
                 .withCustomerId(expectedUserId)
                 .withDate(expectedDate)
                 .withWorkoutType(expectedWorkoutType)
-                .withDurationInHours(expectedDurationInHours)
-                .withDurationInMinutes(expectedDurationInMinutes)
                 .withDurationInSeconds(expectedDurationInSeconds)
                 .withDistance(expectedDistance)
                 .build();
@@ -61,8 +57,6 @@ class CreateWorkoutActivityTest {
         assertEquals(expectedUserId, result.getWorkoutModel().getUserId());
         assertEquals(expectedDate, result.getWorkoutModel().getDate());
         assertEquals(expectedWorkoutType, result.getWorkoutModel().getWorkoutType());
-        assertEquals(expectedDurationInHours, result.getWorkoutModel().getDurationInHours());
-        assertEquals(expectedDurationInMinutes, result.getWorkoutModel().getDurationInMinutes());
         assertEquals(expectedDurationInSeconds, result.getWorkoutModel().getDurationInSeconds());
 
     }

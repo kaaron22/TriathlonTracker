@@ -57,9 +57,7 @@ public class CreateWorkoutActivity {
         newTriathlon.setUserId(createWorkoutRequest.getCustomerId());
         newTriathlon.setDate(createWorkoutRequest.getDate());
         newTriathlon.setWorkoutType(createWorkoutRequest.getWorkoutType());
-        newTriathlon.setHours(createWorkoutRequest.getDurationInHours());
-        newTriathlon.setMinutes(createWorkoutRequest.getDurationInMinutes());
-        newTriathlon.setSeconds(createWorkoutRequest.getDurationInSeconds());
+        newTriathlon.setDurationInSeconds(createWorkoutRequest.getDurationInSeconds());
         newTriathlon.setDistance(createWorkoutRequest.getDistance());
         workoutDao.saveTriathlon(newTriathlon);
 
