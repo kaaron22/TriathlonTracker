@@ -1,11 +1,11 @@
 package com.nashss.se.musicplaylistservice.activity.requests;
 
+import com.nashss.se.musicplaylistservice.utils.LocalDateConverter;
+import com.nashss.se.musicplaylistservice.utils.WorkoutType;
+
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-
-import com.nashss.se.musicplaylistservice.utils.LocalDateConverter;
-import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
 import java.time.LocalDate;
 
