@@ -33,14 +33,14 @@ class CreateWorkoutActivityTest {
         String expectedUserId = "test@test.com";
         String expectedDateString = "2004-12-27";
 //        String expectedDate = LocalDate.parse(expectedDateString, DateTimeFormatter.ISO_DATE);
-        WorkoutType expectedWorkoutType = WorkoutType.RUNNING;
+        String expectedWorkoutType = "RUNNING";
         Integer expectedDurationInSeconds = 0;
         Double expectedDistance = 5.0;
 
         CreateWorkoutRequest request = CreateWorkoutRequest.builder()
                 .withCustomerId(expectedUserId)
                 .withDate(expectedDateString)
-                .withWorkoutType(expectedWorkoutType.name())
+                .withWorkoutType(expectedWorkoutType)
                 .withDurationInSeconds(expectedDurationInSeconds)
                 .withDistance(expectedDistance)
                 .build();

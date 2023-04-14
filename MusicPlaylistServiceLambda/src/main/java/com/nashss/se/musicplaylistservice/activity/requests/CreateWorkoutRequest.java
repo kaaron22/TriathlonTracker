@@ -10,11 +10,11 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class CreateWorkoutRequest {
     private final String customerId;
     private final String date;
-    private final WorkoutType workoutType;
+    private final String workoutType;
     private final Integer durationInSeconds;
     private final Double distance;
 
-    public CreateWorkoutRequest(String customerId, String date, WorkoutType workoutType,
+    public CreateWorkoutRequest(String customerId, String date, String workoutType,
                                 Integer durationInSeconds, Double distance) {
         this.customerId = customerId;
         this.date = date;
@@ -31,7 +31,7 @@ public class CreateWorkoutRequest {
         return date;
     }
 
-    public WorkoutType getWorkoutType() {
+    public String getWorkoutType() {
         return workoutType;
     }
 
@@ -63,7 +63,7 @@ public class CreateWorkoutRequest {
     public static class Builder {
         private String customerId;
         private String date;
-        private WorkoutType workoutType;
+        private String workoutType;
         private Integer durationInSeconds;
         private Double distance;
 
@@ -79,7 +79,7 @@ public class CreateWorkoutRequest {
         }
 
         public Builder withWorkoutType(String workoutType) {
-            this.workoutType = WorkoutType.valueOf(workoutType);
+            this.workoutType = workoutType;
             return this;
         }
 

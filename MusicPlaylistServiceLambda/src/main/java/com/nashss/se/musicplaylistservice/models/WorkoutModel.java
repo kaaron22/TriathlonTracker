@@ -1,16 +1,14 @@
 package com.nashss.se.musicplaylistservice.models;
 
-import com.nashss.se.musicplaylistservice.utils.WorkoutType;
-
 public class WorkoutModel {
 
     private final String customerId;
     private final String date;
-    private final WorkoutType workoutType;
+    private final String workoutType;
     private final Integer durationInSeconds;
     private final Double distance;
 
-    private WorkoutModel(String customerId, String date, WorkoutType workoutType, Integer durationInSeconds,
+    private WorkoutModel(String customerId, String date, String workoutType, Integer durationInSeconds,
                          Double distance) {
         this.customerId = customerId;
         this.date = date;
@@ -27,7 +25,7 @@ public class WorkoutModel {
         return date;
     }
 
-    public WorkoutType getWorkoutType() {
+    public String getWorkoutType() {
         return workoutType;
     }
 
@@ -49,7 +47,7 @@ public class WorkoutModel {
     public static class Builder {
         private String userId;
         private String date;
-        private WorkoutType workoutType;
+        private String workoutType;
         private Integer durationInSeconds;
         private Double distance;
 
@@ -63,7 +61,7 @@ public class WorkoutModel {
             return this;
         }
 
-        public Builder withWorkoutType(WorkoutType type) {
+        public Builder withWorkoutType(String type) {
             this.workoutType = type;
             return this;
         }

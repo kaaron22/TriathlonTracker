@@ -2,14 +2,13 @@ package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.nashss.se.musicplaylistservice.converters.LocalDateConverter;
-import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
 @DynamoDBTable(tableName = "triathlon")
 public class Triathlon {
     private String userId;
     private String workoutId;
     private String date;
-    private WorkoutType workoutType;
+    private String workoutType;
     private Integer durationInSeconds;
     private Double distance;
 
@@ -31,7 +30,6 @@ public class Triathlon {
         this.workoutId = workoutId;
     }
 
-    @DynamoDBTypeConverted(converter = LocalDateConverter.class)
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "date_of_workout-index", attributeName = "date_of_workout")
     public String getDate() {
         return date;
@@ -42,11 +40,11 @@ public class Triathlon {
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "workout_type-index", attributeName = "workout_type")
-    public WorkoutType getWorkoutType() {
+    public String getWorkoutType() {
         return workoutType;
     }
 
-    public void setWorkoutType(WorkoutType workoutType) {
+    public void setWorkoutType(String workoutType) {
         this.workoutType = workoutType;
     }
 
