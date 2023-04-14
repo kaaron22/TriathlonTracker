@@ -1,11 +1,8 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.nashss.se.musicplaylistservice.utils.LocalDateConverter;
 import com.nashss.se.musicplaylistservice.utils.WorkoutType;
-
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.time.LocalDate;
 
@@ -43,6 +40,7 @@ public class Triathlon {
         return date;
     }
 
+    @DynamoDBTypeConverted(converter = LocalDateConverter.class)
     public void setDate(LocalDate date) {
         this.date = date;
     }
