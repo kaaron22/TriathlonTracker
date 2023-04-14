@@ -30,7 +30,7 @@ paths:
             schema:
               type: object
               properties:
-                userId:
+                customerId:
                   type: string
                 date:
                   type: string
@@ -57,7 +57,7 @@ paths:
                 properties:
                   workoutId:
                     type: string
-                  userName:
+                  customerId:
                     type: string
                   date:
                     type: string

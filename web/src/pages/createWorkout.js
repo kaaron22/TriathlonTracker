@@ -44,12 +44,12 @@ class CreateWorkout extends BindingClass {
         //Data Fields for JSON collected from form
         const workoutType = document.getElementById('workoutType').value;
         const date = document.getElementById('date').value;
-        const durationInHours = document.getElementById('hours');
+        const durationInHours = document.getElementById('hours').value;
         const durationInMin = document.getElementById('minutes').value;
         const durationInSeconds = document.getElementById('seconds').value;
         const distance = document.getElementById('distance').value;
 
-        const workout = await this.client.createPlaylist(workoutType, date, durationInHours, durationInMin
+        const workout = await this.client.createWorkout(workoutType, date, durationInHours, durationInMin
             , durationInSeconds, distance, (error) => {
             createButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;

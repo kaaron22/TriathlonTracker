@@ -12,9 +12,11 @@ public class CreateWorkoutLambda
 
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateWorkoutRequest> input, Context context) {
+        System.out.println("Request body: " + input.getBody());
         return super.runActivity(
                 () -> {
                     CreateWorkoutRequest unauthenticatedRequest = input.fromBody(CreateWorkoutRequest.class);
+                    System.out.println("Deserialized request: " + unauthenticatedRequest);
                     return input.fromUserClaims(claims ->
                             CreateWorkoutRequest.builder()
                                     .withDate(unauthenticatedRequest.getDate())
