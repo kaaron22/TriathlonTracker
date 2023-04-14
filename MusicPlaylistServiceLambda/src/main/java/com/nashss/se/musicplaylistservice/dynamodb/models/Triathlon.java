@@ -1,7 +1,7 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.nashss.se.musicplaylistservice.utils.LocalDateConverter;
+import com.nashss.se.musicplaylistservice.converters.LocalDateConverter;
 import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
 import java.time.LocalDate;

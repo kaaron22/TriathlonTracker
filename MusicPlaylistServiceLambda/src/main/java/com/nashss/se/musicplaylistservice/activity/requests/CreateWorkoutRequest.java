@@ -1,6 +1,6 @@
 package com.nashss.se.musicplaylistservice.activity.requests;
 
-import com.nashss.se.musicplaylistservice.utils.LocalDateConverter;
+import com.nashss.se.musicplaylistservice.converters.LocalDateConverter;
 import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
@@ -13,10 +13,7 @@ import java.time.LocalDate;
 @JsonDeserialize(builder = CreatePlaylistRequest.Builder.class)
 public class CreateWorkoutRequest {
     private final String customerId;
-
-    @DynamoDBTypeConverted(converter = LocalDateConverter.class)
     private final LocalDate date;
-
     private final WorkoutType workoutType;
     private final Integer durationInHours;
     private final Integer durationInMinutes;
@@ -39,6 +36,7 @@ public class CreateWorkoutRequest {
     }
 
 
+    @DynamoDBTypeConverted(converter = LocalDateConverter.class)
     public LocalDate getDate() {
         return date;
     }
