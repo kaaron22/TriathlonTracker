@@ -35,12 +35,12 @@ public class Triathlon {
         this.workoutId = workoutId;
     }
 
+    @DynamoDBTypeConverted(converter = LocalDateConverter.class)
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "date_of_workout-index", attributeName = "date_of_workout")
     public LocalDate getDate() {
         return date;
     }
 
-    @DynamoDBTypeConverted(converter = LocalDateConverter.class)
     public void setDate(LocalDate date) {
         this.date = date;
     }
