@@ -44,14 +44,13 @@ class CreateWorkout extends BindingClass {
         //Data Fields for JSON collected from form
         const workoutType = document.getElementById('workoutType').value;
         const date = document.getElementById('date').value;
-        const durationInHours = parseInt(document.getElementById('hours').value, 10);
-        const durationInMin = parseInt(document.getElementById('minutes').value, 10);
-        const durationInSeconds = parseInt(document.getElementById('seconds').value, 10);
-        const distance = parseFloat(document.getElementById('distance').value);
+        const durationInHours = document.getElementById('hours').value;
+        const durationInMinutes = document.getElementById('minutes').value;
+        const durationInSeconds = document.getElementById('seconds').value;
+        const distance = document.getElementById('distance').value;
 
-        //const totalDurationInSeconds = (durationInHours * 3600) + (durationInMin * 60) + durationInSeconds;
-
-        const workout = await this.client.createWorkout(workoutType, date, durationInSeconds, distance, (error) => {
+        const workout = await this.client.createWorkout(workoutType, date, durationInHours, durationInMinutes,
+         durationInSeconds, distance, (error) => {
             createButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');

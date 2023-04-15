@@ -11,11 +11,10 @@ public class Triathlon {
     private String workoutId;
     private String date;
     private String workoutType;
-    private String durationInSeconds;
-    private String distance;
+    private Integer durationInSeconds;
+    private Double distance;
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "CustomerIdIndex", attributeName = "customerId")
-    //@DynamoDBAttribute(attributeName = "customerId")
     public String getCustomerId() {
         return customerId;
     }
@@ -43,7 +42,6 @@ public class Triathlon {
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "DateIndex", attributeName = "date")
-    //@DynamoDBAttribute(attributeName = "date")
     public String getDate() {
         return date;
     }
@@ -53,7 +51,6 @@ public class Triathlon {
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "WorkoutTypeIndex", attributeName = "workoutType")
-    //@DynamoDBAttribute(attributeName = "workoutType")
     public String getWorkoutType() {
         return workoutType;
     }
@@ -63,20 +60,20 @@ public class Triathlon {
     }
 
     @DynamoDBAttribute(attributeName = "seconds")
-    public String getDurationInSeconds() {
+    public Integer getDurationInSeconds() {
         return durationInSeconds;
     }
 
-    public void setDurationInSeconds(String durationInSeconds) {
+    public void setDurationInSeconds(Integer durationInSeconds) {
         this.durationInSeconds = durationInSeconds;
     }
 
     @DynamoDBAttribute(attributeName = "distance")
-    public String getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 

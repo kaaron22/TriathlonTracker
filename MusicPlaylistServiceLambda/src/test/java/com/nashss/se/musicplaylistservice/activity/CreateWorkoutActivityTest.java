@@ -27,15 +27,21 @@ class CreateWorkoutActivityTest {
     @Test
     void handleRequest_validInformation_createsAndSavesWorkout() {
         String expectedCustomerId = "test@test.com";
+        String expectedCustomerName = "test test";
         String expectedDateString = "2004-12-27";
         String expectedWorkoutType = "RUNNING";
-        String expectedDurationInSeconds = "0";
+        String expectedDurationInHours = "2";
+        String expectedDurationInMinutes = "30";
+        String expectedDurationInSeconds = "15";
         String expectedDistance = "5.0";
 
         CreateWorkoutRequest request = CreateWorkoutRequest.builder()
                 .withCustomerId(expectedCustomerId)
+                .withCustomerName(expectedCustomerName)
                 .withDate(expectedDateString)
                 .withWorkoutType(expectedWorkoutType)
+                .withDurationInHours(expectedDurationInHours)
+                .withDurationInMinutes(expectedDurationInMinutes)
                 .withDurationInSeconds(expectedDurationInSeconds)
                 .withDistance(expectedDistance)
                 .build();
@@ -48,9 +54,13 @@ class CreateWorkoutActivityTest {
 
         assertNotNull(result.getWorkoutModel().getDate());
         assertNotNull(result.getWorkoutModel().getCustomerId());
+        assertNotNull(result.getWorkoutModel().getWorkoutId());
         assertEquals(expectedCustomerId, result.getWorkoutModel().getCustomerId());
+        assertEquals(expectedCustomerName, result.getWorkoutModel().getCustomerName());
         assertEquals(expectedDateString, result.getWorkoutModel().getDate());
         assertEquals(expectedWorkoutType, result.getWorkoutModel().getWorkoutType());
+        assertEquals(expectedDurationInHours, result.getWorkoutModel().getDurationInHours());
+        assertEquals(expectedDurationInMinutes, result.getWorkoutModel().getDurationInMinutes());
         assertEquals(expectedDurationInSeconds, result.getWorkoutModel().getDurationInSeconds());
         assertEquals(expectedDistance, result.getWorkoutModel().getDistance());
 

@@ -18,6 +18,8 @@ public class CreateWorkoutLambda
                             CreateWorkoutRequest.builder()
                                     .withDate(unauthenticatedRequest.getDate())
                                     .withWorkoutType(unauthenticatedRequest.getWorkoutType())
+                                    .withDurationInHours(unauthenticatedRequest.getDurationInHours())
+                                    .withDurationInMinutes(unauthenticatedRequest.getDurationInMinutes())
                                     .withDurationInSeconds(unauthenticatedRequest.getDurationInSeconds())
                                     .withDistance(unauthenticatedRequest.getDistance())
                                     .withCustomerId(claims.get("email"))

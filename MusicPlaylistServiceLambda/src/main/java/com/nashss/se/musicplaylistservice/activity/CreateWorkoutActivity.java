@@ -58,8 +58,18 @@ public class CreateWorkoutActivity {
         newTriathlon.setCustomerName(createWorkoutRequest.getCustomerName());
         newTriathlon.setDate(createWorkoutRequest.getDate());
         newTriathlon.setWorkoutType(createWorkoutRequest.getWorkoutType());
-        newTriathlon.setDurationInSeconds(createWorkoutRequest.getDurationInSeconds());
-        newTriathlon.setDistance(createWorkoutRequest.getDistance());
+
+        // exception/error handling to be added to make sure this parses properly
+        Integer hoursToSeconds = Integer.parseInt(createWorkoutRequest.getDurationInHours()) * 3600;
+        Integer minutesToSeconds = Integer.parseInt(createWorkoutRequest.getDurationInMinutes()) * 60;
+        Integer seconds = Integer.parseInt(createWorkoutRequest.getDurationInSeconds());
+        Integer totalTimeInSeconds = hoursToSeconds + minutesToSeconds + seconds;
+
+        newTriathlon.setDurationInSeconds(totalTimeInSeconds);
+
+        // exception/error handling to be added to make sure this parses properly
+        Double distance = Double.parseDouble(createWorkoutRequest.getDistance());
+        newTriathlon.setDistance(distance);
         workoutDao.saveTriathlon(newTriathlon);
 
         WorkoutModel workoutModel = new ModelConverter().toWorkoutModel(newTriathlon);

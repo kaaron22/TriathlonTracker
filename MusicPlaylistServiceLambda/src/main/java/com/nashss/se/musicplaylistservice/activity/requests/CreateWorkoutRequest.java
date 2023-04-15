@@ -9,15 +9,20 @@ public class CreateWorkoutRequest {
     private final String customerName;
     private final String date;
     private final String workoutType;
+    private final String durationInHours;
+    private final String durationInMinutes;
     private final String durationInSeconds;
     private final String distance;
 
     public CreateWorkoutRequest(String customerId, String customerName, String date, String workoutType,
-                                String durationInSeconds, String distance) {
+                                String durationInHours, String durationInMinutes, String durationInSeconds,
+                                String distance) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.date = date;
         this.workoutType = workoutType;
+        this.durationInHours = durationInHours;
+        this.durationInMinutes = durationInMinutes;
         this.durationInSeconds = durationInSeconds;
         this.distance = distance;
     }
@@ -36,6 +41,14 @@ public class CreateWorkoutRequest {
         return workoutType;
     }
 
+    public String getDurationInHours() {
+        return durationInHours;
+    }
+
+    public String getDurationInMinutes() {
+        return durationInMinutes;
+    }
+
     public String getDurationInSeconds() {
         return durationInSeconds;
     }
@@ -51,6 +64,8 @@ public class CreateWorkoutRequest {
                 ", customerName='" + customerName + '\'' +
                 ", date='" + date + '\'' +
                 ", workoutType='" + workoutType + '\'' +
+                ", durationInHours=" + durationInHours +
+                ", durationInMinutes=" + durationInMinutes +
                 ", durationInSeconds=" + durationInSeconds +
                 ", distance=" + distance +
                 '}';
@@ -67,6 +82,8 @@ public class CreateWorkoutRequest {
         private String customerName;
         private String date;
         private String workoutType;
+        private String durationInHours;
+        private String durationInMinutes;
         private String durationInSeconds;
         private String distance;
 
@@ -91,6 +108,16 @@ public class CreateWorkoutRequest {
             return this;
         }
 
+        public Builder withDurationInHours(String durationInHours) {
+            this.durationInHours = durationInHours;
+            return this;
+        }
+
+        public Builder withDurationInMinutes(String durationInMinutes) {
+            this.durationInMinutes = durationInMinutes;
+            return this;
+        }
+
         public Builder withDurationInSeconds(String durationInSeconds) {
             this.durationInSeconds = durationInSeconds;
             return this;
@@ -102,8 +129,8 @@ public class CreateWorkoutRequest {
         }
 
         public CreateWorkoutRequest build() {
-            return new CreateWorkoutRequest(customerId, customerName, date, workoutType, durationInSeconds,
-                    distance);
+            return new CreateWorkoutRequest(customerId, customerName, date, workoutType, durationInHours,
+                    durationInMinutes, durationInSeconds, distance);
         }
     }
 }
