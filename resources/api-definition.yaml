@@ -34,15 +34,16 @@ paths:
                   type: string
                 date:
                   type: string
-                  format: date
                 workoutType:
                   type: string
-                  enum: ["RUNNING", "BIKING", "SWIMMING"]
+                durationInHours:
+                  type: string
+                durationInMinutes:
+                  type: string
                 durationInSeconds:
-                  type: integer
+                  type: string
                 distance:
-                  type: number
-                  format: double
+                  type: string
       responses:
         "200":
           description: A triathlon workout log object
@@ -55,17 +56,20 @@ paths:
                     type: string
                   customerId:
                     type: string
+                  customerName:
+                    type: string
                   date:
                     type: string
-                    format: date
                   workoutType:
                     type: string
-                    enum: ["RUNNING", "BIKING", "SWIMMING"]
+                  durationInHours:
+                    type: string
+                  durationInMinutes:
+                    type: string
                   durationInSeconds:
-                    type: integer
+                    type: string
                   distance:
-                    type: number
-                    format: double
+                    type: string
 
   /playlists:
     post:
