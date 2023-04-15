@@ -18,7 +18,9 @@ public class ModelConverter {
 
     public WorkoutModel toWorkoutModel(Triathlon workout) {
         return WorkoutModel.builder()
-                .withUserId(workout.getUserId())
+                .withWorkoutId(workout.getWorkoutId())
+                .withCustomerId(workout.getCustomerId())
+                .withCustomerName(workout.getCustomerName())
                 .withDate(workout.getDate())
                 .withWorkoutType(workout.getWorkoutType())
                 .withDurationInSeconds(workout.getDurationInSeconds())

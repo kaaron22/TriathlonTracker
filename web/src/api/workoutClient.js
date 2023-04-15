@@ -188,13 +188,13 @@ export default class WorkoutClient extends BindingClass {
         }
     }
 
-    async createWorkout(workoutType, date, totalDurationInSeconds, distance, errorCallBack) {
+    async createWorkout(workoutType, date, durationInSeconds, distance, errorCallBack) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create a workout.");
             const response = await this.axiosClient.post(`workouts`, {
                 workoutType: workoutType,
                 date: date,
-                durationInSeconds: totalDurationInSeconds,
+                durationInSeconds: durationInSeconds,
                 distance: distance
             }, {
                 headers: {

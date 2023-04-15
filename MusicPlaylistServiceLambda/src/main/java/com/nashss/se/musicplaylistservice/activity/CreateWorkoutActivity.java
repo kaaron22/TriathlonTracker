@@ -54,7 +54,8 @@ public class CreateWorkoutActivity {
 
         Triathlon newTriathlon = new Triathlon();
         newTriathlon.setWorkoutId(MusicPlaylistServiceUtils.generatePlaylistId());
-        newTriathlon.setUserId(createWorkoutRequest.getCustomerId());
+        newTriathlon.setCustomerId(createWorkoutRequest.getCustomerId());
+        newTriathlon.setCustomerName(createWorkoutRequest.getCustomerName());
         newTriathlon.setDate(createWorkoutRequest.getDate());
         newTriathlon.setWorkoutType(createWorkoutRequest.getWorkoutType());
         newTriathlon.setDurationInSeconds(createWorkoutRequest.getDurationInSeconds());

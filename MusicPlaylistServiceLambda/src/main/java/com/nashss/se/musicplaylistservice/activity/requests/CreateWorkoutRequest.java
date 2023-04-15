@@ -1,24 +1,21 @@
 package com.nashss.se.musicplaylistservice.activity.requests;
 
-import com.nashss.se.musicplaylistservice.utils.WorkoutType;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-import java.time.LocalDate;
-
-
-@JsonDeserialize(builder = CreatePlaylistRequest.Builder.class)
+@JsonDeserialize(builder = CreateWorkoutRequest.Builder.class)
 public class CreateWorkoutRequest {
     private final String customerId;
-    private final LocalDate date;
-    private final WorkoutType workoutType;
-    private final Integer durationInSeconds;
-    private final Double distance;
+    private final String customerName;
+    private final String date;
+    private final String workoutType;
+    private final String durationInSeconds;
+    private final String distance;
 
-    public CreateWorkoutRequest(String customerId, LocalDate date, WorkoutType workoutType,
-                                Integer durationInSeconds, Double distance) {
+    public CreateWorkoutRequest(String customerId, String customerName, String date, String workoutType,
+                                String durationInSeconds, String distance) {
         this.customerId = customerId;
+        this.customerName = customerName;
         this.date = date;
         this.workoutType = workoutType;
         this.durationInSeconds = durationInSeconds;
@@ -29,19 +26,21 @@ public class CreateWorkoutRequest {
         return customerId;
     }
 
-    public LocalDate getDate() {
+    public String getCustomerName() { return customerName; }
+
+    public String getDate() {
         return date;
     }
 
-    public WorkoutType getWorkoutType() {
+    public String getWorkoutType() {
         return workoutType;
     }
 
-    public Integer getDurationInSeconds() {
+    public String getDurationInSeconds() {
         return durationInSeconds;
     }
 
-    public Double getDistance() {
+    public String getDistance() {
         return distance;
     }
 
@@ -49,6 +48,7 @@ public class CreateWorkoutRequest {
     public String toString() {
         return "CreateWorkoutRequest{" +
                 "customerId='" + customerId + '\'' +
+                ", customerName='" + customerName + '\'' +
                 ", date='" + date + '\'' +
                 ", workoutType='" + workoutType + '\'' +
                 ", durationInSeconds=" + durationInSeconds +
@@ -64,10 +64,11 @@ public class CreateWorkoutRequest {
     @JsonPOJOBuilder
     public static class Builder {
         private String customerId;
-        private LocalDate date;
-        private WorkoutType workoutType;
-        private Integer durationInSeconds;
-        private Double distance;
+        private String customerName;
+        private String date;
+        private String workoutType;
+        private String durationInSeconds;
+        private String distance;
 
 
         public Builder withCustomerId(String customerId) {
@@ -75,28 +76,33 @@ public class CreateWorkoutRequest {
             return this;
         }
 
-        public Builder withDate(LocalDate date) {
+        public Builder withCustomerName(String customerName) {
+            this.customerName = customerName;
+            return this;
+        }
+
+        public Builder withDate(String date) {
             this.date = date;
             return this;
         }
 
-        public Builder withWorkoutType(WorkoutType workoutType) {
+        public Builder withWorkoutType(String workoutType) {
             this.workoutType = workoutType;
             return this;
         }
 
-        public Builder withDurationInSeconds(Integer durationInSeconds) {
+        public Builder withDurationInSeconds(String durationInSeconds) {
             this.durationInSeconds = durationInSeconds;
             return this;
         }
 
-        public Builder withDistance(Double distance) {
+        public Builder withDistance(String distance) {
             this.distance = distance;
             return this;
         }
 
         public CreateWorkoutRequest build() {
-            return new CreateWorkoutRequest(customerId, date, workoutType, durationInSeconds,
+            return new CreateWorkoutRequest(customerId, customerName, date, workoutType, durationInSeconds,
                     distance);
         }
     }

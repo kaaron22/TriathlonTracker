@@ -1,48 +1,49 @@
 package com.nashss.se.musicplaylistservice.models;
 
-import com.nashss.se.musicplaylistservice.utils.WorkoutType;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 public class WorkoutModel {
 
+    private final String workoutId;
     private final String customerId;
-    private final LocalDate date;
-    private final WorkoutType workoutType;
-    private final Integer durationInSeconds;
-    private final Double distance;
+    private final String customerName;
+    private final String date;
+    private final String workoutType;
+    private final String durationInSeconds;
+    private final String distance;
 
-    private WorkoutModel(String customerId, LocalDate date, WorkoutType workoutType, Integer durationInSeconds,
-                         Double distance) {
+    private WorkoutModel(String workoutId, String customerId, String customerName, String date, String workoutType, String durationInSeconds,
+                         String distance) {
+        this.workoutId = workoutId;
         this.customerId = customerId;
+        this.customerName = customerName;
         this.date = date;
         this.workoutType = workoutType;
         this.durationInSeconds = durationInSeconds;
         this.distance = distance;
     }
 
-    public String getUserId() {
+    public String getCustomerName() { return customerName; }
+
+    public String getCustomerId() {
         return customerId;
     }
 
-    public LocalDate getDate() {
+    public String getWorkoutId() { return workoutId; }
+
+    public String getDate() {
         return date;
     }
 
-    public WorkoutType getWorkoutType() {
+    public String getWorkoutType() {
         return workoutType;
     }
 
-
-    public Integer getDurationInSeconds() {
+    public String getDurationInSeconds() {
         return durationInSeconds;
     }
 
-    public Double getDistance() {
+    public String getDistance() {
         return distance;
     }
-
 
     //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
@@ -50,38 +51,50 @@ public class WorkoutModel {
     }
 
     public static class Builder {
-        private String userId;
-        private LocalDate date;
-        private WorkoutType workoutType;
-        private Integer durationInSeconds;
-        private Double distance;
+        private String workoutId;
+        private String customerId;
+        private String customerName;
+        private String date;
+        private String workoutType;
+        private String durationInSeconds;
+        private String distance;
 
-        public Builder withUserId(String id) {
-            this.userId = id;
+        public Builder withWorkoutId(String workoutId) {
+            this.workoutId = workoutId;
             return this;
         }
 
-        public Builder withDate(LocalDate date) {
+        public Builder withCustomerId(String customerId) {
+            this.customerId = customerId;
+            return this;
+        }
+
+        public Builder withCustomerName(String customerName) {
+            this.customerName = customerName;
+            return this;
+        }
+
+        public Builder withDate(String date) {
             this.date = date;
             return this;
         }
 
-        public Builder withWorkoutType(WorkoutType type) {
+        public Builder withWorkoutType(String type) {
             this.workoutType = type;
             return this;
         }
 
-        public Builder withDurationInSeconds(Integer durationInSeconds) {
+        public Builder withDurationInSeconds(String durationInSeconds) {
             this.durationInSeconds = durationInSeconds;
             return this;
         }
-        public Builder withDistance(Double distance) {
+        public Builder withDistance(String distance) {
             this.distance = distance;
             return this;
         }
 
         public WorkoutModel build() {
-            return new WorkoutModel(userId, date, workoutType, durationInSeconds, distance);
+            return new WorkoutModel(workoutId, customerId, customerName, date, workoutType, durationInSeconds, distance);
         }
 
     }
