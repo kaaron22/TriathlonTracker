@@ -9,9 +9,9 @@ import DataStore from '../util/DataStore';
 class CreateWorkout extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'submit', 'redirectToCreateWorkout'], this);
+        this.bindClassMethods(['mount', 'submit'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.redirectToCreateWorkout);
+        //this.dataStore.addChangeListener(this.redirectToCreateWorkout);
         this.header = new Header(this.dataStore);
     }
 
@@ -56,17 +56,20 @@ class CreateWorkout extends BindingClass {
             errorMessageDisplay.classList.remove('hidden');
         });
         this.dataStore.set('workout', workout);
+
+        document.getElementById('create').innerText = 'Record Workout';
+        document.getElementById("create-workout-form").reset();
     }
 
     /**
      * When the playlist is updated in the datastore, redirect to the view playlist page.
      */
-    redirectToCreateWorkout() {
+    /*redirectToCreateWorkout() {
         const workout = this.dataStore.get('workout');
         if (workout != null) {
             window.location.href = `/createWorkout.html`;
         }
-    }
+    }*/
 }
 
 /**
