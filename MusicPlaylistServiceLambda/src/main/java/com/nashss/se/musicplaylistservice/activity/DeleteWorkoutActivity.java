@@ -1,8 +1,13 @@
 package com.nashss.se.musicplaylistservice.activity;
 
+import com.amazonaws.services.cloudwatch.model.ResourceNotFoundException;
 import com.nashss.se.musicplaylistservice.activity.requests.DeleteWorkoutRequest;
+import com.nashss.se.musicplaylistservice.activity.results.DeleteWorkoutResult;
+import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.WorkoutDao;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
 import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
+import com.nashss.se.musicplaylistservice.models.WorkoutModel;
 import com.nashss.se.projectresources.music.playlist.servic.util.MusicPlaylistServiceUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,15 +23,22 @@ public class DeleteWorkoutActivity {
         this.workoutDao = workoutDao;
     }
 
-    public void handleRequest(final DeleteWorkoutRequest deleteWorkoutRequest) {
+    public DeleteWorkoutResult handleRequest(final DeleteWorkoutRequest deleteWorkoutRequest) {
         log.info("Received DeleteWorkoutRequest {}", deleteWorkoutRequest);
+        String workoutId = deleteWorkoutRequest.getWorkoutId();
+        Triathlon workout = workoutDao.getTriathlon(workoutId);
 
-        if (!MusicPlaylistServiceUtils.isValidString(deleteWorkoutRequest.getCustomerId())) {
-            throw new InvalidAttributeValueException("Workout customer ID [" + deleteWorkoutRequest.getCustomerId() +
-                    "] contains illegal characters");
+        if (workout == null) {
+            throw new ResourceNotFoundException("Workout with ID " + workoutId + "not found.");
         }
+        workoutDao.deleteTriathlon(workout);
 
-        workoutDao.deleteTriathlon(workoutDao.getTriathlon(deleteWorkoutRequest.getCustomerId()));
+        //Model conversion
+        WorkoutModel workoutModel =  new ModelConverter().toWorkoutModel(workout);
+
+        return DeleteWorkoutResult.builder()
+                .withTriathlon(workoutModel)
+                .build();
     }
 
 }

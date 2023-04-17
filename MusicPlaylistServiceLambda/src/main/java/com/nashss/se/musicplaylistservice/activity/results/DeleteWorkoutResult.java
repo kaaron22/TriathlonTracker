@@ -22,14 +22,14 @@ public class DeleteWorkoutResult {
     }
 
     //CHECKSTYLE:OFF:Builder
-    public static DeleteWorkoutResult.Builder builder() {
-        return new DeleteWorkoutResult.Builder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public static class Builder {
         private WorkoutModel workout;
 
-        public DeleteWorkoutResult.Builder withWorkout(WorkoutModel workout) {
+        public Builder withTriathlon(WorkoutModel workout) {
             this.workout = workout;
             return this;
         }

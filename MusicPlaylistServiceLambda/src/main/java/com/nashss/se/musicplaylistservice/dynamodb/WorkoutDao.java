@@ -51,20 +51,7 @@ public class WorkoutDao {
         return workout;
     }
     public void deleteTriathlon(Triathlon workout) {
-        //method may need some tweaking + metric publishing
-
-        //handling the Delete request to the Triathlon table, does this need a delete expression?
-        DeleteWorkoutRequest deleteWorkoutRequest = DeleteWorkoutRequest.builder()
-                .withCustomerId(workout.getUserId())
-                .withDate(workout.getDate())
-                .withWorkoutType(workout.getWorkoutType())
-                .build();
-        try {
-            this.dynamoDbMapper.delete(deleteWorkoutRequest);
-        } catch (DeleteWorkoutException e) {
-            //should add logging + metric publishing
-            System.out.println(e.getMessage());
+        //Create a new DeleteWorkoutRequest
+        this.dynamoDbMapper.delete(workout);
         }
-    }
-
 }
