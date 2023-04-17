@@ -2,25 +2,25 @@ package com.nashss.se.musicplaylistservice.converters;
 
 public class WorkoutDuration {
 
-    private final Integer hours;
-    private final Integer minutes;
-    private final Integer seconds;
+    private final String hours;
+    private final String minutes;
+    private final String seconds;
 
-    public WorkoutDuration(final Integer hours, final Integer minutes, final Integer seconds) {
+    public WorkoutDuration(final String hours, final String minutes, final String seconds) {
         this.hours = hours;
         this.minutes = minutes;
         this.seconds = seconds;
     }
 
-    public Integer getHours() {
+    public String getHours() {
         return hours;
     }
 
-    public Integer getMinutes() {
+    public String getMinutes() {
         return minutes;
     }
 
-    public Integer getSeconds() {
+    public String getSeconds() {
         return seconds;
     }
 }
