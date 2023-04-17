@@ -2,14 +2,20 @@ package com.nashss.se.musicplaylistservice.activity;
 
 import com.nashss.se.musicplaylistservice.activity.requests.GetFullWorkoutHistoryByCustomerRequest;
 import com.nashss.se.musicplaylistservice.activity.results.GetFullWorkoutHistoryByCustomerResult;
+import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.WorkoutDao;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
 import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 import com.nashss.se.musicplaylistservice.models.PlaylistModel;
+import com.nashss.se.musicplaylistservice.models.WorkoutModel;
 import com.nashss.se.projectresources.music.playlist.servic.util.MusicPlaylistServiceUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GetFullWorkoutHistoryByCustomerActivity {
 
@@ -44,7 +50,13 @@ public class GetFullWorkoutHistoryByCustomerActivity {
                     getFullWorkoutHistoryByCustomerRequest.getCustomerId() + "] contains illegal characters");
         }
 
-        List<>
+        List<Triathlon> triathlonList =
+                workoutDao.getAllTriathlonRecordsForCustomer(getFullWorkoutHistoryByCustomerRequest.getCustomerId());
+
+        List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(triathlonList);
+        return GetFullWorkoutHistoryByCustomerResult.builder()
+                .withTriathlon(workoutModels)
+                .build();
     }
 
 }
