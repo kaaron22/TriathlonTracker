@@ -32,18 +32,29 @@ paths:
               properties:
                 customerId:
                   type: string
+                  example: "test@test.com"
                 date:
                   type: string
+                  format: date
                 workoutType:
                   type: string
+                  example: "RUNNING"
                 durationInHours:
                   type: string
+                  description: The duration in hours
+                  pattern: '^[0-9]+$'
+                  example: "5"
                 durationInMinutes:
                   type: string
+                  pattern: '^[0-9]+$'
+                  example: "20"
                 durationInSeconds:
+                  pattern: '^[0-9]+$'
                   type: string
+                  example: "30"
                 distance:
                   type: string
+                  example: "20"
       responses:
         "200":
           description: A triathlon workout log object
@@ -60,16 +71,22 @@ paths:
                     type: string
                   date:
                     type: string
+                    format: date
                   workoutType:
                     type: string
+                    example: "RUNNING"
                   durationInHours:
                     type: string
+                    example: "20"
                   durationInMinutes:
                     type: string
+                    example: "20"
                   durationInSeconds:
                     type: string
+                    example: "20"
                   distance:
                     type: string
+                    example: "20"
 
   /playlists:
     post:
