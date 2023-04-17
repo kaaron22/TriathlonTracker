@@ -19,10 +19,10 @@ public class DeleteWorkoutLambda extends LambdaActivityRunner<DeleteWorkoutReque
                         return DeleteWorkoutRequest.builder()
                                 .withCustomerId(claims.get("email"))
                                 .withDate(unauthenticatedRequest.getDate())
-                                .withWorkoutType(unauthenticatedRequest.getWorkoutType())
+                                .withWorkoutId(unauthenticatedRequest.getWorkoutId())
                                 .build();
                     });
-                }, //this is a problem, deleteWorkoutRequest cannot be void, may need some refactoring of this lambda or the class
+                },
                 (request, serviceComponent) ->
                         serviceComponent.provideDeleteWorkoutActivity().handleRequest(request)
         );
