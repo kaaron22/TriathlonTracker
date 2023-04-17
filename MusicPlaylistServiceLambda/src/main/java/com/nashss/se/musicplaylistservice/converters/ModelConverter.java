@@ -7,7 +7,6 @@ import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 import com.nashss.se.musicplaylistservice.models.SongModel;
 import com.nashss.se.musicplaylistservice.models.WorkoutModel;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +16,30 @@ import java.util.List;
 public class ModelConverter {
 
     public WorkoutModel toWorkoutModel(Triathlon workout) {
+        // conversion both directions (from seconds here; to seconds in CreateWorkoutActivity) to be moved to util method?
+        Integer totalSecondsToConvertToHoursMinutesSeconds = workout.getDurationInSeconds();
+        Integer seconds = totalSecondsToConvertToHoursMinutesSeconds % 60;
+        String secondsToStringValue = String.valueOf(seconds);
+
+        Integer remainingSecondsToConvertToHoursMinutes = totalSecondsToConvertToHoursMinutesSeconds - seconds;
+        Integer remainingMinutesToConvertToHoursMinutes = remainingSecondsToConvertToHoursMinutes / 60;
+        Integer minutes = remainingMinutesToConvertToHoursMinutes % 60;
+        String minutesToStringValue = String.valueOf(minutes);
+
+        Integer remainingMinutesToConvertToHours = remainingMinutesToConvertToHoursMinutes - minutes;
+        Integer hours = remainingMinutesToConvertToHours / 60;
+        String hoursToStringValue = String.valueOf(hours);
+
         return WorkoutModel.builder()
-                .withUserId(workout.getUserId())
+                .withWorkoutId(workout.getWorkoutId())
+                .withCustomerId(workout.getCustomerId())
+                .withCustomerName(workout.getCustomerName())
                 .withDate(workout.getDate())
                 .withWorkoutType(workout.getWorkoutType())
-                .withDurationInHours(workout.getHours())
-                .withDurationInMinutes(workout.getMinutes())
-                .withDurationInSeconds(workout.getSeconds())
-                .withDistance(workout.getDistance())
+                .withDurationInHours(hoursToStringValue)
+                .withDurationInMinutes(minutesToStringValue)
+                .withDurationInSeconds(secondsToStringValue)
+                .withDistance(String.valueOf(workout.getDistance()))
                 .build();
     }
     /**

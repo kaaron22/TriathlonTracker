@@ -6,12 +6,9 @@ import com.nashss.se.musicplaylistservice.activity.results.CreateWorkoutResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-
-
 public class CreateWorkoutLambda
         extends LambdaActivityRunner<CreateWorkoutRequest, CreateWorkoutResult>
         implements RequestHandler<AuthenticatedLambdaRequest<CreateWorkoutRequest>, LambdaResponse> {
-
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateWorkoutRequest> input, Context context) {
         return super.runActivity(
@@ -26,6 +23,7 @@ public class CreateWorkoutLambda
                                     .withDurationInSeconds(unauthenticatedRequest.getDurationInSeconds())
                                     .withDistance(unauthenticatedRequest.getDistance())
                                     .withCustomerId(claims.get("email"))
+                                    .withCustomerName(claims.get("name"))
                                     .build());
             },
             (request, serviceComponent) ->

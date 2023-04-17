@@ -188,14 +188,15 @@ export default class WorkoutClient extends BindingClass {
         }
     }
 
-    async createWorkout(workoutType, date, durationInHours, durationInMin, durationInSeconds, distance, errorCallBack) {
+    async createWorkout(workoutType, date, durationInHours, durationInMinutes, durationInSeconds, distance,
+     errorCallBack) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create a workout.");
-            const response = await this.axiosClient.post('/workouts', {
+            const response = await this.axiosClient.post(`workouts`, {
                 workoutType: workoutType,
                 date: date,
                 durationInHours: durationInHours,
-                durationInMin: durationInMin,
+                durationInMinutes: durationInMinutes,
                 durationInSeconds: durationInSeconds,
                 distance: distance
             }, {
@@ -203,7 +204,7 @@ export default class WorkoutClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data;
+            return response.data.workout;
         } catch (error) {
             this.handleError(error, errorCallBack)
         }
