@@ -14,14 +14,14 @@ public class GetFullWorkoutHistoryByCustomerResult {
     }
 
     //CHECKSTYLE:OFF:Builder
-    public static GetPlaylistResult.Builder builder() {
-        return new GetPlaylistResult.Builder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public static class Builder {
         private List<WorkoutModel> workoutModels;
 
-        public Builder withWorkoutModels(List<WorkoutModel> workoutModels) {
+        public Builder withTriathlonList(List<WorkoutModel> workoutModels) {
             this.workoutModels = CollectionUtils.copyToList(workoutModels);
             return this;
         }

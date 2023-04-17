@@ -13,8 +13,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetFullWorkoutHistoryByCustomerActivity {
@@ -44,18 +42,12 @@ public class GetFullWorkoutHistoryByCustomerActivity {
     public GetFullWorkoutHistoryByCustomerResult handleRequest(final GetFullWorkoutHistoryByCustomerRequest
                                                                        getFullWorkoutHistoryByCustomerRequest) {
         log.info("Received GetFullWorkoutHistoryByCustomerRequest {}", getFullWorkoutHistoryByCustomerRequest);
-
-        if (!MusicPlaylistServiceUtils.isValidString(getFullWorkoutHistoryByCustomerRequest.getCustomerId())) {
-            throw new InvalidAttributeValueException("Workout customer ID [" +
-                    getFullWorkoutHistoryByCustomerRequest.getCustomerId() + "] contains illegal characters");
-        }
-
-        List<Triathlon> triathlonList =
-                workoutDao.getAllTriathlonRecordsForCustomer(getFullWorkoutHistoryByCustomerRequest.getCustomerId());
-
+        String customerId = getFullWorkoutHistoryByCustomerRequest.getCustomerId();
+        List<Triathlon> triathlonList = workoutDao.getAllTriathlonRecordsForCustomer(customerId);
         List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(triathlonList);
+
         return GetFullWorkoutHistoryByCustomerResult.builder()
-                .withTriathlon(workoutModels)
+                .withTriathlonList(workoutModels)
                 .build();
     }
 
