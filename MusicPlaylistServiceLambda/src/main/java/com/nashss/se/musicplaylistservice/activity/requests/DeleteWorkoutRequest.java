@@ -1,13 +1,5 @@
 package com.nashss.se.musicplaylistservice.activity.requests;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.nashss.se.musicplaylistservice.activity.results.DeleteWorkoutResult;
-import com.nashss.se.musicplaylistservice.utils.LocalDateConverter;
-import com.nashss.se.musicplaylistservice.utils.WorkoutType;
-
-import java.time.LocalDate;
 
 public class DeleteWorkoutRequest {
     private final String customerId;
@@ -18,9 +10,6 @@ public class DeleteWorkoutRequest {
     private DeleteWorkoutRequest(String customerId, String date, String workoutId) {
         this.customerId = customerId;
         this.date = date;
-        this.workoutId = workoutId;
-    }
-    public DeleteWorkoutRequest(String workoutId) {
         this.workoutId = workoutId;
     }
 
@@ -34,10 +23,6 @@ public class DeleteWorkoutRequest {
 
     public String getDate() {
         return this.date;
-    }
-
-    public void setWorkoutId(String workoutId) {
-        this.workoutId = workoutId;
     }
 
     public static Builder builder() {
