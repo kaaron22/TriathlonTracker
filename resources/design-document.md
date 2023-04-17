@@ -2,206 +2,143 @@
 
 ## 1. Problem Statement
 
-Fitness Tracker is a service featuring several ways to track your personal health and fitness goals. Our goal is to design and develop a web-based Java application that is easy to use, reliable, and provides users with the tools they need to achieve their fitness goals. The application should allow users to track their workouts and nutrition, and view history to help them make data-driven decisions about their health and fitness routines.
+Triathlon Trainer is a service featuring several ways to track your personal fitness routines. Our goal is to design and develop a web-based Java application that is easy to use, reliable, and provides users with the tools they need to achieve their fitness goals. The application should allow users to track their workouts, and view history to help them make data-driven decisions about their health and fitness routines.
 
 ## 2. Top Questions to Resolve in Review
 
-1. What are the most important features that users are looking for in a fitness tracking application?
+1. What are the most important features that users are looking for in a triathlon tracking application?
 2. How can we ensure that the user application is friendly to use while still providing useful functionality?
 3. What endpoints do we need to create (i.e. PUT, POST, etc.)?
 
 ## 3. Use Cases
 
-_This is where we work backwards from the customer and define what our customers would like to do (and why). You may also include use cases for yourselves (as developers), or for the organization providing the product to customers._
+U1. As a user of Triathlon Tracker, I want to record a triathlon workout, so that I have a saved history of my triathlon workouts.
 
-U1. As a Fitness Tracker customer, I want to log exercise sessions as I complete them
+U2. As a user of Triathlon Tracker, I want to see a message indicating the success/failure of recording the workout, so that I know whether it was stored or not.
 
-U2. As a Fitness Tracker customer, I want to view my workout history
+U3. As a user of Triathlon Tracker, I want to be able to modify a previously recorded workout, so that I can correct mistakes.
 
-U3. As a Fitness Tracker customer, I want to log my weight
+U4. As a user of Triathlon Tracker, I want to see a message indicating the success/failure of updating the workout, so that I know whether it was updated or not.
 
-U4. As a Fitness Tracker customer, I was to view my weight history
+U5. As a user of Triathlon Tracker, I want to be able to delete a previously recorded workout, so that I can remove any unwanted workouts.
 
-U5. As a Fitness Tracker customer, I want to log nutritional details of my meals (i.e. carbs, calories)
+U6. As a user of Triathlon Tracker, I want to see a message indicating the success/failure of deleting the workout, so that I know whether it was deleted or not.
 
-U6. As a Fitness Tracker customer, I want to view a history of meals
+U7. As a user of Triathlon Tracker, I want to search a history of workouts between specified dates and have it displayed, so that I can see what my progress is over the given period of time.
 
-U7. As a Fitness Tracker customer, I want to be able to log my water intake
+U8. As a user of Triathlon Tracker, I want to search a history of workouts by type and have it displayed, so that I can view my workouts in specific categories
 
-U8. As a Fitness Tracker customer, I want to be able to view my water intake history
+U9. As a user of Triathlon Tracker, I want to see my workout history for the last 7 days displayed by default in the landing page, so that I can quickly review my recent workouts without having to search
+
+U10. As a user of Triathlon Tracker, I want to see the total number of workouts by type displayed by default in the landing page, so that I can quickly review my overall workouts without having to search
+
+U11. As a user of Triathlon Tracker, I want to see a complete list of my workout history, so that I can review my total progress from my first workout to my last
 
 ## 4. Project Scope
 
 ### 4.1. In Scope
 
-* Creating completed exercise events and retrieving all exercises a customer has created
-* Creating current weight values and retrieving a list of weights by date
-* Creating and retrieving logs with nutritional details of meals 
-* Creating and retrieving logs of water intake
+* logging completed workout events 
+* retrieving workouts a customer has created
+* updating/modifying a workout record
+* deleting a workout record
+* filtering user data by date 
+* filtering user data by workout type
 
 ### 4.2. Out of Scope
 
-* Integration with external fitness devices
-* Personalized workout recommendations
-* Nutritional recommendations
-* Scheduling workouts / workout reminders
-* Social features (sharing favorite workouts, etc.)
+* let the user see progress over time
+* let the user set goals 
+* track weight 
+* track nutrition
 
 ## 5. Proposed Architecture Overview
 
-This initial iteration will provide the minimum viable product (MVP) including creating and retrieving several health and nutrition related statistics for a user.
+This initial iteration will provide the minimum viable product (MVP) including creating and retrieving workout data for a user.
 
-We will use API Gateway and Lambda to create eight endpoints (CreateExerciseLog, GetExerciseLogs, CreateWeightLog, GetWeightLogs, CreateMealLog, GetMealLogs, CreateWaterIntakeLog, GetWaterIntakeLogs) that will handle the creation and/or retrieval of the corresponding health information to satisfy our requirements.
+We will use API Gateway and Lambda to create six endpoints (CreateWorkoutLog, GetWorkoutLogs, EditWorkoutLog, DeleteWorkoutLog, GetRecentWorkoutsSummary, GetRecentWorkoutsSummaryByType) that will handle the creation, modification, deletion and/or retrieval of the corresponding workout information to satisfy our requirements.
 
-We will store completed exercise, meal, weight, and water intake logs each in a separate table in DynamoDB.
+We will store completed exercise logs each in a table in DynamoDB.
 
 ## 6. API
 
 ### 6.1. Public Models
 
 ```
-// WaterLogModel
+// WorkoutLogModel
 
 String customerId
-LocalDateTime timestamp
-Double ounces
-```
-
-```
-// MealLogModel
-
-String customerId
-LocalDateTime timestamp
-String name
-String type
-Double calories
-Double carbs
-Double protein
-Double fat
-```
-
-```
-// ExerciseLogModel
-
-String customerId
-LocalDateTime timestamp
-String exerciseType
-String description
-Double caloriesBurned
-Integer numReps
-Double numSets
-Double duration
+String date  
+String workoutType
+Integer durationInHours
+Integer durationInMin
+Integer durationInSeconds
 Double distance
 ```
 
-```
-// WeightLogModel
+### 6.2. CreateWorkoutLog Endpoint
 
-String customerId
-LocalDateTime timestamp
-Double weight
-```
-
-### 6.2. CreateExerciseLog Endpoint
-
-* Accepts `POST` requests to `/exercise-logs`
-* Accepts data to create a new ExerciseLog with the required fields (customerId, timestamp, exerciseType) and optional fields (description, caloriesBurned, numReps, numSets, duration, distance)
+* Accepts `POST` requests to `/workouts`
+* Accepts data to create a new WorkoutLog with the required fields (date, exerciseType) with optional fields (durationInHours, durationInMin, durationInSec, distance)
 
 ![Client sends create exercise log form to Website Exercise Log page. Website
 Exercise Log page sends a create request to CreateExerciseLogActivity.
 CreateExerciseLogActivity saves updates to the exercise logs
 database.](images/design_document/CreateExerciseLogSD.png)
 
-### 6.3. GetExerciseLogs Endpoint
+### 6.3. GetWorkoutLogs Endpoint
 
-* Accepts `GET` requests to `/exercise-logs/:customerId`
-* Accepts a customerId and returns the corresponding list of ExerciseLog objects for the specified customer
+* Accepts `GET` requests to `/workouts`
+* Accepts a customerId and returns the corresponding list of WorkoutLog objects for the specified customer
 
 ![Client sends get exercise logs form to Website Exercise Log page. Website
 Exercise Log page sends a get request to getExerciseLogsActivity.
 GetExerciseLogsActivity obtains list of Exercise Logs from
 database.](images/design_document/GetExerciseLogsSD.png)
 
-### 6.4. CreateMealLog Endpoint
+### 6.4. EditWorkoutLog Endpoint
 
-* Accepts `POST` requests to `/meal-logs`
-* Accepts data to create a new MealLog with the required fields (customerId, timestamp, name, type) and optional fields (calories, carbs, protein, fat)
+* Accepts `PUT` requests to `/workouts/:workout_id`
+* Accepts a workoutId and edits existing WorkoutLog for the specified customer
 
-### 6.5. GetMealLogs Endpoint
+### 6.5. DeleteWorkoutLog Endpoint
 
-* Accepts `GET` requests to `/meal-logs/:customerId`
-* Accepts a customerId and returns the corresponding list of MealLog objects for the specified customer
+* Accepts `DELETE` requests to `/workouts/:workout_id`
+* Accepts a workoutId and deletes existing WorkoutLog for the specified customer
 
-### 6.6. CreateWaterLog Endpoint
+### 6.5. GetRecentWorkoutsSummary Endpoint
 
-* Accepts `POST` requests to `/water-logs`
-* Accepts data to create a new ExerciseLog with the required fields (customerId, timestamp, ounces)
+* Accepts `GET` requests to `/workouts/summary/recent`
+* Returns a summary of recent workouts for the user
 
-### 6.7. GetWaterLogs Endpoint
+### 6.6. GetRecentWorkoutsSummaryByType Endpoint
 
-* Accepts `GET` requests to `/water-logs/:customerId`
-* Accepts a customerId and returns the corresponding list of WaterLog objects for the specified customer
-
-### 6.8. CreateWeightLog Endpoint
-
-* Accepts `POST` requests to `/weight-logs`
-* Accepts data to create a new ExerciseLog with the required fields (customerId, timestamp, weight)
-
-### 6.9. GetWeightLogs Endpoint
-
-* Accepts `GET` requests to `/weight-logs/:customerId`
-* Accepts a customerId and returns the corresponding list of WeightLog objects for the specified customer
+* Accepts `GET` requests to `/workouts/summary/type`
+* Returns a summary of recent workout type for the user
 
 ## 7. Tables
 
-### 7.1. `water_logs`
+### 7.1. `workout_logs`
 
 ```
-customerId // partition key, string
-timestamp // sort key, string
-customerName // string
-ounces // number
-```
-
-### 7.2. `meal_logs`
-
-```
-customerId // partition key, string
-timestamp // sort key, string
-name // string
-type // string
-calories // number
-carbs // number
-protein // number
-fat // number
-```
-
-### 7.3. `exercise_logs`
-
-```
-customerId // partition key, string
-timestamp // sort key, string
-String exerciseType // string
-String description // string
-Double caloriesBurned // number
-Integer numReps // number
-Double numSets // number
-Double duration // number
-Double distance // number
-```
-
-### 7.4. `weight_logs`
-
-```
-customerId // partition key, string
-timestamp // sort key, string
-weight // number
+String workout_id (Primary Key ) - UUID
+String userName(GSI) - user who performed the workout
+String date (GSI) - The date when the workout was performed. ( standard format?)
+String workoutType(GSI)   // ENUM "RUNNING", "BIKING", "SWIMMING"
+Number hours
+Number minutes
+Number seconds
+Number distance -  The distance covered during the workout in kilometers
+Indexes -
+user_name-index  //  Partition key user_name
+workout_type-index //  Partition key  workout_type
+date-index // Partition key date
 ```
 
 ## 8. Pages
 
-![](images/design_document/LoginPageMarkdown.png)
+![](images/design_document/front_end_workflow.png)
 
-![](images/design_document/MarkdownDataSheet.png)
+![](images/design_document/dashboard_overview_page.jpg)
 
-![](images/design_document/SiteMapMarkdown.png)
+![](images/design_document/add_workout_page.png)
