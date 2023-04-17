@@ -1,11 +1,18 @@
 package com.nashss.se.musicplaylistservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Singleton
 public class WorkoutDao {
@@ -32,6 +39,24 @@ public class WorkoutDao {
      */
     public Triathlon getTriathlon(String workoutId) {
         return this.dynamoDbMapper.load(Triathlon.class, workoutId);
+    }
+    public List <Triathlon> getSevenDayHistory (String customerId) {
+        LocalDate endLocal = LocalDate.now();
+        LocalDate startLocal = LocalDate.now().minusDays(6);
+
+
+        Map<String, AttributeValue> valueMap = new HashMap<>();
+        valueMap.put(":startDate", new AttributeValue().withS(startLocal.toString()));
+        valueMap.put(":endDate", new AttributeValue().withS(endLocal.toString()));
+        valueMap.put(":CustomerIdIndex", new AttributeValue().withS(customerId));
+        DynamoDBQueryExpression<Triathlon> queryExpression = new DynamoDBQueryExpression<Triathlon>()
+                .withIndexName("CustomerIdIndex")
+                .withConsistentRead(false)
+                .withKeyConditionExpression("date = :date between :startDate AND :endDate")
+                .withExpressionAttributeValues(valueMap);
+
+     PaginatedQueryList<Triathlon> workoutList = dynamoDbMapper.query(Triathlon.class, queryExpression);
+     return workoutList;
     }
 
     /**

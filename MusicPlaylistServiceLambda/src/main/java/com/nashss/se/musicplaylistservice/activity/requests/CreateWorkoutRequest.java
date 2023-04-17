@@ -2,19 +2,28 @@ package com.nashss.se.musicplaylistservice.activity.requests;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
+import com.nashss.se.musicplaylistservice.models.PlaylistModel;
+
+import java.time.LocalDate;
 
 @JsonDeserialize(builder = CreateWorkoutRequest.Builder.class)
 public class CreateWorkoutRequest {
     private final String customerId;
     private final String customerName;
-    private final String date;
+    private final LocalDate date;
     private final String workoutType;
     private final String durationInHours;
     private final String durationInMinutes;
     private final String durationInSeconds;
     private final String distance;
-
-    public CreateWorkoutRequest(String customerId, String customerName, String date, String workoutType,
+    /**
+     * Creates a CreateWorkoutRequest   representation.
+     *
+     * @param customerId for the request
+     *
+     */
+    public CreateWorkoutRequest(String customerId, String customerName, LocalDate date, String workoutType,
                                 String durationInHours, String durationInMinutes, String durationInSeconds,
                                 String distance) {
         this.customerId = customerId;
@@ -33,7 +42,7 @@ public class CreateWorkoutRequest {
 
     public String getCustomerName() { return customerName; }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -80,7 +89,7 @@ public class CreateWorkoutRequest {
     public static class Builder {
         private String customerId;
         private String customerName;
-        private String date;
+        private LocalDate date;
         private String workoutType;
         private String durationInHours;
         private String durationInMinutes;
@@ -98,7 +107,7 @@ public class CreateWorkoutRequest {
             return this;
         }
 
-        public Builder withDate(String date) {
+        public Builder withDate(LocalDate date) {
             this.date = date;
             return this;
         }

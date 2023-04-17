@@ -42,6 +42,16 @@ public class ModelConverter {
                 .withDistance(String.valueOf(workout.getDistance()))
                 .build();
     }
+
+    public List<WorkoutModel> toWorkoutModelList(List<Triathlon> workouts) {
+        List<WorkoutModel> workoutModels = new ArrayList<>();
+
+        for (Triathlon workout : workouts) {
+            workoutModels.add(toWorkoutModel(workout));
+        }
+
+        return workoutModels;
+    }
     /**
      * Converts a provided {@link Playlist} into a {@link PlaylistModel} representation.
      *

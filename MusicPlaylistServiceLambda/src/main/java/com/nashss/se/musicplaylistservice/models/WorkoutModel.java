@@ -1,18 +1,20 @@
 package com.nashss.se.musicplaylistservice.models;
 
+import java.time.LocalDate;
+
 public class WorkoutModel {
 
     private final String workoutId;
     private final String customerId;
     private final String customerName;
-    private final String date;
+    private final LocalDate date;
     private final String workoutType;
     private final String durationInHours;
     private final String durationInMinutes;
     private final String durationInSeconds;
     private final String distance;
 
-    private WorkoutModel(String workoutId, String customerId, String customerName, String date, String workoutType,
+    private WorkoutModel(String workoutId, String customerId, String customerName, LocalDate date, String workoutType,
                          String durationInHours, String durationInMinutes, String durationInSeconds, String distance) {
         this.workoutId = workoutId;
         this.customerId = customerId;
@@ -33,7 +35,7 @@ public class WorkoutModel {
 
     public String getWorkoutId() { return workoutId; }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -66,7 +68,7 @@ public class WorkoutModel {
         private String workoutId;
         private String customerId;
         private String customerName;
-        private String date;
+        private LocalDate date;
         private String workoutType;
         private String durationInHours;
         private String durationInMinutes;
@@ -88,7 +90,7 @@ public class WorkoutModel {
             return this;
         }
 
-        public Builder withDate(String date) {
+        public Builder withDate(LocalDate date) {
             this.date = date;
             return this;
         }

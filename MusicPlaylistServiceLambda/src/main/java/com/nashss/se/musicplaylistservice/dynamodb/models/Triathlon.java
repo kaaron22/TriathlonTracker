@@ -2,6 +2,7 @@ package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @DynamoDBTable(tableName = "triathlon_table")
@@ -9,7 +10,7 @@ public class Triathlon {
     private String customerId;
     private String customerName;
     private String workoutId;
-    private String date;
+    private LocalDate date;
     private String workoutType;
     private Integer durationInSeconds;
     private Double distance;
@@ -42,11 +43,11 @@ public class Triathlon {
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "DateIndex", attributeName = "date")
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

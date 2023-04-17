@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -28,7 +30,7 @@ class CreateWorkoutActivityTest {
     void handleRequest_validInformation_createsAndSavesWorkout() {
         String expectedCustomerId = "test@test.com";
         String expectedCustomerName = "test test";
-        String expectedDateString = "2004-12-27";
+        LocalDate expectedDateString = "2004-12-27";
         String expectedWorkoutType = "RUNNING";
         String expectedDurationInHours = "2";
         String expectedDurationInMinutes = "30";
