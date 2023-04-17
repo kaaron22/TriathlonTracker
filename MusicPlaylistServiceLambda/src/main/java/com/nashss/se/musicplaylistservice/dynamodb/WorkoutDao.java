@@ -42,7 +42,7 @@ public class WorkoutDao {
     }
 
 
-    public List<Triathlon> getAllTriathlonRecordsByCustomer(String customerId) {
+    public List<Triathlon> getAllTriathlonRecordsForCustomer(String customerId) {
         Map<String, AttributeValue> valueMap = new HashMap<>();
         valueMap.put(":customerId", new AttributeValue().withS(customerId));
         DynamoDBQueryExpression<Triathlon> queryExpression = new DynamoDBQueryExpression<Triathlon>()
