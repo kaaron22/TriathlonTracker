@@ -9,13 +9,13 @@ import Authenticator from "./authenticator";
  * which we could avoid using inheritance or Mixins.
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Mix-ins
  * https://javascript.info/mixins
-  */
-export default class MusicPlaylistClient extends BindingClass {
+ */
+export default class WorkoutClient extends BindingClass {
 
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist', 'createWorkout'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -185,6 +185,28 @@ export default class MusicPlaylistClient extends BindingClass {
 
         if (errorCallback) {
             errorCallback(error);
+        }
+    }
+
+    async createWorkout(workoutType, date, durationInHours, durationInMinutes, durationInSeconds, distance,
+     errorCallBack) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create a workout.");
+            const response = await this.axiosClient.post(`workouts`, {
+                workoutType: workoutType,
+                date: date,
+                durationInHours: durationInHours,
+                durationInMinutes: durationInMinutes,
+                durationInSeconds: durationInSeconds,
+                distance: distance
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.workout;
+        } catch (error) {
+            this.handleError(error, errorCallBack)
         }
     }
 }

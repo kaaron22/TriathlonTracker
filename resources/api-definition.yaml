@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Music Playlist Service
-  description: "This is the API definition for the Music Playlist Service."
+  title: Triathlon Tracker Service
+  description: "This is the API definition for the Triathlon Tracker Service."
   version: 1.0.0
 
 servers:
@@ -14,7 +14,62 @@ tags:
   - name: Songs
     description: View and add songs to playlists
 
+  - name: Triathlon
+    description: Create, view, and update triathlon workouts
+
 paths:
+
+  /workouts:
+    post:
+      tags:
+        - Triathlon
+      summary: Create a new completed triathlon workout log (CreateWorkoutLambda)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customerId:
+                  type: string
+                date:
+                  type: string
+                workoutType:
+                  type: string
+                durationInHours:
+                  type: string
+                durationInMinutes:
+                  type: string
+                durationInSeconds:
+                  type: string
+                distance:
+                  type: string
+      responses:
+        "200":
+          description: A triathlon workout log object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workoutId:
+                    type: string
+                  customerId:
+                    type: string
+                  customerName:
+                    type: string
+                  date:
+                    type: string
+                  workoutType:
+                    type: string
+                  durationInHours:
+                    type: string
+                  durationInMinutes:
+                    type: string
+                  durationInSeconds:
+                    type: string
+                  distance:
+                    type: string
 
   /playlists:
     post:
