@@ -41,6 +41,7 @@ public class WorkoutDao {
         return this.dynamoDbMapper.load(Triathlon.class, workoutId);
     }
 
+
     public List<Triathlon> getAllTriathlonRecordsByCustomer(String customerId) {
         Map<String, AttributeValue> valueMap = new HashMap<>();
         valueMap.put(":customerId", new AttributeValue().withS(customerId));
