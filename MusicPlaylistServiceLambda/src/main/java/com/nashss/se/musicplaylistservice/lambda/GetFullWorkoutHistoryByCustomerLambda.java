@@ -23,7 +23,7 @@ public class GetFullWorkoutHistoryByCustomerLambda
                                     .build());
                 },
                 (request, serviceComponent) ->
-                            serviceComponent.provideGetFullWorkoutHistoryByCustomerLambda().handleRequest(request)
+                            serviceComponent.provideGetFullWorkoutHistoryByCustomerActivity().handleRequest(request)
         );
     }
 }
