@@ -19,8 +19,11 @@ public class GetFullWorkoutHistoryByCustomerLambda
                             input.fromBody(GetFullWorkoutHistoryByCustomerRequest.class);
                     return input.fromUserClaims(claims ->
                             GetFullWorkoutHistoryByCustomerRequest.builder()
-                    )
-                }
-        )
+                                    .withCustomerId(claims.get("email"))
+                                    .build());
+                },
+                (request, serviceComponent) ->
+                            serviceComponent.provideGetFullWorkoutHistoryByCustomerLambda().handleRequest(request)
+        );
     }
 }
