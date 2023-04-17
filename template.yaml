@@ -218,7 +218,7 @@ Resources:
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/album_tracks"
 
-        - PolicyName: 'AccessTriathlonTableTable'
+        - PolicyName: 'AccessTriathlonTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
@@ -384,38 +384,66 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "workout_id"
+        - AttributeName: "workoutId"
           AttributeType: "S"
-        - AttributeName: "user_id"
+        - AttributeName: "customerId"
           AttributeType: "S"
-        - AttributeName: "date_of_workout"
+        - AttributeName: "date"
           AttributeType: "S"
-        - AttributeName: "workout_type"
+        - AttributeName: "workoutType"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "workout_id"
+        - AttributeName: "workoutId"
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "triathlon_table"
       GlobalSecondaryIndexes:
-        - IndexName: "user_id-index"
+        - IndexName: "CustomerIdIndex"
           KeySchema:
-            - AttributeName: "user_id"
+            - AttributeName: "customerId"
               KeyType: "HASH"
           Projection:
-            ProjectionType: "KEYS_ONLY"
-        - IndexName: "workout_type-index"
+            ProjectionType: "ALL"
+        - IndexName: "WorkoutTypeIndex"
           KeySchema:
-            - AttributeName: "workout_type"
+            - AttributeName: "workoutType"
               KeyType: "HASH"
           Projection:
-            ProjectionType: "KEYS_ONLY"
-        - IndexName: "date_of_workout-index"
+            ProjectionType: "ALL"
+        - IndexName: "DateIndex"
           KeySchema:
-            - AttributeName: "date_of_workout"
+            - AttributeName: "date"
               KeyType: "HASH"
           Projection:
-            ProjectionType: "KEYS_ONLY"
+            ProjectionType: "ALL"
+
+  PlaylistsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "playlists"
+
+  AlbumTracksTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "asin"
+          AttributeType: "S"
+        - AttributeName: "track_number"
+          AttributeType: "N"
+      KeySchema:
+        - AttributeName: "asin"
+          KeyType: "HASH"
+        - AttributeName: "track_number"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "album_tracks"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed

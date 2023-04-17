@@ -1,29 +1,38 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.nashss.se.musicplaylistservice.utils.WorkoutType;
 
-@DynamoDBTable(tableName = "triathlon")
+import java.util.Objects;
+
+@DynamoDBTable(tableName = "triathlon_table")
 public class Triathlon {
-    private String userId; //the specific user //HASH
-    private String workoutId; //Specific workout HASH for GSI???
-    private String date; //LocalDateTime converted //SORT
-    private WorkoutType workoutType; //ENUM CLASS OF "RUNNING", "BIKING", "SWIMMING"
-    private Integer hours;
-    private Integer minutes;
-    private Integer seconds;
-    private Double distance; //distance traveled
+    private String customerId;
+    private String customerName;
+    private String workoutId;
+    private String date;
+    private String workoutType;
+    private Integer durationInSeconds;
+    private Double distance;
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "user_id-index", attributeName = "user_id")
-    public String getUserId() {
-        return userId;
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "CustomerIdIndex", attributeName = "customerId")
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
-    @DynamoDBHashKey(attributeName = "workout_id")
+    @DynamoDBAttribute(attributeName = "customerName")
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    @DynamoDBHashKey(attributeName = "workoutId")
     public String getWorkoutId() {
         return workoutId;
     }
@@ -32,7 +41,7 @@ public class Triathlon {
         this.workoutId = workoutId;
     }
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "date_of_workout-index", attributeName = "date_of_workout")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "DateIndex", attributeName = "date")
     public String getDate() {
         return date;
     }
@@ -41,47 +50,53 @@ public class Triathlon {
         this.date = date;
     }
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "workout_type-index", attributeName = "workout_type")
-    public WorkoutType getWorkoutType() {
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "WorkoutTypeIndex", attributeName = "workoutType")
+    public String getWorkoutType() {
         return workoutType;
     }
 
-    public void setWorkoutType(WorkoutType workoutType) {
+    public void setWorkoutType(String workoutType) {
         this.workoutType = workoutType;
     }
 
-    @DynamoDBAttribute(attributeName = "hours")
-    public Integer getHours() {
-        return hours;
-    }
-
-    public void setHours(Integer hours) {
-        this.hours = hours;
-    }
-
-    @DynamoDBAttribute(attributeName = "minutes")
-    public Integer getMinutes() {
-        return minutes;
-    }
-
-    public void setMinutes(Integer minutes) {
-        this.minutes = minutes;
-    }
-
     @DynamoDBAttribute(attributeName = "seconds")
-    public Integer getSeconds() {
-        return seconds;
+    public Integer getDurationInSeconds() {
+        return durationInSeconds;
     }
 
-    public void setSeconds(Integer seconds) {
-        this.seconds = seconds;
+    public void setDurationInSeconds(Integer durationInSeconds) {
+        this.durationInSeconds = durationInSeconds;
     }
-    @DynamoDBAttribute(attributeName = "workout_distance")
+
+    @DynamoDBAttribute(attributeName = "distance")
     public Double getDistance() {
         return distance;
     }
 
     public void setDistance(Double distance) {
         this.distance = distance;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Triathlon triathlon = (Triathlon) o;
+        return customerId.equals(triathlon.customerId) &&
+                customerName.equals(triathlon.customerName) &&
+                workoutId.equals(triathlon.workoutId) &&
+                date.equals(triathlon.date) &&
+                workoutType.equals(triathlon.workoutType) &&
+                durationInSeconds.equals(triathlon.durationInSeconds) &&
+                distance.equals(triathlon.distance);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerId, customerName, workoutId, date, workoutType, durationInSeconds, distance);
     }
 }

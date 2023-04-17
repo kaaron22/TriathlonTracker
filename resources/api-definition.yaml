@@ -30,23 +30,20 @@ paths:
             schema:
               type: object
               properties:
-                userId:
+                customerId:
                   type: string
                 date:
                   type: string
-                  format: date
                 workoutType:
                   type: string
-                  enum: ["RUNNING", "BIKING", "SWIMMING"]
                 durationInHours:
-                  type: integer
-                durationInMin:
-                  type: integer
+                  type: string
+                durationInMinutes:
+                  type: string
                 durationInSeconds:
-                  type: integer
+                  type: string
                 distance:
-                  type: number
-                  format: double
+                  type: string
       responses:
         "200":
           description: A triathlon workout log object
@@ -57,23 +54,22 @@ paths:
                 properties:
                   workoutId:
                     type: string
-                  userName:
+                  customerId:
+                    type: string
+                  customerName:
                     type: string
                   date:
                     type: string
-                    format: date
                   workoutType:
                     type: string
-                    enum: ["RUNNING", "BIKING", "SWIMMING"]
                   durationInHours:
-                    type: integer
-                  durationInMin:
-                    type: integer
+                    type: string
+                  durationInMinutes:
+                    type: string
                   durationInSeconds:
-                    type: integer
+                    type: string
                   distance:
-                    type: number
-                    format: double
+                    type: string
 
   /playlists:
     post:
