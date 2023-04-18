@@ -230,6 +230,26 @@ Resources:
   # Lambda Functions Configuration
   #-----------------------------------------------------
 
+  DeleteWorkoutLambda:
+      Type: AWS::Serverless::Function
+      Properties:
+        Role: !GetAtt AccessRole.Arn
+        CodeUri: MusicPlaylistServiceLambda
+        Handler: com.nashss.se.musicplaylistservice.lambda.DeleteWorkoutLambda::handleRequest
+        Runtime: java11
+        Architectures:
+          - x86_64
+        MemorySize: 512
+        Environment:
+          Variables:
+            JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+        Events:
+          MusicPlaylistService:
+            Type: Api
+            Properties:
+              Path: /workouts/{workout_id}
+              Method: delete
+
   GetFullWorkoutHistoryByCustomerLambda:
     Type: AWS::Serverless::Function
     Properties:
@@ -395,28 +415,6 @@ Resources:
           Properties:
             Path: /playlists/{id}/songs
             Method: post
-
-  DeleteWorkoutLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: MusicPlaylistServiceLambda
-      Handler: com.nashss.se.musicplaylistservice.lambda.AddSongToPlaylistLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /workouts/{id}
-            Method: delete
-
-
 
   #-----------------------------------------------------
   # DynamoDB Configuration
