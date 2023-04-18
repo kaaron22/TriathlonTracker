@@ -41,11 +41,10 @@ public class DeleteWorkoutActivity {
         }
 
         //Model conversion
-        WorkoutModel workoutModel =  new ModelConverter().toWorkoutModel(workout);
-
+//        WorkoutModel workoutModel =  new ModelConverter().toWorkoutModel(workout);
 
         return DeleteWorkoutResult.builder()
-                .withTriathlon(workoutModel)
+                .withWorkoutId(workoutId)
                 .build();
     }
 

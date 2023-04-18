@@ -4,22 +4,16 @@ import com.nashss.se.musicplaylistservice.models.WorkoutModel;
 
 public class DeleteWorkoutResult {
 
-    private final WorkoutModel workout;
+    private final String workoutId;
 
-    private DeleteWorkoutResult(WorkoutModel workout) {
-        this.workout = workout;
+    private DeleteWorkoutResult(String workoutId) {
+        this.workoutId = workoutId;
     }
 
-    public WorkoutModel getWorkout() {
-        return workout;
+    public String getWorkoutId() {
+        return workoutId;
     }
 
-    @Override
-    public String toString() {
-        return "DeleteWorkoutResult{" +
-                "workout=" + workout +
-                '}';
-    }
 
     //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
@@ -27,17 +21,23 @@ public class DeleteWorkoutResult {
     }
 
     public static class Builder {
-        private WorkoutModel workout;
+        private String workoutId;
 
-        public Builder withTriathlon(WorkoutModel workout) {
-            this.workout = workout;
+        public Builder withWorkoutId(String workoutId) {
+            this.workoutId = workoutId;
             return this;
         }
 
 
-
         public DeleteWorkoutResult build() {
-            return new DeleteWorkoutResult(workout);
+            return new DeleteWorkoutResult(workoutId);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "DeleteWorkoutResult{" +
+                "workoutId='" + workoutId + '\'' +
+                '}';
     }
 }
