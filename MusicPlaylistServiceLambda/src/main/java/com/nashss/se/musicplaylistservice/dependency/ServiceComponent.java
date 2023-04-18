@@ -18,7 +18,11 @@ public interface ServiceComponent {
      * @return CreateWorkoutActivity
      */
     CreateWorkoutActivity provideCreateWorkoutActivity();
-
+    /**
+     * Provides the relevant activity.
+     * @return GetWorkoutActivity
+     */
+    GetWorkoutActivity provideGetWorkoutActivity();
 
     /**
      * Provides the relevant activity.
