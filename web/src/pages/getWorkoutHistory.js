@@ -1,4 +1,4 @@
-import MusicPlaylistClient from '../api/musicPlaylistClient';
+import MusicPlaylistClient from '../api/workoutClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
@@ -25,7 +25,7 @@ class GetWorkoutHistory extends BindingClass {
 
         this.header.addHeaderToPage();
 
-        this.client = new MusicPlaylistClient();
+        this.client = new WorkoutClient();
     }
 
     async getFullWorkoutHistory(evt) {
