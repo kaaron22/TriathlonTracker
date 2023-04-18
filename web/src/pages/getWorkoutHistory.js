@@ -26,7 +26,6 @@ class GetWorkoutHistory extends BindingClass {
         this.header.addHeaderToPage();
 
         this.client = new MusicPlaylistClient();
-        this.clientLoaded();
     }
 
     async getFullWorkoutHistory(evt) {
