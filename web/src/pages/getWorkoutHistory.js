@@ -9,13 +9,32 @@ import DataStore from "../util/DataStore";
 class GetWorkoutHistory extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'getFullWorkoutHistory', 'addWorkoutsToPage'], this);
+        this.bindClassMethods(['mount', 'clientLoaded', 'getFullWorkoutHistory', 'addWorkoutsToPage'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.getFullWorkoutHistory);
         this.dataStore.addChangeListener(this.addWorkoutsToPage);
         this.header = new Header(this.dataStore);
         console.log("getWorkoutHistory constructor");
     }
+
+    /**
+     * Once the client is loaded, get the playlist metadata and song list.
+     */
+    async clientLoaded() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const playlistId = urlParams.get('id');
+        document.getElementById('playlist-name').innerText = "Loading Playlist ...";
+        const playlist = await this.client.getPlaylist(playlistId);
+        this.dataStore.set('playlist', playlist);
+        document.getElementById('songs').innerText = "(loading songs...)";
+        const songs = await this.client.getPlaylistSongs(playlistId);
+        this.dataStore.set('songs', songs);
+    }
+
+    const playlist = this.dataStore.get('playlist');
+        if (playlist != null) {
+            window.location.href = `/playlist.html?id=${playlist.id}`;
+        }
 
     /**
      * Add the header to the page and load the MusicPlaylistClient.

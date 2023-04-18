@@ -89,7 +89,7 @@ export default class WorkoutClient extends BindingClass {
 
     async getFullWorkoutHistoryByCustomer(customerId, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`workouts/${customerId}/history`);
+            const response = await this.axiosClient.get(`workouts/${customerId}`);
             return response.data.workouts;
         } catch (error) {
             this.handleError(error, errorCallback)
