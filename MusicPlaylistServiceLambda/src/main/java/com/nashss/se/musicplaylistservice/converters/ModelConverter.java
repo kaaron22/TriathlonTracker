@@ -17,20 +17,32 @@ public class ModelConverter {
 
     public WorkoutModel toWorkoutModel(Triathlon workout) {
 
-        WorkoutDuration durationHoursMinutesSeconds =
-                convertTotalSecondsToHoursMinutesSeconds(workout.getDurationInSeconds());
+        Integer totalTimeInSeconds = workout.getDurationInSeconds();
 
-        return WorkoutModel.builder()
-                .withWorkoutId(workout.getWorkoutId())
-                .withCustomerId(workout.getCustomerId())
-                .withCustomerName(workout.getCustomerName())
-                .withDate(workout.getDate())
-                .withWorkoutType(workout.getWorkoutType())
-                .withDurationInHours(durationHoursMinutesSeconds.getHours())
-                .withDurationInMinutes(durationHoursMinutesSeconds.getMinutes())
-                .withDurationInSeconds(durationHoursMinutesSeconds.getSeconds())
-                .withDistance(String.valueOf(workout.getDistance()))
-                .build();
+        if (!(null == totalTimeInSeconds)) {
+            WorkoutDuration durationInHoursMinutesSeconds = convertTotalSecondsToHoursMinutesSeconds(totalTimeInSeconds);
+
+            return WorkoutModel.builder()
+                    .withWorkoutId(workout.getWorkoutId())
+                    .withCustomerId(workout.getCustomerId())
+                    .withCustomerName(workout.getCustomerName())
+                    .withDate(workout.getDate())
+                    .withWorkoutType(workout.getWorkoutType())
+                    .withDurationInHours(durationInHoursMinutesSeconds.getHours())
+                    .withDurationInMinutes(durationInHoursMinutesSeconds.getMinutes())
+                    .withDurationInSeconds(durationInHoursMinutesSeconds.getSeconds())
+                    .withDistance(String.valueOf(workout.getDistance()))
+                    .build();
+        } else {
+            return WorkoutModel.builder()
+                    .withWorkoutId(workout.getWorkoutId())
+                    .withCustomerId(workout.getCustomerId())
+                    .withCustomerName(workout.getCustomerName())
+                    .withDate(workout.getDate())
+                    .withWorkoutType(workout.getWorkoutType())
+                    .withDistance(String.valueOf(workout.getDistance()))
+                    .build();
+        }
     }
 
     public List<WorkoutModel> toWorkoutModels(List<Triathlon> triathlonList) {
