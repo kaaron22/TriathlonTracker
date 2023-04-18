@@ -247,7 +247,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /workouts/{customerId}
+            Path: /workouts
             Method: get
 
   GetPlaylistLambda:

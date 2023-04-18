@@ -33,11 +33,18 @@ class GetWorkoutHistory extends BindingClass {
     async getFullWorkoutHistory(evt) {
         evt.preventDefault();
 
-        const customerId = this.authenticator.isUserLoggedIn();
+/*
+        const authenticatedUser = this.authenticator.isUserLoggedIn();
         if (customerId == null) {
             return;
         }
-        const customerId = authenticator.getCurrentUserInfo()[email];
+*/
+        //const { email, name } currentUser = this.authenticator.getCurrentUserInfo();
+        //const customerId = this.dataStore.get[email];
+
+        const currentUser = this.client.getIdentity();
+        const customerId = currentUser.email;
+        document.getElementById('customer-name').innerText = ${currentUser.name};
 
         const errorMessageDisplay = document.getElementById('error-message-full-history');
         errorMessageDisplay.innerText = ``;
