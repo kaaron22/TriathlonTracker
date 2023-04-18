@@ -33,8 +33,8 @@ public class ModelConverter {
         return WorkoutModel.builder()
                 .withWorkoutId(workout.getWorkoutId())
                 .withCustomerId(workout.getCustomerId())
-                .withCustomerName(workout.getCustomerName())
                 .withDate(workout.getDate())
+                .withCustomerName(workout.getCustomerName())
                 .withWorkoutType(workout.getWorkoutType())
                 .withDurationInHours(hoursToStringValue)
                 .withDurationInMinutes(minutesToStringValue)
@@ -110,4 +110,6 @@ public class ModelConverter {
 
         return playlistModels;
     }
+
+
 }

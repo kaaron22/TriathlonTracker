@@ -6,6 +6,7 @@ import com.nashss.se.musicplaylistservice.activity.results.DeleteWorkoutResult;
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.WorkoutDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
+import com.nashss.se.musicplaylistservice.exceptions.DeleteWorkoutException;
 import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 import com.nashss.se.musicplaylistservice.models.WorkoutModel;
 import com.nashss.se.projectresources.music.playlist.servic.util.MusicPlaylistServiceUtils;
@@ -29,12 +30,19 @@ public class DeleteWorkoutActivity {
         Triathlon workout = workoutDao.getTriathlon(workoutId);
 
         if (workout == null) {
-            throw new ResourceNotFoundException("Workout with ID " + workoutId + "not found.");
+            throw new DeleteWorkoutException("Workout with ID " + workoutId + "not found.");
         }
-        workoutDao.deleteTriathlon(workout);
+
+        try {
+            workoutDao.deleteTriathlon(workout);
+        } catch (DeleteWorkoutException e) {
+            log.error("Error deleting workout: {}", e.getMessage());
+            System.out.println(e.getMessage());
+        }
 
         //Model conversion
         WorkoutModel workoutModel =  new ModelConverter().toWorkoutModel(workout);
+
 
         return DeleteWorkoutResult.builder()
                 .withTriathlon(workoutModel)

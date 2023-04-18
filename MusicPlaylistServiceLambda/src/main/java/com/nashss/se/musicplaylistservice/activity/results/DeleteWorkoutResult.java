@@ -34,6 +34,8 @@ public class DeleteWorkoutResult {
             return this;
         }
 
+
+
         public DeleteWorkoutResult build() {
             return new DeleteWorkoutResult(workout);
         }

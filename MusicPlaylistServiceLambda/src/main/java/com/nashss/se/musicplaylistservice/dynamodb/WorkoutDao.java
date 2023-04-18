@@ -1,7 +1,9 @@
 package com.nashss.se.musicplaylistservice.dynamodb;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDeleteExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.model.Delete;
 import com.amazonaws.services.lambda.runtime.events.models.dynamodb.AttributeValue;
 import com.nashss.se.musicplaylistservice.activity.requests.DeleteWorkoutRequest;
 import com.nashss.se.musicplaylistservice.activity.results.DeleteWorkoutResult;
@@ -11,7 +13,6 @@ import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.HashMap;
 
 @Singleton
 public class WorkoutDao {
@@ -51,7 +52,10 @@ public class WorkoutDao {
         return workout;
     }
     public void deleteTriathlon(Triathlon workout) {
-        //Create a new DeleteWorkoutRequest
-        this.dynamoDbMapper.delete(workout);
+        try {
+            this.dynamoDbMapper.delete(workout);
+        } catch (AmazonClientException e) {
+            throw new DeleteWorkoutException("Could not delete workout with ID" + workout.getWorkoutId());
         }
+    }
 }
