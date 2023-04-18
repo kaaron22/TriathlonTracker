@@ -35,8 +35,8 @@ class DeleteWorkoutActivityTest {
         when(workoutDao.getTriathlon(workoutId)).thenReturn(workout);
         workout.setCustomerId(customerId);
         workout.setDate(date);
-        workout.setDurationInSeconds(3600);
-        workout.setDistance(10.0);
+        workout.setDurationInSeconds(null);
+        workout.setDistance(null);
         workout.setWorkoutId(workoutId);
         workout.setWorkoutType("Biking");
 
