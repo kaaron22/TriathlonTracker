@@ -26,11 +26,17 @@ public class DeleteWorkoutActivity {
 
     public DeleteWorkoutResult handleRequest(final DeleteWorkoutRequest deleteWorkoutRequest) {
         log.info("Received DeleteWorkoutRequest {}", deleteWorkoutRequest);
-//        String workoutId = deleteWorkoutRequest.getWorkoutId();
-        Triathlon workout = workoutDao.getTriathlon(deleteWorkoutRequest.getWorkoutId());
+        String workoutId = deleteWorkoutRequest.getWorkoutId();
+        Triathlon workout = workoutDao.getTriathlon(workoutId);
 
         if (workout == null) {
             throw new DeleteWorkoutException("Workout with ID " + deleteWorkoutRequest.getWorkoutId() + "not found.");
+        }
+
+        //some validation on email here
+        if (!workout.getCustomerId().equals(deleteWorkoutRequest.getCustomerId())) {
+            throw new DeleteWorkoutException("Workout with ID " + workoutId + " does not belong to the user with " +
+                    "customerId " + workout.getCustomerId());
         }
 
         try {
@@ -39,9 +45,6 @@ public class DeleteWorkoutActivity {
             log.error("Error deleting workout: {}", e.getMessage());
             System.out.println(e.getMessage());
         }
-
-        //Model conversion
-//        WorkoutModel workoutModel =  new ModelConverter().toWorkoutModel(workout);
 
         return DeleteWorkoutResult.builder()
                 .withWorkoutId(deleteWorkoutRequest.getWorkoutId())
