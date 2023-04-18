@@ -67,10 +67,6 @@ public class WorkoutDao {
         return workout;
     }
     public void deleteTriathlon(Triathlon workout) {
-        try {
-            this.dynamoDbMapper.delete(workout);
-        } catch (AmazonClientException e) {
-            throw new DeleteWorkoutException("Could not delete workout with ID" + workout.getWorkoutId());
-        }
+        dynamoDbMapper.delete(workout);
     }
 }

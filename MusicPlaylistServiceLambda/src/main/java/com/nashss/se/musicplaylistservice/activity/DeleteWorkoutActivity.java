@@ -26,11 +26,11 @@ public class DeleteWorkoutActivity {
 
     public DeleteWorkoutResult handleRequest(final DeleteWorkoutRequest deleteWorkoutRequest) {
         log.info("Received DeleteWorkoutRequest {}", deleteWorkoutRequest);
-        String workoutId = deleteWorkoutRequest.getWorkoutId();
-        Triathlon workout = workoutDao.getTriathlon(workoutId);
+//        String workoutId = deleteWorkoutRequest.getWorkoutId();
+        Triathlon workout = workoutDao.getTriathlon(deleteWorkoutRequest.getWorkoutId());
 
         if (workout == null) {
-            throw new DeleteWorkoutException("Workout with ID " + workoutId + "not found.");
+            throw new DeleteWorkoutException("Workout with ID " + deleteWorkoutRequest.getWorkoutId() + "not found.");
         }
 
         try {
@@ -44,7 +44,7 @@ public class DeleteWorkoutActivity {
 //        WorkoutModel workoutModel =  new ModelConverter().toWorkoutModel(workout);
 
         return DeleteWorkoutResult.builder()
-                .withWorkoutId(workoutId)
+                .withWorkoutId(deleteWorkoutRequest.getWorkoutId())
                 .build();
     }
 

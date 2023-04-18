@@ -111,13 +111,6 @@ paths:
                   workoutId:
                     type: string
                     example: "abc1234a"
-                  customerId:
-                    type: string
-                    example: "test@test.com"
-                  date:
-                    type: string
-                    format: date
-                    example: "2022-05-01"
         "400":
           description: An error indicating the workout could not be deleted
 

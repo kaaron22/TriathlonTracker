@@ -249,8 +249,6 @@ Resources:
             Properties:
               Path: /workouts/{workoutId}
               Method: delete
-              Auth:
-                Authorizer: 'NONE'
 
   GetFullWorkoutHistoryByCustomerLambda:
     Type: AWS::Serverless::Function
