@@ -2,6 +2,7 @@ import WorkoutClient from '../api/workoutClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
+import Authenticator from '../api/authenticator';
 
 /**
  * Logic needed for the get workout history page of the website.
@@ -9,32 +10,14 @@ import DataStore from "../util/DataStore";
 class GetWorkoutHistory extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'clientLoaded', 'getFullWorkoutHistory', 'addWorkoutsToPage'], this);
+        this.bindClassMethods(['mount', 'getFullWorkoutHistory', 'addWorkoutsToPage'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.getFullWorkoutHistory);
         this.dataStore.addChangeListener(this.addWorkoutsToPage);
         this.header = new Header(this.dataStore);
+        this.authenticator = new Authenticator();
         console.log("getWorkoutHistory constructor");
     }
-
-    /**
-     * Once the client is loaded, get the playlist metadata and song list.
-     */
-    async clientLoaded() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const playlistId = urlParams.get('id');
-        document.getElementById('playlist-name').innerText = "Loading Playlist ...";
-        const playlist = await this.client.getPlaylist(playlistId);
-        this.dataStore.set('playlist', playlist);
-        document.getElementById('songs').innerText = "(loading songs...)";
-        const songs = await this.client.getPlaylistSongs(playlistId);
-        this.dataStore.set('songs', songs);
-    }
-
-    const playlist = this.dataStore.get('playlist');
-        if (playlist != null) {
-            window.location.href = `/playlist.html?id=${playlist.id}`;
-        }
 
     /**
      * Add the header to the page and load the MusicPlaylistClient.
@@ -50,6 +33,12 @@ class GetWorkoutHistory extends BindingClass {
     async getFullWorkoutHistory(evt) {
         evt.preventDefault();
 
+        const customerId = this.authenticator.isUserLoggedIn();
+        if (customerId == null) {
+            return;
+        }
+        const customerId = authenticator.getCurrentUserInfo()[email];
+
         const errorMessageDisplay = document.getElementById('error-message-full-history');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
@@ -58,8 +47,6 @@ class GetWorkoutHistory extends BindingClass {
         const origButtonText = createButton.innerText;
         createButton.innerText = 'Loading Workout History...';
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const customerId = urlParams.get('customerId');
         const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId);
         this.dataStore.set('workouts', workouts);
     }
