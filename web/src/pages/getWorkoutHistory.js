@@ -4,9 +4,9 @@ import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
 
 /**
- * Logic needed for the view playlist page of the website.
+ * Logic needed for the get workout history page of the website.
  */
-class ViewPlaylist extends BindingClass {
+class GetWorkoutHistory extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['mount', 'getFullWorkoutHistory', 'addWorkoutsToPage'], this);
@@ -57,7 +57,7 @@ class ViewPlaylist extends BindingClass {
         let workout;
         for (workout of workouts) {
             workoutHtml += `
-                <li class="workout">
+                <li class="song">
                     <span class="title">${workout.workoutId}</span>
                     <span class="title">${workout.date}</span>
                     <span class="title">${workout.workoutType}</span>
