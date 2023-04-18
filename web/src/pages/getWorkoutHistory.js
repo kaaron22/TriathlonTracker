@@ -44,7 +44,6 @@ class GetWorkoutHistory extends BindingClass {
 
         const currentUser = this.client.getIdentity();
         const customerId = currentUser.email;
-        document.getElementById('customer-name').innerText = ${currentUser.name};
 
         const errorMessageDisplay = document.getElementById('error-message-full-history');
         errorMessageDisplay.innerText = ``;
@@ -53,6 +52,7 @@ class GetWorkoutHistory extends BindingClass {
         const createButton = document.getElementById('get-full-history');
         const origButtonText = createButton.innerText;
         createButton.innerText = 'Loading Workout History...';
+        createButton.innerText = currentUser.name;
 
         const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId);
         this.dataStore.set('workouts', workouts);
