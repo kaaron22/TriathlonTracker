@@ -55,8 +55,7 @@ public class WorkoutDao {
                 .withKeyConditionExpression("date = :date between :startDate AND :endDate")
                 .withExpressionAttributeValues(valueMap);
 
-     PaginatedQueryList<Triathlon> workoutList = dynamoDbMapper.query(Triathlon.class, queryExpression);
-     return workoutList;
+        return dynamoDbMapper.query(Triathlon.class, queryExpression);
     }
 
     /**
