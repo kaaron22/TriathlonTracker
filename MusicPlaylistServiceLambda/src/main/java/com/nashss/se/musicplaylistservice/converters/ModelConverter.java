@@ -40,6 +40,9 @@ public class ModelConverter {
                     .withCustomerName(workout.getCustomerName())
                     .withDate(workout.getDate())
                     .withWorkoutType(workout.getWorkoutType())
+                    .withDurationInHours(null)
+                    .withDurationInMinutes(null)
+                    .withDurationInSeconds(null)
                     .withDistance(String.valueOf(workout.getDistance()))
                     .build();
         }
