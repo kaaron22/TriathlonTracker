@@ -24,7 +24,7 @@ env:
   PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   SAM_TEMPLATE: template.yaml
 
-  STACK_NAME: music-playlist-service
+  STACK_NAME: triathlon-tracker-service
   PIPELINE_EXECUTION_ROLE: arn:aws:iam::657543486965:role/aws-sam-cli-managed-ServiceS-PipelineExecutionRole-54B6OK9WSBL8
   CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::657543486965:role/aws-sam-cli-managed-Servi-CloudFormationExecutionR-1KBFP7EGIUFFG
   ARTIFACTS_BUCKET: aws-sam-cli-managed-servicestage-artifactsbucket-6w7q4s2cvfep

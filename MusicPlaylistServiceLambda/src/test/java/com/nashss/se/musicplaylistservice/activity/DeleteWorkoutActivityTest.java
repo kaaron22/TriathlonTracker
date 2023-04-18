@@ -28,11 +28,17 @@ class DeleteWorkoutActivityTest {
 
     @Test
     public void handleRequest_validWorkoutId_returnsSuccessfully() {
-        String workoutId = UUID.randomUUID().toString();
-        String customerId = UUID.randomUUID().toString();
+        String workoutId = "12345";
+        String customerId = "test@test.com";
         Triathlon workout = new Triathlon();
         String date = "2022-04-12";
         when(workoutDao.getTriathlon(workoutId)).thenReturn(workout);
+        workout.setCustomerId(customerId);
+        workout.setDate(date);
+        workout.setDurationInSeconds(3600);
+        workout.setDistance(10.0);
+        workout.setWorkoutId(workoutId);
+        workout.setWorkoutType("Biking");
 
         DeleteWorkoutRequest request = DeleteWorkoutRequest.builder()
                 .withWorkoutId(workoutId)

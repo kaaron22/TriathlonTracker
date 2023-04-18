@@ -1,9 +1,7 @@
 package com.nashss.se.musicplaylistservice.dependency;
 
-import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.nashss.se.musicplaylistservice.activity.*;
 
-import com.nashss.se.musicplaylistservice.activity.requests.DeleteWorkoutRequest;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -21,6 +19,11 @@ public interface ServiceComponent {
      */
     CreateWorkoutActivity provideCreateWorkoutActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return getFullWorkoutHistoryByCustomerActivity
+     */
+    GetFullWorkoutHistoryByCustomerActivity provideGetFullWorkoutHistoryByCustomerActivity();
     /**
      * Provides the relevant activity.
      * @return CreateWorkoutActivity
