@@ -10,16 +10,31 @@ import org.apache.logging.log4j.Logger;
 public class DeleteWorkoutLambda extends LambdaActivityRunner<DeleteWorkoutRequest, DeleteWorkoutResult>
         implements RequestHandler<AuthenticatedLambdaRequest<DeleteWorkoutRequest>, LambdaResponse> {
     private final Logger log = LogManager.getLogger();
+
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<DeleteWorkoutRequest> input, Context context) {
         log.info("Handling request to delete workout");
         return super.runActivity(
-                () -> input.fromPath(path ->
-                        DeleteWorkoutRequest.builder()
-                                .withWorkoutId(path.get("workoutId"))
-                                .build()),
+                () -> input.fromPath(path -> {
+                    String workoutId = path.get("workoutId");
+                    return input.fromUserClaims(claims -> {
+                        String customerId = claims.get("email");
+
+                        return DeleteWorkoutRequest.builder()
+                                .withCustomerId(customerId)
+                                .withWorkoutId(workoutId)
+                                .build();
+                    });
+                }),
                 (request, serviceComponent) ->
                         serviceComponent.provideDeleteWorkoutActivity().handleRequest(request)
         );
     }
 }
+
+
+
+
+
+
+
