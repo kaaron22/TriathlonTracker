@@ -41,6 +41,7 @@ class DeleteWorkoutActivityTest {
 
         DeleteWorkoutRequest request = DeleteWorkoutRequest.builder()
                 .withWorkoutId(workoutId)
+                .withCustomerId(customerId)
                 .build();
 
         DeleteWorkoutResult result = deleteWorkoutActivity.handleRequest(request);
