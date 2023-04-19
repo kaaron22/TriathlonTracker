@@ -14,12 +14,10 @@ public class DeleteWorkoutLambda extends LambdaActivityRunner<DeleteWorkoutReque
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<DeleteWorkoutRequest> input, Context context) {
         log.info("Handling request to delete workout");
         return super.runActivity(
-                () -> {
-                    return input.fromPath(path ->
-                            DeleteWorkoutRequest.builder()
-                                    .withWorkoutId(path.get("workoutId"))
-                                    .build());
-                },
+                () -> input.fromPath(path ->
+                        DeleteWorkoutRequest.builder()
+                                .withWorkoutId(path.get("workoutId"))
+                                .build()),
                 (request, serviceComponent) ->
                         serviceComponent.provideDeleteWorkoutActivity().handleRequest(request)
         );
