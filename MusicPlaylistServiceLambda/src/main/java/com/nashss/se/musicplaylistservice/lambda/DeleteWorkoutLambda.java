@@ -15,22 +15,13 @@ public class DeleteWorkoutLambda extends LambdaActivityRunner<DeleteWorkoutReque
         log.info("Handling request to delete workout");
         return super.runActivity(
                 () -> {
-//                    DeleteWorkoutRequest unauthenticatedRequest = input.fromBody(DeleteWorkoutRequest.class);
-//                    log.info("Unauthenticated request: {}", unauthenticatedRequest);
-//                    String workoutId = input.getPathParameters().get("workoutId");
-                    String path = input.getPathParameters().get("workoutId");
-                    return input.fromUserClaims(claims ->
+                    return input.fromPath(path ->
                             DeleteWorkoutRequest.builder()
-                                    .withWorkoutId(path)
-                                    .withCustomerId(claims.get("email"))
+                                    .withWorkoutId(path.get("workoutId"))
                                     .build());
                 },
                 (request, serviceComponent) ->
                         serviceComponent.provideDeleteWorkoutActivity().handleRequest(request)
         );
     }
-
-
-
-
 }
