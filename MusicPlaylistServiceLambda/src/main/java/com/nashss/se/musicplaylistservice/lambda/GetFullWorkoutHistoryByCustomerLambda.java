@@ -10,12 +10,12 @@ import org.apache.logging.log4j.Logger;
 
 public class GetFullWorkoutHistoryByCustomerLambda
         extends LambdaActivityRunner<GetFullWorkoutHistoryByCustomerRequest, GetFullWorkoutHistoryByCustomerResult>
-        implements RequestHandler<AuthenticatedLambdaRequest<GetFullWorkoutHistoryByCustomerRequest>, LambdaResponse> {
+        implements RequestHandler<LambdaRequest<GetFullWorkoutHistoryByCustomerRequest>, LambdaResponse> {
 
     private final Logger log = LogManager.getLogger();
 
     @Override
-    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetFullWorkoutHistoryByCustomerRequest> input,
+    public LambdaResponse handleRequest(LambdaRequest<GetFullWorkoutHistoryByCustomerRequest> input,
                                         Context context) {
         log.info("FullHistoryHandleRequest");
         return super.runActivity(
