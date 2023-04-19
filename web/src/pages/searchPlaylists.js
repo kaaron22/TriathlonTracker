@@ -63,11 +63,8 @@ class SearchPlaylists extends BindingClass {
        if(!loggedInUser) return
 
 
-
-
-
         if (searchCriteria) {
-            const results = await this.client.sevenDayWorkout(loggedInUser.authenticator.getCurrentUserInfo());
+            const results = await this.client.sevenDayWorkout(loggedInUser.email);
 
             this.dataStore.setState({
                 [SEARCH_CRITERIA_KEY]: searchCriteria,

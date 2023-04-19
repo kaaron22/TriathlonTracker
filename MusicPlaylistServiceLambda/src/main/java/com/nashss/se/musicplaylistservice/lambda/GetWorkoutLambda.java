@@ -9,20 +9,19 @@ import org.apache.logging.log4j.Logger;
 
 public class GetWorkoutLambda
         extends LambdaActivityRunner<GetWorkoutRequest, GetWorkoutResult>
-        implements RequestHandler<AuthenticatedLambdaRequest<GetWorkoutRequest>, LambdaResponse> {
+        implements RequestHandler<LambdaRequest<GetWorkoutRequest>, LambdaResponse> {
 
     private final Logger log = LogManager.getLogger();
 
     @Override
-    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetWorkoutRequest> input, Context context) {
+    public LambdaResponse handleRequest(LambdaRequest<GetWorkoutRequest> input, Context context) {
         return super.runActivity(
-                () -> {
-                    GetWorkoutRequest unauthenticatedRequest = input.fromBody(GetWorkoutRequest.class);
-                    return input.fromUserClaims(claims ->
-                            GetWorkoutRequest.builder()
-                                    .withCustomerId(claims.get("email"))
-                                    .build());
-                },
+                () -> input.fromPathAndQuery((path, query )->
+                        GetWorkoutRequest.builder()
+                                .withCustomerId(path.get("customerId"))
+
+                                .build()),
+
                 (request, serviceComponent) ->
                         serviceComponent.provideGetWorkoutActivity().handleRequest(request)
         );

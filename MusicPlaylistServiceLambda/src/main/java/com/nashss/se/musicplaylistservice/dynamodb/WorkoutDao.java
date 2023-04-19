@@ -46,13 +46,16 @@ public class WorkoutDao {
 
 
         Map<String, AttributeValue> valueMap = new HashMap<>();
-        valueMap.put(":startDate", new AttributeValue().withS(startLocal.toString()));
-        valueMap.put(":endDate", new AttributeValue().withS(endLocal.toString()));
-        valueMap.put(":CustomerIdIndex", new AttributeValue().withS(customerId));
+        //valueMap.put(":startDate", new AttributeValue().withS(startLocal.toString()));
+      //  valueMap.put(":endDate", new AttributeValue().withS(endLocal.toString()));
+        valueMap.put(":customerId", new AttributeValue().withS(customerId));
         DynamoDBQueryExpression<Triathlon> queryExpression = new DynamoDBQueryExpression<Triathlon>()
                 .withIndexName("CustomerIdIndex")
+
+              //  .withExpressionAttributeNames(Map.of("#TriathlonDate", "date"))
+                //.withProjectionExpression("#TriathlonDate")
                 .withConsistentRead(false)
-                .withKeyConditionExpression("date = :date between :startDate AND :endDate")
+                .withKeyConditionExpression("customerId = :customerId" )
                 .withExpressionAttributeValues(valueMap);
 
         return dynamoDbMapper.query(Triathlon.class, queryExpression);
