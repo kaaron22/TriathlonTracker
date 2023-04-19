@@ -17,11 +17,11 @@ public class GetFullWorkoutHistoryByCustomerLambda
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetFullWorkoutHistoryByCustomerRequest> input,
                                         Context context) {
-        log.info("handleRequest");
+        log.info("FullHistoryhHandleRequest");
         return super.runActivity(
-                () -> input.fromUserClaims(claims ->
+                () -> input.fromPath(path ->
                         GetFullWorkoutHistoryByCustomerRequest.builder()
-                                .withCustomerId(claims.get("customerId"))
+                                .withCustomerId(path.get("customerId"))
                                 .build()),
                 (request, serviceComponent) ->
                         serviceComponent.provideGetFullWorkoutHistoryByCustomerActivity().handleRequest(request)
