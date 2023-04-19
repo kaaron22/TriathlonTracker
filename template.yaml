@@ -249,8 +249,6 @@ Resources:
           Properties:
             Path: /workouts/{customerId}
             Method: get
-            Auth:
-              Authorizer: 'NONE'
 
   GetPlaylistLambda:
     Type: AWS::Serverless::Function
@@ -357,8 +355,6 @@ Resources:
           Properties:
             Path: /workouts
             Method: post
-            Auth:
-              Authorizer: 'NONE'
 
   UpdatePlaylistLambda:
     Type: AWS::Serverless::Function
