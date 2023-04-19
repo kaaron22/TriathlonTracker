@@ -249,6 +249,8 @@ Resources:
           Properties:
             Path: /workouts/history
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetPlaylistLambda:
     Type: AWS::Serverless::Function
