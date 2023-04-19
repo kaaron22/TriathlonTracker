@@ -25,6 +25,7 @@ class DeleteWorkoutActivityTest {
         deleteWorkoutActivity = new DeleteWorkoutActivity(workoutDao);
     }
 
+    //test
     @Test
     public void handleRequest_validWorkoutId_returnsSuccessfully() {
         String workoutId = "12345";
