@@ -358,7 +358,7 @@ Resources:
             Path: /workouts
             Method: post
             Auth:
-              Authorizer: "NONE"
+              Authorizer: 'NONE'
 
   UpdatePlaylistLambda:
     Type: AWS::Serverless::Function
