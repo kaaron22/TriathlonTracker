@@ -34,10 +34,10 @@ public class DeleteWorkoutActivity {
         }
 
         //some validation on email here
-//        if (!workout.getCustomerId().equals(deleteWorkoutRequest.getCustomerId())) {
-//            throw new DeleteWorkoutException("Workout with ID " + workoutId + " does not belong to the user with " +
-//                    "customerId " + workout.getCustomerId());
-//        }
+        if (!workout.getCustomerId().equals(deleteWorkoutRequest.getCustomerId())) {
+            throw new DeleteWorkoutException("Workout with ID " + workoutId + " does not belong to the user with " +
+                    "customerId " + workout.getCustomerId());
+        }
 
         try {
             workoutDao.deleteTriathlon(workout);
