@@ -17,7 +17,7 @@ public class GetFullWorkoutHistoryByCustomerLambda
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetFullWorkoutHistoryByCustomerRequest> input,
                                         Context context) {
-        log.info("FullHistoryhHandleRequest");
+        log.info("FullHistoryHandleRequest");
         return super.runActivity(
                 () -> input.fromPath(path ->
                         GetFullWorkoutHistoryByCustomerRequest.builder()
