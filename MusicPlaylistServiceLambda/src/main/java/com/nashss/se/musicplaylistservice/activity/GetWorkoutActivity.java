@@ -45,7 +45,7 @@ public class GetWorkoutActivity {
 
         List<Triathlon> workouts = workoutDao.getSevenDayHistory(getWorkoutRequest.getCustomerId());
         List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModelList(workouts);
-
+        log.info("Received GetWorkoutRequest {}", workoutModels.toString());
         return GetWorkoutResult.builder()
                 .withWorkoutList(workoutModels)
                 .build();

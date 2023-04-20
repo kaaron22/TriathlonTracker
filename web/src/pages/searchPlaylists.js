@@ -43,12 +43,12 @@ class SearchPlaylists extends BindingClass {
      */
     mount() {
         // Wire up the form's 'submit' event and the button's 'click' event to the search method.
-        document.getElementById('search-playlists-form').addEventListener('submit', this.search);
-        document.getElementById('search-btn').addEventListener('click', this.search);
+        this.search()
+
 
         this.header.addHeaderToPage();
 
-        this.client = new MusicPlaylistClient();
+        this.client = new WorkoutClient();
     }
 
     /**
@@ -59,17 +59,12 @@ class SearchPlaylists extends BindingClass {
     async search(evt) {
         // Prevent submitting the from from reloading the page.
         evt.preventDefault();
+       const loggedInUser = this.client.getIdentity()
+       if(!loggedInUser) return
 
-        const searchCriteria = document.getElementById('search-criteria').value;
-        const previousSearchCriteria = this.dataStore.get(SEARCH_CRITERIA_KEY);
-
-        // If the user didn't change the search criteria, do nothing
-        if (previousSearchCriteria === searchCriteria) {
-            return;
-        }
 
         if (searchCriteria) {
-            const results = await this.client.search(searchCriteria);
+            const results = await this.client.sevenDayWorkout(loggedInUser.email);
 
             this.dataStore.setState({
                 [SEARCH_CRITERIA_KEY]: searchCriteria,

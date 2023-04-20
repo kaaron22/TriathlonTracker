@@ -1,6 +1,7 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.nashss.se.musicplaylistservice.converters.LocalDateConverter;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -41,8 +42,8 @@ public class Triathlon {
     public void setWorkoutId(String workoutId) {
         this.workoutId = workoutId;
     }
-
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "DateIndex", attributeName = "date")
+    @DynamoDBTypeConverted(converter = LocalDateConverter.class)
+   // @DynamoDBIndexHashKey(globalSecondaryIndexName = "DateIndex", attributeName = "date")
     public LocalDate getDate() {
         return date;
     }

@@ -2,6 +2,7 @@ package com.nashss.se.musicplaylistservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
@@ -48,15 +49,17 @@ public class WorkoutDao {
         Map<String, AttributeValue> valueMap = new HashMap<>();
         valueMap.put(":startDate", new AttributeValue().withS(startLocal.toString()));
         valueMap.put(":endDate", new AttributeValue().withS(endLocal.toString()));
-        valueMap.put(":CustomerIdIndex", new AttributeValue().withS(customerId));
-        DynamoDBQueryExpression<Triathlon> queryExpression = new DynamoDBQueryExpression<Triathlon>()
+        valueMap.put(":customerId", new AttributeValue().withS(customerId));
+        DynamoDBScanExpression queryExpression = new DynamoDBScanExpression()
                 .withIndexName("CustomerIdIndex")
-                .withConsistentRead(false)
-                .withKeyConditionExpression("date = :date between :startDate AND :endDate")
+
+                .withExpressionAttributeNames(Map.of("#TriathlonDate", "date"))
+                .withProjectionExpression("#TriathlonDate")
+                //.withConsistentRead(false)
+                .withFilterExpression("customerId = :customerId and #TriathlonDate between :startDate and :endDate" )
                 .withExpressionAttributeValues(valueMap);
 
-     PaginatedQueryList<Triathlon> workoutList = dynamoDbMapper.query(Triathlon.class, queryExpression);
-     return workoutList;
+        return dynamoDbMapper.scan(Triathlon.class, queryExpression);
     }
 
     /**

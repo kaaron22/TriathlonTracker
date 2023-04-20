@@ -4,19 +4,17 @@ import java.time.LocalDate;
 
 public class GetWorkoutRequest {
     private final String customerId;
-    private final String startDate;
 
-    private GetWorkoutRequest(String customerId, String startDate) {
+
+    private GetWorkoutRequest(String customerId) {
         this.customerId = customerId;
-        this.startDate = startDate;
+
     }
 
     public String getCustomerId() {
         return customerId;
     }
-    public String getStartDate(){
-        return startDate;
-    }
+
 
     @Override
     public String toString() {
@@ -32,7 +30,7 @@ public class GetWorkoutRequest {
 
     public static class Builder {
         private String customerId;
-        private String startDate;
+
 
 
 
@@ -41,13 +39,13 @@ public class GetWorkoutRequest {
             return this;
         }
 
-        public Builder withStartDate(String startDate) {
-            this.startDate = startDate;
-            return this;
-        }
+//        public Builder withStartDate(String startDate) {
+//            this.startDate = startDate;
+//            return this;
+//        }
 
         public GetWorkoutRequest build() {
-            return new GetWorkoutRequest(customerId, startDate);
+            return new GetWorkoutRequest(customerId);
         }
     }
 }
