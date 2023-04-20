@@ -27,56 +27,61 @@ class GetWorkoutHistory extends BindingClass {
         this.clientLoaded();
 
 
+
+
+
     }
 
 
     async clientLoaded() {
         const identity = await this.client.getIdentity();
-        console.log(identity)
         const customerId = identity.email;
         console.log(customerId)
         document.getElementById('workouts').innerText = "Loading Workouts ...";
         const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId)
+        this.dataStore.set('workouts', workouts);
         console.log("Workout object in clientLoaded()", workouts);
+        console.log("End clientLoaded()");
+        this.addWorkoutsToPage();
 
     }
 
     async getFullWorkoutHistory(evt) {
         const identity = await this.client.getIdentity();
-        const customerId = identity.email
-
-        // const errorMessageDisplay = document.getElementById('error-message-full-history');
-        // errorMessageDisplay.innerText = ``;
-        // errorMessageDisplay.classList.add('hidden');
-
-        const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId);
-        this.dataStore.set('workouts', workouts);
         console.log("Workouts data:", workouts);
         this.addWorkoutsToPage();
+        console.log("end getFullWorkoutHistory()");
     }
 
      addWorkoutsToPage() {
         console.log("addWorkoutToPage() start");
-        const workouts = this.dataStore.get('workouts')
-        console.log(workouts);
+        const workouts = this.dataStore.get('workouts');
+
+        console.log('type of workouts:', typeof workouts);
+        console.log("workouts in addWorkoutstoPage method", workouts);
         if (workouts == null) {
             return;
         }
 
         const workoutsList = document.getElementById('workouts');
-        console.log("Workouts list element:", workoutsList);
+        console.log("workouts list *line67* ", workoutsList);
         workoutsList.innerHTML = '';
-        for (let workout of workouts) {
-            const listItem = document.createElement('li');
-            listItem.className = 'workout';
 
-            const dateSpan = document.createElement('span');
-            dateSpan.className = 'title';
-            dateSpan.textContent = workout.date
-            listItem.appendChild(dateSpan);
-
-            workoutsList.appendChild(listItem);
+        let workoutHistoryHtml = '';
+        let workout;
+        for (workout of workouts.workoutModels) {
+            console.log(workout.date);
+            workoutHistoryHtml += `
+               <li class="workouts">
+                   <span class="date">${workout.date}</span>
+                   <span class="workoutType">${workout.workoutType}</span>
+                   <span class="workoutDuration">${workout.durationInHours}</span>
+                   <span class="workoutDurationInMinutes">${workout.durationInMinutes}</span>
+               </li>
+            `;
         }
+        workoutsList.innerHTML = workoutHistoryHtml;
+
     }
 }
 
