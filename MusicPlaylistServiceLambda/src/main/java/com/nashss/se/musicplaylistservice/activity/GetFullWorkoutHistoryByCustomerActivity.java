@@ -42,9 +42,13 @@ public class GetFullWorkoutHistoryByCustomerActivity {
     public GetFullWorkoutHistoryByCustomerResult handleRequest(final GetFullWorkoutHistoryByCustomerRequest
                                                                        getFullWorkoutHistoryByCustomerRequest) {
         log.info("Received GetFullWorkoutHistoryByCustomerRequest {}", getFullWorkoutHistoryByCustomerRequest);
+        System.out.println("Line 45 before customer Id");
         String customerId = getFullWorkoutHistoryByCustomerRequest.getCustomerId();
+        System.out.println("after customer Id" + customerId);
         List<Triathlon> triathlonList = workoutDao.getAllTriathlonRecordsForCustomer(customerId);
+        System.out.println("after triathlon get all");
         List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(triathlonList);
+        System.out.println("after WorkoutModel converter");
 
         return GetFullWorkoutHistoryByCustomerResult.builder()
                 .withTriathlonList(workoutModels)
