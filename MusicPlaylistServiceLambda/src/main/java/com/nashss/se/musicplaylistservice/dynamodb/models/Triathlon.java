@@ -43,7 +43,7 @@ public class Triathlon {
         this.workoutId = workoutId;
     }
     @DynamoDBTypeConverted(converter = LocalDateConverter.class)
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "DateIndex", attributeName = "date")
+   // @DynamoDBIndexHashKey(globalSecondaryIndexName = "DateIndex", attributeName = "date")
     public LocalDate getDate() {
         return date;
     }
