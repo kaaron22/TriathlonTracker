@@ -11,8 +11,6 @@ class GetWorkoutHistory extends BindingClass {
         super();
         this.bindClassMethods(['clientLoaded', 'mount', 'getFullWorkoutHistory'], this);
         this.dataStore = new DataStore();
-        // this.dataStore.addChangeListener(this.getFullWorkoutHistory);
-        // this.dataStore.addChangeListener(this.addWorkoutsToPage);
         this.header = new Header(this.dataStore);
         // this.authenticator = new Authenticator();
         console.log("getWorkoutHistory constructor");
@@ -26,7 +24,7 @@ class GetWorkoutHistory extends BindingClass {
 
         this.client = new WorkoutClient();
 
-        this.getFullWorkoutHistory();
+        this.clientLoaded();
 
 
     }
@@ -34,9 +32,13 @@ class GetWorkoutHistory extends BindingClass {
 
     async clientLoaded() {
         const identity = await this.client.getIdentity();
+        console.log(identity)
         const customerId = identity.email;
+        console.log(customerId)
         document.getElementById('workouts').innerText = "Loading Workouts ...";
         const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId)
+        console.log("Workout object in clientLoaded()", workouts);
+
     }
 
     async getFullWorkoutHistory(evt) {
