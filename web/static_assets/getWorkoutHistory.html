@@ -2,26 +2,20 @@
 <html>
 
 <head>
+    <title>Workout History</title>
     <script type="text/javascript" src="assets/getWorkoutHistory.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body class="background">
-    <header class="header" id="header"></header>
-    <div class="card">
-        <h2>Get Full Workout History</h2>
-        <form class="card-content" id="get-full-workout-history">
-            <p class="hidden error" id="error-message-full-history"> </p>
-            <p>
-                <a href="#" class="button" id="get-full-history">Get Full History</a>
-            </p>
-        </form>
-    </div>
-    <div class="card">
-        <h2 id="workout-list"></h2>
-        <h3>Customer name: <span id="customer-name"></span></h3>
-        <div id="workouts"></div>
-    </div>
-</body>
-
+    <header class="header" id="header">
+        <h1>Get Full Workout History</h1>
+    </header>
+    <main>
+        <div class="card">
+            <h2 id="workout-list"> Workout List</h2>
+            <ul id="workouts"></ul>
+        </div>
+    </main>
+  </body>
 </html>
