@@ -49,35 +49,32 @@ class GetWorkoutHistory extends BindingClass {
 
         const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId);
         this.dataStore.set('workouts', workouts);
-        await this.addWorkoutsToPage();
+        console.log("Workouts data:", workouts);
+        this.addWorkoutsToPage();
     }
 
-    async addWorkoutsToPage() {
+     addWorkoutsToPage() {
+        console.log("addWorkoutToPage() start");
         const workouts = this.dataStore.get('workouts')
-
+        console.log(workouts);
         if (workouts == null) {
             return;
         }
 
-        let workoutHtml = '';
-        let workout;
-        for (workout of workouts) {
-            workoutHtml += `
-                <li class="workout">                  
-                    <span class="title">${workout.date}</span>
-                    <span class="title">${workout.workoutType}</span>
-                    <span class="title">${workout.durationInHours}</span>
-                    <span class="title">${workout.durationInMinutes}</span>
-                    <span class="title">${workout.durationInSeconds}</span>
-                    <span class="title">${workout.distance}</span>
-                </li>
-            `;
-        }
-        document.getElementById('workouts').innerHTML = workoutHtml;
+        const workoutsList = document.getElementById('workouts');
+        console.log("Workouts list element:", workoutsList);
+        workoutsList.innerHTML = '';
+        for (let workout of workouts) {
+            const listItem = document.createElement('li');
+            listItem.className = 'workout';
 
-        const customerName = document.getElementById("customerName");
-        const currentUser = await this.client.getIdentity();
-        customerName.innerText = currentUser.name;
+            const dateSpan = document.createElement('span');
+            dateSpan.className = 'title';
+            dateSpan.textContent = workout.date
+            listItem.appendChild(dateSpan);
+
+            workoutsList.appendChild(listItem);
+        }
     }
 }
 
