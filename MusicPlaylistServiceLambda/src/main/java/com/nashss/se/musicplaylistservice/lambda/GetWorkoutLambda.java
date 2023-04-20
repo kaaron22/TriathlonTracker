@@ -19,7 +19,7 @@ public class GetWorkoutLambda
                 () -> input.fromPathAndQuery((path, query )->
                         GetWorkoutRequest.builder()
                                 .withCustomerId(path.get("customerId"))
-
+                                .withNumberOfDays(Integer.parseInt(query.get("numberOfDays")))
                                 .build()),
 
                 (request, serviceComponent) ->

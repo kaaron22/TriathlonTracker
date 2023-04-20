@@ -1,9 +1,6 @@
 package com.nashss.se.musicplaylistservice.dynamodb;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
@@ -41,9 +38,10 @@ public class WorkoutDao {
     public Triathlon getTriathlon(String workoutId) {
         return this.dynamoDbMapper.load(Triathlon.class, workoutId);
     }
-    public List <Triathlon> getSevenDayHistory (String customerId) {
+    public List<Triathlon> getSevenDayHistory (String customerId, int numberOfDays) {
+        System.out.println(customerId + numberOfDays);
         LocalDate endLocal = LocalDate.now();
-        LocalDate startLocal = LocalDate.now().minusDays(6);
+        LocalDate startLocal = LocalDate.now().minusDays(numberOfDays);
 
 
         Map<String, AttributeValue> valueMap = new HashMap<>();
@@ -59,7 +57,8 @@ public class WorkoutDao {
                 .withFilterExpression("customerId = :customerId and #TriathlonDate between :startDate and :endDate" )
                 .withExpressionAttributeValues(valueMap);
 
-        return dynamoDbMapper.scan(Triathlon.class, queryExpression);
+        ScanResultPage<Triathlon> triathlons = dynamoDbMapper.scanPage(Triathlon.class, queryExpression);
+        return triathlons.getResults();
     }
 
     /**

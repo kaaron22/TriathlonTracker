@@ -43,11 +43,13 @@ public class ModelConverter {
                 .build();
     }
 
-    public List<WorkoutModel> toWorkoutModelList(List<Triathlon> workouts) {
+    public List<WorkoutModel> toWorkoutModels(List<Triathlon> triathlonList) {
+        System.out.println(triathlonList);
         List<WorkoutModel> workoutModels = new ArrayList<>();
 
-        for (Triathlon workout : workouts) {
-            workoutModels.add(toWorkoutModel(workout));
+        for(Triathlon triathlon : triathlonList) {
+            System.out.println(triathlon);
+            workoutModels.add(toWorkoutModel(triathlon));
         }
 
         return workoutModels;

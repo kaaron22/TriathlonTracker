@@ -354,8 +354,11 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /workouts/{customerId}
+            Path: /workouts/{customerId}/history
             Method: get
+            Auth:
+              Authorizer: 'NONE'
+
 
   UpdatePlaylistLambda:
     Type: AWS::Serverless::Function

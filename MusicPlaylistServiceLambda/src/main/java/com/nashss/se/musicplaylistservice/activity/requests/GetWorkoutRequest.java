@@ -4,22 +4,25 @@ import java.time.LocalDate;
 
 public class GetWorkoutRequest {
     private final String customerId;
+    private final Integer numberOfDays;
 
-
-    private GetWorkoutRequest(String customerId) {
+    private GetWorkoutRequest(String customerId, Integer numberOfDays) {
         this.customerId = customerId;
-
+        this.numberOfDays = numberOfDays;
     }
 
+    public Integer getNumberOfDays() {
+        return numberOfDays;
+    }
     public String getCustomerId() {
         return customerId;
     }
-
 
     @Override
     public String toString() {
         return "GetWorkoutRequest{" +
                 "customerId='" + customerId + '\'' +
+                ", numberOfDays='" + numberOfDays + '\'' +
                 '}';
     }
 
@@ -30,12 +33,17 @@ public class GetWorkoutRequest {
 
     public static class Builder {
         private String customerId;
-
+        private Integer numberOfDays;
 
 
 
         public Builder withCustomerId(String customerId) {
             this.customerId = customerId;
+            return this;
+        }
+
+        public Builder withNumberOfDays(Integer numberOfDays) {
+            this.numberOfDays = numberOfDays;
             return this;
         }
 
@@ -45,7 +53,7 @@ public class GetWorkoutRequest {
 //        }
 
         public GetWorkoutRequest build() {
-            return new GetWorkoutRequest(customerId);
+            return new GetWorkoutRequest(customerId, numberOfDays);
         }
     }
 }

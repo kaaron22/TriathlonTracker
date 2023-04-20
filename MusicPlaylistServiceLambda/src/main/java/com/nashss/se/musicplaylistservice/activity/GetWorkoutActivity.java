@@ -10,6 +10,7 @@ import com.nashss.se.musicplaylistservice.models.WorkoutModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -43,8 +44,11 @@ public class GetWorkoutActivity {
 
         //String songOrder = computeSongOrder(getPlaylistSongsRequest.getOrder());
 
-        List<Triathlon> workouts = workoutDao.getSevenDayHistory(getWorkoutRequest.getCustomerId());
-        List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModelList(workouts);
+        List<Triathlon> workouts = workoutDao.getSevenDayHistory(getWorkoutRequest.getCustomerId(), getWorkoutRequest.getNumberOfDays());
+
+        System.out.println("Line 49");
+        List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(workouts);
+        System.out.println("line 51 :" + workoutModels);
         log.info("Received GetWorkoutRequest {}", workoutModels.toString());
         return GetWorkoutResult.builder()
                 .withWorkoutList(workoutModels)
