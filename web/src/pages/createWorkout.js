@@ -60,7 +60,9 @@ class CreateWorkout extends BindingClass {
             successMessageDisplay.innerText = `Workout added successfully`;
             successMessageDisplay.classList.remove('hidden');
         } catch (error) {
-            errorMessageDisplay.innerText = `Error: ${error.message}`;
+            console.log("error data object:", error.response.data);
+            const errorMessage = error.response?.data?.error_message;
+            errorMessageDisplay.innerText = `Error: ${errorMessage}`;
             errorMessageDisplay.classList.remove('hidden');
         } finally {
             createButton.innerText = origButtonText;
