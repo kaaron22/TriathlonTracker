@@ -1,10 +1,12 @@
 package com.nashss.se.musicplaylistservice.dynamodb;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
+import com.nashss.se.musicplaylistservice.exceptions.DeleteWorkoutException;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
@@ -63,5 +65,8 @@ public class WorkoutDao {
     public Triathlon saveTriathlon(Triathlon workout) {
         this.dynamoDbMapper.save(workout);
         return workout;
+    }
+    public void deleteTriathlon(Triathlon workout) {
+        dynamoDbMapper.delete(workout);
     }
 }

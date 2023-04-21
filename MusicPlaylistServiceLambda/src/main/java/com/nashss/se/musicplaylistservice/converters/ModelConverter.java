@@ -17,35 +17,26 @@ public class ModelConverter {
 
     public WorkoutModel toWorkoutModel(Triathlon workout) {
 
-        Integer totalTimeInSeconds = workout.getDurationInSeconds();
 
-        if (!(null == totalTimeInSeconds)) {
-            WorkoutDuration durationInHoursMinutesSeconds = convertTotalSecondsToHoursMinutesSeconds(totalTimeInSeconds);
+        WorkoutModel.Builder builder = WorkoutModel.builder()
+                .withWorkoutId(workout.getWorkoutId())
+                .withCustomerId(workout.getCustomerId())
+                .withCustomerName(workout.getCustomerName())
+                .withDate(workout.getDate())
+                .withWorkoutType(workout.getWorkoutType())
+                .withDistance(workout.getDistance() != null ? String.valueOf(workout.getDistance()) : null);
 
-            return WorkoutModel.builder()
-                    .withWorkoutId(workout.getWorkoutId())
-                    .withCustomerId(workout.getCustomerId())
-                    .withCustomerName(workout.getCustomerName())
-                    .withDate(workout.getDate())
-                    .withWorkoutType(workout.getWorkoutType())
-                    .withDurationInHours(durationInHoursMinutesSeconds.getHours())
-                    .withDurationInMinutes(durationInHoursMinutesSeconds.getMinutes())
-                    .withDurationInSeconds(durationInHoursMinutesSeconds.getSeconds())
-                    .withDistance(String.valueOf(workout.getDistance()))
-                    .build();
-        } else {
-            return WorkoutModel.builder()
-                    .withWorkoutId(workout.getWorkoutId())
-                    .withCustomerId(workout.getCustomerId())
-                    .withCustomerName(workout.getCustomerName())
-                    .withDate(workout.getDate())
-                    .withWorkoutType(workout.getWorkoutType())
-                    .withDurationInHours(null)
-                    .withDurationInMinutes(null)
-                    .withDurationInSeconds(null)
-                    .withDistance(String.valueOf(workout.getDistance()))
-                    .build();
+        if (workout.getDurationInSeconds() != null) {
+            WorkoutDuration durationHoursMinutesSeconds =
+                    convertTotalSecondsToHoursMinutesSeconds(workout.getDurationInSeconds());
+
+            builder.withDurationInHours(durationHoursMinutesSeconds.getHours())
+                    .withDurationInMinutes(durationHoursMinutesSeconds.getMinutes())
+                    .withDurationInSeconds(durationHoursMinutesSeconds.getSeconds());
         }
+
+        return builder.build();
+
     }
 
     public List<WorkoutModel> toWorkoutModels(List<Triathlon> triathlonList) {

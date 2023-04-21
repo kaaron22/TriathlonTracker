@@ -24,6 +24,12 @@ public interface ServiceComponent {
      * @return getFullWorkoutHistoryByCustomerActivity
      */
     GetFullWorkoutHistoryByCustomerActivity provideGetFullWorkoutHistoryByCustomerActivity();
+    /**
+     * Provides the relevant activity.
+     * @return CreateWorkoutActivity
+     */
+    DeleteWorkoutActivity provideDeleteWorkoutActivity();
+
 
     /**
      * Provides the relevant activity.
