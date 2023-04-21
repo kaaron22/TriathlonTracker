@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class CreateWorkoutRequest {
     private final String customerId;
     private final String customerName;
-    private final LocalDate date;
+    private final String date;
     private final String workoutType;
     private final String durationInHours;
     private final String durationInMinutes;
@@ -23,7 +23,7 @@ public class CreateWorkoutRequest {
      * @param customerId for the request
      *
      */
-    public CreateWorkoutRequest(String customerId, String customerName, LocalDate date, String workoutType,
+    public CreateWorkoutRequest(String customerId, String customerName, String date, String workoutType,
                                 String durationInHours, String durationInMinutes, String durationInSeconds,
                                 String distance) {
         this.customerId = customerId;
@@ -42,7 +42,7 @@ public class CreateWorkoutRequest {
 
     public String getCustomerName() { return customerName; }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -89,7 +89,7 @@ public class CreateWorkoutRequest {
     public static class Builder {
         private String customerId;
         private String customerName;
-        private LocalDate date;
+        private String date;
         private String workoutType;
         private String durationInHours;
         private String durationInMinutes;
@@ -107,7 +107,7 @@ public class CreateWorkoutRequest {
             return this;
         }
 
-        public Builder withDate(LocalDate date) {
+        public Builder withDate(String date) {
             this.date = date;
             return this;
         }

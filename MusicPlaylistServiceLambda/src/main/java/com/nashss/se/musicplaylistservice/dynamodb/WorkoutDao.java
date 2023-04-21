@@ -8,6 +8,7 @@ import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,15 +40,15 @@ public class WorkoutDao {
         return this.dynamoDbMapper.load(Triathlon.class, workoutId);
     }
     public List<Triathlon> getSevenDayHistory (String customerId, int numberOfDays) {
-        System.out.println(customerId + numberOfDays);
-        LocalDate endLocal = LocalDate.now();
-        LocalDate startLocal = LocalDate.now().minusDays(numberOfDays);
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate.minusDays(numberOfDays);
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
 
         Map<String, AttributeValue> valueMap = new HashMap<>();
-        valueMap.put(":startDate", new AttributeValue().withS(startLocal.toString()));
-        valueMap.put(":endDate", new AttributeValue().withS(endLocal.toString()));
         valueMap.put(":customerId", new AttributeValue().withS(customerId));
+        valueMap.put(":startDate", new AttributeValue().withS(startDate.format(formatter)));
+        valueMap.put(":endDate", new AttributeValue().withS(startDate.format(formatter)));
         DynamoDBScanExpression queryExpression = new DynamoDBScanExpression()
                 .withIndexName("CustomerIdIndex")
 

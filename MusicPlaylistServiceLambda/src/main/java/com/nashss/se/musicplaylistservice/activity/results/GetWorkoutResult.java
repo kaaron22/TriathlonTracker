@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetWorkoutResult {
-    private final List<WorkoutModel> workoutList;
+    private final List<WorkoutModel> workoutModels;
 
-    private GetWorkoutResult(List<WorkoutModel> workoutList) {
-        this.workoutList = workoutList;
+    private GetWorkoutResult(List<WorkoutModel> workoutModels) {
+        this.workoutModels = workoutModels;
     }
 
     public List<WorkoutModel> getWorkoutList() {
-        return new ArrayList<>(workoutList);
+        return new ArrayList<>(workoutModels);
     }
 
     @Override
     public String toString() {
         return "GetWorkoutResult{" +
-                "workoutList=" + workoutList +
+                "workoutModels=" + workoutModels +
                 '}';
     }
 
@@ -30,15 +30,15 @@ public class GetWorkoutResult {
     }
 
     public static class Builder {
-        private List<WorkoutModel> workoutList;
+        private List<WorkoutModel> workoutModels;
 
-        public Builder withWorkoutList(List<WorkoutModel> workoutList) {
-            this.workoutList = new ArrayList<>(workoutList);
+        public Builder withWorkoutList(List<WorkoutModel> workoutModels) {
+            this.workoutModels = new ArrayList<>(workoutModels);
             return this;
         }
 
         public GetWorkoutResult build() {
-            return new GetWorkoutResult(workoutList);
+            return new GetWorkoutResult(workoutModels);
         }
     }
 }
