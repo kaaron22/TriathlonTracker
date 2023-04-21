@@ -42,19 +42,22 @@ public class GetWorkoutActivity {
     public GetWorkoutResult handleRequest(final GetWorkoutRequest getWorkoutRequest) {
         log.info("Received GetWorkoutRequest {}", getWorkoutRequest);
 
-        //String songOrder = computeSongOrder(getPlaylistSongsRequest.getOrder());
+        int numberOfDays;
+        try {
+            numberOfDays = Integer.parseInt(getWorkoutRequest.getNumberOfDays());
+        } catch (NumberFormatException e) {
+            log.info("Invalid input for numberOfDays: " + getWorkoutRequest.getNumberOfDays());
+            return GetWorkoutResult.builder()
+                    .withErrorMessage("Invalid input for numberOfDays: " + getWorkoutRequest.getNumberOfDays())
+                    .build();
+        }
 
-        List<Triathlon> workouts = workoutDao.getSevenDayHistory(getWorkoutRequest.getCustomerId(), getWorkoutRequest.getNumberOfDays());
+        List<Triathlon> workouts = workoutDao.getSevenDayHistory(getWorkoutRequest.getCustomerId(), numberOfDays);
 
-        System.out.println("Line 49");
         List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(workouts);
-        System.out.println("line 51 :" + workoutModels);
-        log.info("Received GetWorkoutRequest {}", workoutModels.toString());
+        log.info("workoutModels converted");
         return GetWorkoutResult.builder()
                 .withWorkoutList(workoutModels)
                 .build();
     }
-
-
 }
-

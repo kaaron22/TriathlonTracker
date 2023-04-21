@@ -17,6 +17,7 @@ import java.util.Map;
 public class WorkoutDao {
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
+    private final String CUSTOMER_ID_INDEX = "CustomerIdIndex";
 
     /**
      * Instantiates a WorkoutDao object.
@@ -48,18 +49,20 @@ public class WorkoutDao {
         Map<String, AttributeValue> valueMap = new HashMap<>();
         valueMap.put(":customerId", new AttributeValue().withS(customerId));
         valueMap.put(":startDate", new AttributeValue().withS(startDate.format(formatter)));
-        valueMap.put(":endDate", new AttributeValue().withS(startDate.format(formatter)));
-        DynamoDBScanExpression queryExpression = new DynamoDBScanExpression()
-                .withIndexName("CustomerIdIndex")
+        valueMap.put(":endDate", new AttributeValue().withS(endDate.format(formatter)));
 
-                .withExpressionAttributeNames(Map.of("#TriathlonDate", "date"))
-                .withProjectionExpression("#TriathlonDate")
-                //.withConsistentRead(false)
-                .withFilterExpression("customerId = :customerId and #TriathlonDate between :startDate and :endDate" )
-                .withExpressionAttributeValues(valueMap);
+        Map<String, String> nameMap = new HashMap<>();
+        nameMap.put("#dateAttr", "date");
 
-        ScanResultPage<Triathlon> triathlons = dynamoDbMapper.scanPage(Triathlon.class, queryExpression);
-        return triathlons.getResults();
+        DynamoDBQueryExpression<Triathlon> queryExpression = new DynamoDBQueryExpression<Triathlon>()
+                .withIndexName(CUSTOMER_ID_INDEX)
+                .withConsistentRead(false)
+                .withKeyConditionExpression("customerId = :customerId")
+                .withFilterExpression("#dateAttr BETWEEN :startDate and :endDate")
+                .withExpressionAttributeValues(valueMap)
+                .withExpressionAttributeNames(nameMap);
+
+        return dynamoDbMapper.query(Triathlon.class, queryExpression);
     }
 
     /**
