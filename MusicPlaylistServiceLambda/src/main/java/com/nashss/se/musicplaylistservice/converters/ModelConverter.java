@@ -16,31 +16,27 @@ import java.util.List;
 public class ModelConverter {
 
     public WorkoutModel toWorkoutModel(Triathlon workout) {
-        // conversion both directions (from seconds here; to seconds in CreateWorkoutActivity) to be moved to util method?
-        Integer totalSecondsToConvertToHoursMinutesSeconds = workout.getDurationInSeconds();
-        Integer seconds = totalSecondsToConvertToHoursMinutesSeconds % 60;
-        String secondsToStringValue = String.valueOf(seconds);
 
-        Integer remainingSecondsToConvertToHoursMinutes = totalSecondsToConvertToHoursMinutesSeconds - seconds;
-        Integer remainingMinutesToConvertToHoursMinutes = remainingSecondsToConvertToHoursMinutes / 60;
-        Integer minutes = remainingMinutesToConvertToHoursMinutes % 60;
-        String minutesToStringValue = String.valueOf(minutes);
 
-        Integer remainingMinutesToConvertToHours = remainingMinutesToConvertToHoursMinutes - minutes;
-        Integer hours = remainingMinutesToConvertToHours / 60;
-        String hoursToStringValue = String.valueOf(hours);
-
-        return WorkoutModel.builder()
+        WorkoutModel.Builder builder = WorkoutModel.builder()
                 .withWorkoutId(workout.getWorkoutId())
                 .withCustomerId(workout.getCustomerId())
                 .withCustomerName(workout.getCustomerName())
                 .withDate(workout.getDate())
                 .withWorkoutType(workout.getWorkoutType())
-                .withDurationInHours(hoursToStringValue)
-                .withDurationInMinutes(minutesToStringValue)
-                .withDurationInSeconds(secondsToStringValue)
-                .withDistance(String.valueOf(workout.getDistance()))
-                .build();
+                .withDistance(workout.getDistance() != null ? String.valueOf(workout.getDistance()) : null);
+
+        if (workout.getDurationInSeconds() != null) {
+            WorkoutDuration durationHoursMinutesSeconds =
+                    convertTotalSecondsToHoursMinutesSeconds(workout.getDurationInSeconds());
+
+            builder.withDurationInHours(durationHoursMinutesSeconds.getHours())
+                    .withDurationInMinutes(durationHoursMinutesSeconds.getMinutes())
+                    .withDurationInSeconds(durationHoursMinutesSeconds.getSeconds());
+        }
+
+        return builder.build();
+
     }
     /**
      * Converts a provided {@link Playlist} into a {@link PlaylistModel} representation.
@@ -109,5 +105,22 @@ public class ModelConverter {
         }
 
         return playlistModels;
+    }
+
+    private WorkoutDuration convertTotalSecondsToHoursMinutesSeconds(Integer totalWorkoutDurationInASeconds) {
+        Integer totalSecondsToConvertToHoursMinutesSeconds = totalWorkoutDurationInASeconds;
+        Integer seconds = totalSecondsToConvertToHoursMinutesSeconds % 60;
+        String secondsToStringValue = String.valueOf(seconds);
+
+        Integer remainingSecondsToConvertToHoursMinutes = totalSecondsToConvertToHoursMinutesSeconds - seconds;
+        Integer remainingMinutesToConvertToHoursMinutes = remainingSecondsToConvertToHoursMinutes / 60;
+        Integer minutes = remainingMinutesToConvertToHoursMinutes % 60;
+        String minutesToStringValue = String.valueOf(minutes);
+
+        Integer remainingMinutesToConvertToHours = remainingMinutesToConvertToHoursMinutes - minutes;
+        Integer hours = remainingMinutesToConvertToHours / 60;
+        String hoursToStringValue = String.valueOf(hours);
+
+        return new WorkoutDuration(hoursToStringValue, minutesToStringValue, secondsToStringValue);
     }
 }

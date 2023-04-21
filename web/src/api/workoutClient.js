@@ -15,7 +15,8 @@ export default class WorkoutClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist', 'createWorkout'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs',
+            'createPlaylist', 'createWorkout', 'getFullWorkoutHistoryByCustomer'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -81,6 +82,15 @@ export default class WorkoutClient extends BindingClass {
         try {
             const response = await this.axiosClient.get(`playlists/${id}`);
             return response.data.playlist;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getFullWorkoutHistoryByCustomer(customerId, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`workouts/${customerId}/history`);
+            return response.data.workouts;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
