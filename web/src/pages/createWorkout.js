@@ -37,8 +37,8 @@ class CreateWorkout extends BindingClass {
         const successMessageDisplay = document.getElementById('success-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
+        successMessageDisplay.innerText = ``;
         successMessageDisplay.classList.add('hidden');
-
 
 
         const createButton = document.getElementById('create');
@@ -53,20 +53,25 @@ class CreateWorkout extends BindingClass {
         const durationInSeconds = document.getElementById('seconds').value;
         const distance = document.getElementById('distance').value;
 
-        const workout = await this.client.createWorkout(workoutType, date, durationInHours, durationInMinutes,
-         durationInSeconds, distance, (error) => {
-            createButton.innerText = origButtonText;
+        try {
+            const workout = await this.client.createWorkout(workoutType, date, durationInHours, durationInMinutes, durationInSeconds, distance);
+
+            this.dataStore.set('workout', workout);
+            successMessageDisplay.innerText = `Workout added successfully`;
+            successMessageDisplay.classList.remove('hidden');
+        } catch (error) {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
-        });
-
-        if (workout) {
-            successMessageDisplay.classList.remove('hidden');
+        } finally {
+            createButton.innerText = origButtonText;
         }
-        this.dataStore.set('workout', workout);
 
-        document.getElementById('create').innerText = 'Record Workout';
-        document.getElementById("create-workout-form").reset();
+        setTimeout(() => {
+            document.getElementById('create').innerText = 'Record Workout';
+            document.getElementById("create-workout-form").reset();
+            successMessageDisplay.innerText = ``;
+            successMessageDisplay.classList.add('hidden');
+        }, 3000);
     }
 
     /**
