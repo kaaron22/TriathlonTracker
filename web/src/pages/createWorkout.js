@@ -34,8 +34,12 @@ class CreateWorkout extends BindingClass {
         evt.preventDefault();
 
         const errorMessageDisplay = document.getElementById('error-message');
+        const successMessageDisplay = document.getElementById('success-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
+        successMessageDisplay.classList.add('hidden');
+
+
 
         const createButton = document.getElementById('create');
         const origButtonText = createButton.innerText;
@@ -55,6 +59,10 @@ class CreateWorkout extends BindingClass {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
+
+        if (workout) {
+            successMessageDisplay.classList.remove('hidden');
+        }
         this.dataStore.set('workout', workout);
 
         document.getElementById('create').innerText = 'Record Workout';
