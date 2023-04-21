@@ -60,8 +60,7 @@ class CreateWorkout extends BindingClass {
             successMessageDisplay.innerText = `Workout added successfully`;
             successMessageDisplay.classList.remove('hidden');
         } catch (error) {
-            console.log("error data object:", error.response.data);
-            const errorMessage = error.response?.data?.error_message;
+            const errorMessage = error.response?.data?.error_message || "Undefined Error";
             errorMessageDisplay.innerText = `Error: ${errorMessage}`;
             errorMessageDisplay.classList.remove('hidden');
         } finally {
@@ -75,16 +74,6 @@ class CreateWorkout extends BindingClass {
             successMessageDisplay.classList.add('hidden');
         }, 3000);
     }
-
-    /**
-     * When the playlist is updated in the datastore, redirect to the view playlist page.
-     */
-    /*redirectToCreateWorkout() {
-        const workout = this.dataStore.get('workout');
-        if (workout != null) {
-            window.location.href = `/createWorkout.html`;
-        }
-    }*/
 }
 
 /**
