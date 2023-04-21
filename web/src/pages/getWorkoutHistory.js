@@ -72,12 +72,16 @@ class GetWorkoutHistory extends BindingClass {
         for (workout of workouts.workoutModels) {
             console.log(workout.date);
             workoutHistoryHtml += `
-               <li class="workouts">
-                   <span class="date">${workout.date}</span>
-                   <span class="workoutType">${workout.workoutType}</span>
-                   <span class="workoutDuration">${workout.durationInHours}</span>
-                   <span class="workoutDurationInMinutes">${workout.durationInMinutes}</span>
-               </li>
+                <table id="workouts">
+                    <tr>
+                        <td class="date">${workout.date}</td>
+                        <td class="workoutType">${workout.workoutType}</td>
+                        <td class="workoutDurationHours">${workout.durationInHours}</td>
+                        <td class="workoutDurationInMinutes">${workout.durationInMinutes}</td>
+                        <td class="workoutDurationInSeconds">${workout.durationInSeconds}</td>
+                        <td class="distance">${workout.distance}</td>
+                    </tr>
+                </table>
             `;
         }
         workoutsList.innerHTML = workoutHistoryHtml;
