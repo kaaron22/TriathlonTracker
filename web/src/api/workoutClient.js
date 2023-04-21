@@ -90,7 +90,7 @@ export default class WorkoutClient extends BindingClass {
     async getFullWorkoutHistoryByCustomer(customerId, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Must be logged in to view workout history");
-            const response = await this.axiosClient.get(`workouts/${customerId}`);
+            const response = await this.axiosClient.get(`workouts/customers/${customerId}`);
             console.log("getfullWorkoutHistoryByCustomer() in workoutClient response", response);
             return response.data;
         } catch (error) {
