@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GetWorkoutResult {
     private final List<WorkoutModel> workoutModels;
-    private String errorMessage;
+    private final String errorMessage;
 
 
 
