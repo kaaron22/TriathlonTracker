@@ -5,15 +5,21 @@ import com.nashss.se.musicplaylistservice.activity.results.GetFullWorkoutHistory
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.WorkoutDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
+import com.nashss.se.musicplaylistservice.dynamodb.models.TriathlonComparator;
 import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 import com.nashss.se.musicplaylistservice.models.WorkoutModel;
+import com.nashss.se.musicplaylistservice.utils.CollectionUtils;
 import com.nashss.se.projectresources.music.playlist.servic.util.MusicPlaylistServiceUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 public class GetFullWorkoutHistoryByCustomerActivity {
 
@@ -44,7 +50,13 @@ public class GetFullWorkoutHistoryByCustomerActivity {
         log.info("Received GetFullWorkoutHistoryByCustomerRequest {}", getFullWorkoutHistoryByCustomerRequest);
         String customerId = getFullWorkoutHistoryByCustomerRequest.getCustomerId();
         List<Triathlon> triathlonList = workoutDao.getAllTriathlonRecordsForCustomer(customerId);
-        List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(triathlonList);
+        List<Triathlon> triathlonListCopy = CollectionUtils.copyToList(triathlonList);
+        Comparator<Triathlon> triathlonComparator = new TriathlonComparator();
+        //comparator.reversed();
+        triathlonListCopy.sort(triathlonComparator);
+        log.info(triathlonListCopy.toString());
+        //List<Triathlon> copyTriathlonList = CollectionUtils.copyToList(triathlonList);
+        List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(triathlonListCopy);
 
         return GetFullWorkoutHistoryByCustomerResult.builder()
                 .withTriathlonList(workoutModels)

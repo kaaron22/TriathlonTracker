@@ -35,8 +35,14 @@ class GetWorkoutHistory extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const customerId = identity.email;
+        console.log(customerId);
         document.getElementById('workouts').innerText = "Loading Workouts ...";
         const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId)
+        let workout;
+        for (workout of workouts.workoutModels) {
+            console.log(workout);
+        }
+        console.log(workouts.workoutModels);
         this.dataStore.set('workouts', workouts);
         console.log("End clientLoaded()");
         this.addWorkoutsToPage();
@@ -52,10 +58,12 @@ class GetWorkoutHistory extends BindingClass {
      addWorkoutsToPage() {
         console.log("addWorkoutToPage() start");
         const workouts = this.dataStore.get('workouts');
+        console.log("get workouts from datastore complete")
         if (workouts == null) {
             return;
         }
 
+        console.log("workouts from datastore null check complete")
         const workoutsList = document.getElementById('workouts');
         workoutsList.innerHTML = '';
 
@@ -71,8 +79,11 @@ class GetWorkoutHistory extends BindingClass {
                                    </tr>
                                </table>`
 
+        console.log("line 75")
         let workout;
+        console.log("line 77")
         for (workout of workouts.workoutModels) {
+        console.log("line 79")
             workoutHistoryHtml += `
                 <table id="workouts">
                     <tr>
