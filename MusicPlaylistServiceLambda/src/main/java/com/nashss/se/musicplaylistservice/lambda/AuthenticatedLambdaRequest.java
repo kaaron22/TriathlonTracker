@@ -20,7 +20,6 @@ public class AuthenticatedLambdaRequest<T> extends LambdaRequest<T> {
      * @return A instance of T that contains data from the request's claims.
      */
     public T fromUserClaims(Function<Map<String, String>, T> converter) {
-        log.info("Received request from FullHistoryHandleRequest");
         try {
             return converter.apply(getClaims());
         } catch (Exception e) {
