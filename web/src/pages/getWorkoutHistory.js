@@ -12,8 +12,7 @@ class GetWorkoutHistory extends BindingClass {
         this.bindClassMethods(['clientLoaded', 'mount', 'getFullWorkoutHistory'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        // this.authenticator = new Authenticator();
-        console.log("getWorkoutHistory constructor");
+
     }
 
     /**
@@ -36,11 +35,9 @@ class GetWorkoutHistory extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const customerId = identity.email;
-        console.log(customerId)
         document.getElementById('workouts').innerText = "Loading Workouts ...";
         const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId)
         this.dataStore.set('workouts', workouts);
-        console.log("Workout object in clientLoaded()", workouts);
         console.log("End clientLoaded()");
         this.addWorkoutsToPage();
 
@@ -48,7 +45,6 @@ class GetWorkoutHistory extends BindingClass {
 
     async getFullWorkoutHistory(evt) {
         const identity = await this.client.getIdentity();
-        console.log("Workouts data:", workouts);
         this.addWorkoutsToPage();
         console.log("end getFullWorkoutHistory()");
     }
@@ -56,15 +52,11 @@ class GetWorkoutHistory extends BindingClass {
      addWorkoutsToPage() {
         console.log("addWorkoutToPage() start");
         const workouts = this.dataStore.get('workouts');
-
-        console.log('type of workouts:', typeof workouts);
-        console.log("workouts in addWorkoutstoPage method", workouts);
         if (workouts == null) {
             return;
         }
 
         const workoutsList = document.getElementById('workouts');
-        console.log("workouts list *line67* ", workoutsList);
         workoutsList.innerHTML = '';
 
         let workoutHistoryHtml = '';
@@ -81,7 +73,6 @@ class GetWorkoutHistory extends BindingClass {
 
         let workout;
         for (workout of workouts.workoutModels) {
-            console.log(workout.date);
             workoutHistoryHtml += `
                 <table id="workouts">
                     <tr>
