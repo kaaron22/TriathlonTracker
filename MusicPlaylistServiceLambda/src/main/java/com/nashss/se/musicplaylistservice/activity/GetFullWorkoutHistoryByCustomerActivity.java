@@ -44,10 +44,10 @@ public class GetFullWorkoutHistoryByCustomerActivity {
         log.info("Received GetFullWorkoutHistoryByCustomerRequest {}", getFullWorkoutHistoryByCustomerRequest);
         String customerId = getFullWorkoutHistoryByCustomerRequest.getCustomerId();
         List<Triathlon> triathlonList = workoutDao.getAllTriathlonRecordsForCustomer(customerId);
-//        List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(triathlonList);
+        List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(triathlonList);
 
         return GetFullWorkoutHistoryByCustomerResult.builder()
-//                .withTriathlonList(workoutModels)
+                .withTriathlonList(workoutModels)
                 .build();
     }
 

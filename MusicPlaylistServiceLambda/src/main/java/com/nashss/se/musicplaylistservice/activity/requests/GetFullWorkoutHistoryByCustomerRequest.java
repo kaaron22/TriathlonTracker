@@ -1,9 +1,6 @@
 package com.nashss.se.musicplaylistservice.activity.requests;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-@JsonDeserialize(builder = GetFullWorkoutHistoryByCustomerRequest.class)
 public class GetFullWorkoutHistoryByCustomerRequest {
     private final String customerId;
 
@@ -13,10 +10,18 @@ public class GetFullWorkoutHistoryByCustomerRequest {
 
     public String getCustomerId() { return customerId; }
 
+
+    @Override
+    public String toString() {
+        return "GetFullWorkoutHistoryByCustomerRequest{" +
+                "customerId='" + customerId + '\'' +
+                '}';
+    }
+
     //CHECKSTYLE:OFF:Builder
     public static Builder builder() { return new Builder(); }
 
-    @JsonPOJOBuilder
+
     public static class Builder {
         private String customerId;
 

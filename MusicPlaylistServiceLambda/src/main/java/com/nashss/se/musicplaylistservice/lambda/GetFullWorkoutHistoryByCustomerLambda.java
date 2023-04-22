@@ -5,25 +5,26 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import com.nashss.se.musicplaylistservice.activity.requests.GetFullWorkoutHistoryByCustomerRequest;
 import com.nashss.se.musicplaylistservice.activity.results.GetFullWorkoutHistoryByCustomerResult;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GetFullWorkoutHistoryByCustomerLambda
         extends LambdaActivityRunner<GetFullWorkoutHistoryByCustomerRequest, GetFullWorkoutHistoryByCustomerResult>
-        implements RequestHandler<AuthenticatedLambdaRequest<GetFullWorkoutHistoryByCustomerRequest>, LambdaResponse> {
+        implements RequestHandler<LambdaRequest<GetFullWorkoutHistoryByCustomerRequest>, LambdaResponse> {
+
+    private final Logger log = LogManager.getLogger();
 
     @Override
-    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetFullWorkoutHistoryByCustomerRequest> input,
+    public LambdaResponse handleRequest(LambdaRequest<GetFullWorkoutHistoryByCustomerRequest> input,
                                         Context context) {
+        log.info("FullHistoryHandleRequest");
         return super.runActivity(
-                () -> {
-                    GetFullWorkoutHistoryByCustomerRequest unauthenticatedRequest =
-                            input.fromBody(GetFullWorkoutHistoryByCustomerRequest.class);
-                    return input.fromUserClaims(claims ->
-                            GetFullWorkoutHistoryByCustomerRequest.builder()
-                                    .withCustomerId(claims.get("email"))
-                                    .build());
-                },
+                () -> input.fromPath(path ->
+                        GetFullWorkoutHistoryByCustomerRequest.builder()
+                                .withCustomerId(path.get("customerId"))
+                                .build()),
                 (request, serviceComponent) ->
-                            serviceComponent.provideGetFullWorkoutHistoryByCustomerActivity().handleRequest(request)
+                        serviceComponent.provideGetFullWorkoutHistoryByCustomerActivity().handleRequest(request)
         );
     }
 }

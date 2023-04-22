@@ -9,67 +9,85 @@ import DataStore from "../util/DataStore";
 class GetWorkoutHistory extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'getFullWorkoutHistory', 'addWorkoutsToPage'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'getFullWorkoutHistory'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.getFullWorkoutHistory);
-        this.dataStore.addChangeListener(this.addWorkoutsToPage);
         this.header = new Header(this.dataStore);
-        console.log("getWorkoutHistory constructor");
+
     }
 
     /**
      * Add the header to the page and load the MusicPlaylistClient.
      */
     mount() {
-        document.getElementById('get-full-history').addEventListener('click', this.getFullWorkoutHistory);
-
         this.header.addHeaderToPage();
 
         this.client = new WorkoutClient();
+
+        this.clientLoaded();
+
+
+
+
+
+    }
+
+
+    async clientLoaded() {
+        const identity = await this.client.getIdentity();
+        const customerId = identity.email;
+        document.getElementById('workouts').innerText = "Loading Workouts ...";
+        const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId)
+        this.dataStore.set('workouts', workouts);
+        console.log("End clientLoaded()");
+        this.addWorkoutsToPage();
+
     }
 
     async getFullWorkoutHistory(evt) {
-        evt.preventDefault();
-
-        const errorMessageDisplay = document.getElementById('error-message-full-history');
-        errorMessageDisplay.innerText = ``;
-        errorMessageDisplay.classList.add('hidden');
-
-        const createButton = document.getElementById('get-full-history');
-        const origButtonText = createButton.innerText;
-        createButton.innerText = 'Loading Workout History...';
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const customerId = urlParams.get('customerId');
-        const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId);
-        this.dataStore.set('workouts', workouts);
+        const identity = await this.client.getIdentity();
+        this.addWorkoutsToPage();
+        console.log("end getFullWorkoutHistory()");
     }
 
-    addWorkoutsToPage() {
-        const workouts = this.dataStore.get('workouts')
-
+     addWorkoutsToPage() {
+        console.log("addWorkoutToPage() start");
+        const workouts = this.dataStore.get('workouts');
         if (workouts == null) {
             return;
         }
 
-        let workoutHtml = '';
+        const workoutsList = document.getElementById('workouts');
+        workoutsList.innerHTML = '';
+
+        let workoutHistoryHtml = '';
+        workoutHistoryHtml += `<table id="workouts">
+                                   <tr>
+                                       <th>Date</th>
+                                       <th>Workout Type</th>
+                                       <th>Hours</th>
+                                       <th>Minutes</th>
+                                       <th>Seconds</th>
+                                       <th>Distance(km)</th>
+                                   </tr>
+                               </table>`
+
         let workout;
-        for (workout of workouts) {
-            workoutHtml += `
-                <li class="song">
-                    <span class="title">${workout.workoutId}</span>
-                    <span class="title">${workout.date}</span>
-                    <span class="title">${workout.workoutType}</span>
-                    <span class="title">${workout.durationInHours}</span>
-                    <span class="title">${workout.durationInMinutes}</span>
-                    <span class="title">${workout.durationInSeconds}</span>
-                    <span class="title">${workout.distance}</span>
-                </li>
+        for (workout of workouts.workoutModels) {
+            workoutHistoryHtml += `
+                <table id="workouts">
+                    <tr>
+                        <td class="date">${workout.date}</td>
+                        <td class="workoutType">${workout.workoutType}</td>
+                        <td class="workoutDurationHours">${workout.durationInHours}</td>
+                        <td class="workoutDurationInMinutes">${workout.durationInMinutes}</td>
+                        <td class="workoutDurationInSeconds">${workout.durationInSeconds}</td>
+                        <td class="distance">${workout.distance}</td>
+                    </tr>
+                </table>
             `;
         }
-        document.getElementById('workouts').innerHTML = workoutHtml;
+        workoutsList.innerHTML = workoutHistoryHtml;
 
-        createButton.innerText = origButtonText;
     }
 }
 
