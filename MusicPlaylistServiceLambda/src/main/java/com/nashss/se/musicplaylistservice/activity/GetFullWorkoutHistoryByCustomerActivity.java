@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -48,19 +49,24 @@ public class GetFullWorkoutHistoryByCustomerActivity {
     public GetFullWorkoutHistoryByCustomerResult handleRequest(final GetFullWorkoutHistoryByCustomerRequest
                                                                        getFullWorkoutHistoryByCustomerRequest) {
         log.info("Received GetFullWorkoutHistoryByCustomerRequest {}", getFullWorkoutHistoryByCustomerRequest);
+
+        // pull list of workouts from DDB for given customer ID
         String customerId = getFullWorkoutHistoryByCustomerRequest.getCustomerId();
         List<Triathlon> triathlonList = workoutDao.getAllTriathlonRecordsForCustomer(customerId);
-        List<Triathlon> triathlonListCopy = CollectionUtils.copyToList(triathlonList);
-        Comparator<Triathlon> triathlonComparator = new TriathlonComparator();
-        //comparator.reversed();
+
+        // copy paginated query list received from DDB into an arraylist so that it can be sorted
+        List<Triathlon> triathlonListCopy =
+                triathlonList != null ? CollectionUtils.copyToList(triathlonList) : new ArrayList<>();
+
+        // comparator to sort from most recent to oldest by date
+        Comparator<Triathlon> triathlonComparator = new TriathlonComparator().reversed();
         triathlonListCopy.sort(triathlonComparator);
-        log.info(triathlonListCopy.toString());
-        //List<Triathlon> copyTriathlonList = CollectionUtils.copyToList(triathlonList);
+
+        // convert to client model list, package in result and return
         List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(triathlonListCopy);
 
         return GetFullWorkoutHistoryByCustomerResult.builder()
                 .withTriathlonList(workoutModels)
                 .build();
     }
-
 }
