@@ -12,7 +12,6 @@ class GetWorkoutHistory extends BindingClass {
         this.bindClassMethods(['clientLoaded', 'mount', 'getFullWorkoutHistory'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-
     }
 
     /**
@@ -24,50 +23,34 @@ class GetWorkoutHistory extends BindingClass {
         this.client = new WorkoutClient();
 
         this.clientLoaded();
-
-
-
-
-
     }
-
 
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const customerId = identity.email;
-        console.log(customerId);
         document.getElementById('workouts').innerText = "Loading Workouts ...";
         const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId)
-        let workout;
-        for (workout of workouts.workoutModels) {
-            console.log(workout);
-        }
-        console.log(workouts.workoutModels);
         this.dataStore.set('workouts', workouts);
-        console.log("End clientLoaded()");
         this.addWorkoutsToPage();
-
     }
 
     async getFullWorkoutHistory(evt) {
         const identity = await this.client.getIdentity();
         this.addWorkoutsToPage();
-        console.log("end getFullWorkoutHistory()");
     }
 
-     addWorkoutsToPage() {
-        console.log("addWorkoutToPage() start");
+    addWorkoutsToPage() {
         const workouts = this.dataStore.get('workouts');
-        console.log("get workouts from datastore complete")
         if (workouts == null) {
             return;
         }
 
-        console.log("workouts from datastore null check complete")
         const workoutsList = document.getElementById('workouts');
         workoutsList.innerHTML = '';
 
         let workoutHistoryHtml = '';
+
+        // table header row
         workoutHistoryHtml += `<table id="workouts">
                                    <tr>
                                        <th>Date</th>
@@ -79,11 +62,9 @@ class GetWorkoutHistory extends BindingClass {
                                    </tr>
                                </table>`
 
-        console.log("line 75")
+        // append each workout found, row by row to existing table
         let workout;
-        console.log("line 77")
         for (workout of workouts.workoutModels) {
-        console.log("line 79")
             workoutHistoryHtml += `
                 <table id="workouts">
                     <tr>
@@ -97,8 +78,9 @@ class GetWorkoutHistory extends BindingClass {
                 </table>
             `;
         }
-        workoutsList.innerHTML = workoutHistoryHtml;
 
+        // set page to display table built
+        workoutsList.innerHTML = workoutHistoryHtml;
     }
 }
 
