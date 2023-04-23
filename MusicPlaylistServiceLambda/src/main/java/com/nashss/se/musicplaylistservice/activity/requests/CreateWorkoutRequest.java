@@ -2,6 +2,10 @@ package com.nashss.se.musicplaylistservice.activity.requests;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
+import com.nashss.se.musicplaylistservice.models.PlaylistModel;
+
+import java.time.LocalDate;
 
 @JsonDeserialize(builder = CreateWorkoutRequest.Builder.class)
 public class CreateWorkoutRequest {
@@ -13,7 +17,12 @@ public class CreateWorkoutRequest {
     private final String durationInMinutes;
     private final String durationInSeconds;
     private final String distance;
-
+    /**
+     * Creates a CreateWorkoutRequest   representation.
+     *
+     * @param customerId for the request
+     *
+     */
     public CreateWorkoutRequest(String customerId, String customerName, String date, String workoutType,
                                 String durationInHours, String durationInMinutes, String durationInSeconds,
                                 String distance) {

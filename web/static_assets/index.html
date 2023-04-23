@@ -7,30 +7,23 @@
 </head>
 
 <body class="background">
-    <header class="header" id="header"></header>
+    <header class="header" id="header">
+        <h1>Dashboard</h1>
+    </header>
     <div class="card">
-        <h2>Search Playlists</h2>
-        <form class="card-content" id="search-playlists-form">
-            <p class="form-field">
-                <label>Search by name or tag</label>
-                <input type="text" class="validated-field" id="search-criteria" placeholder="smooth-jamz" autofocus>
-                <sub>Search is case-sensitive and tags must match exactly.</sub>
-            </p>
-        </form>
+        <h2>Triathlon Hub</h2>
         <p class="button-group">
-            <a href="#" class="button" id="search-btn">Search</a>
             <a href="createWorkout.html" class="button">Record Triathlon Workout</a>
-        </p>
-        <p class="button-group">
-            <a href="#" class="button" id="search-btn">Search</a>
             <a href="getWorkoutHistory.html" class="button">Workout History</a>
         </p>
     </div>
-    <div class="card hidden" id='search-results-container'>
-        <h3>Results for <span id="search-criteria-display"></span></h3>
-        <div id="search-results-display">
+    <main>
+        <div class="card">
+            <h2 id="workout-title"> Workout List</h2>
+            <table id="workouts"></table>
         </div>
-    </div>
+    </main>
+
 </body>
 
 </html>

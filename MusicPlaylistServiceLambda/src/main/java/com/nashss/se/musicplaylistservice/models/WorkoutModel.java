@@ -1,5 +1,7 @@
 package com.nashss.se.musicplaylistservice.models;
 
+import java.time.LocalDate;
+
 public class WorkoutModel {
 
     private final String workoutId;

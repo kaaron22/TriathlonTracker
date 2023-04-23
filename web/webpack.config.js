@@ -27,7 +27,9 @@ module.exports = {
     createPlaylist: path.resolve(__dirname, 'src', 'pages', 'createPlaylist.js'),
     viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
     searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
-    getWorkoutHistory: path.resolve(__dirname, 'src', 'pages', 'getWorkoutHistory.js')
+    getWorkoutHistory: path.resolve(__dirname, 'src', 'pages', 'getWorkoutHistory.js'),
+    getWorkout: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js')
+
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),
