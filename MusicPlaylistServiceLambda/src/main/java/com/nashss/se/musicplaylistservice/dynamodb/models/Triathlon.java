@@ -78,6 +78,19 @@ public class Triathlon {
     }
 
     @Override
+    public String toString() {
+        return "Triathlon{" +
+                "customerId='" + customerId + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", workoutId='" + workoutId + '\'' +
+                ", date='" + date + '\'' +
+                ", workoutType='" + workoutType + '\'' +
+                ", durationInSeconds=" + durationInSeconds +
+                ", distance=" + distance +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

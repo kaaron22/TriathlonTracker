@@ -12,7 +12,6 @@ class GetWorkoutHistory extends BindingClass {
         this.bindClassMethods(['clientLoaded', 'mount', 'getFullWorkoutHistory'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-
     }
 
     /**
@@ -24,13 +23,7 @@ class GetWorkoutHistory extends BindingClass {
         this.client = new WorkoutClient();
 
         this.clientLoaded();
-
-
-
-
-
     }
-
 
     async clientLoaded() {
         const identity = await this.client.getIdentity();
@@ -38,19 +31,15 @@ class GetWorkoutHistory extends BindingClass {
         document.getElementById('workouts').innerText = "Loading Workouts ...";
         const workouts = await this.client.getFullWorkoutHistoryByCustomer(customerId)
         this.dataStore.set('workouts', workouts);
-        console.log("End clientLoaded()");
         this.addWorkoutsToPage();
-
     }
 
     async getFullWorkoutHistory(evt) {
         const identity = await this.client.getIdentity();
         this.addWorkoutsToPage();
-        console.log("end getFullWorkoutHistory()");
     }
 
-     addWorkoutsToPage() {
-        console.log("addWorkoutToPage() start");
+    addWorkoutsToPage() {
         const workouts = this.dataStore.get('workouts');
         if (workouts == null) {
             return;
@@ -60,6 +49,8 @@ class GetWorkoutHistory extends BindingClass {
         workoutsList.innerHTML = '';
 
         let workoutHistoryHtml = '';
+
+        // table header row
         workoutHistoryHtml += `<table id="workouts">
                                    <tr>
                                        <th>Date</th>
@@ -71,6 +62,7 @@ class GetWorkoutHistory extends BindingClass {
                                    </tr>
                                </table>`
 
+        // append each workout found, row by row to existing table
         let workout;
         for (workout of workouts.workoutModels) {
             workoutHistoryHtml += `
@@ -86,8 +78,9 @@ class GetWorkoutHistory extends BindingClass {
                 </table>
             `;
         }
-        workoutsList.innerHTML = workoutHistoryHtml;
 
+        // set page to display table built
+        workoutsList.innerHTML = workoutHistoryHtml;
     }
 }
 
