@@ -246,4 +246,13 @@ export default class WorkoutClient extends BindingClass {
                     this.handleError(error, errorCallback)
                  }
           }
+      async getTypes  (customerId, numberOfDays, errorCallback) {
+                 try {
+                         const response = await this.axiosClient.get(`workouts/type/${customerId}/recent?numberOfDays=${numberOfDays}`);
+                         console.log(response)
+                         return response.data;
+                   } catch (error) {
+                         this.handleError(error, errorCallback)
+                      }
+               }
     }

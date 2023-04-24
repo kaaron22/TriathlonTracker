@@ -4,25 +4,28 @@
 <head>
     <script type="text/javascript" src="assets/searchPlaylists.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script type="module" src="dimensions.js"></script> -->
+    
+
 </head>
 
 <body class="background">
-    <header class="header" id="header">
-        <h1>Dashboard</h1>
-    </header>
-    <div class="card">
-        <h2>Triathlon Hub</h2>
-        <p class="button-group">
-            <a href="createWorkout.html" class="button">Record Triathlon Workout</a>
-            <a href="getWorkoutHistory.html" class="button">Workout History</a>
-        </p>
-    </div>
-    <main>
-        <div class="card">
-            <h2 id="workout-title"> Recent Workouts (last 7 days)</h2>
-            <table id="workouts"></table>
-        </div>
-    </main>
+<header class="header" id="header">
+</header>
+<div class="card">
+    <h2>Triathlon Hub</h2>
+    <p class="button-group">
+
+        <a href="createWorkout.html" class="button">Record Triathlon Workout</a>
+    </p>
+</div>
+<div style="width: 325px;"><canvas id="typesChart"></canvas></div>
+
+<div class="card" >
+    <h2 id="workout-list"> Recent Workouts</h2>
+    <table id="workouts"></table>
+</div>
 
 </body>
 
