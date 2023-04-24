@@ -80,7 +80,7 @@ class GetWorkoutHub extends BindingClass {
         const customerId = identity.email;
         console.log(customerId)
         document.getElementById('workouts').innerText = "Loading Workouts ...";
-        const workouts = await this.client.sevenDayWorkout(customerId,7)
+        const workouts = await this.client.sevenDayWorkout(customerId,"7")
         this.dataStore.set('workouts', workouts);
         console.log("Workout object in clientLoaded()", workouts);
         console.log("End clientLoaded()");
@@ -97,11 +97,7 @@ class GetWorkoutHub extends BindingClass {
     }
 
      addWorkoutsToPage() {
-        console.log("addWorkoutToPage() start");
         const workouts = this.dataStore.get('workouts');
-
-        console.log('type of workouts:', typeof workouts);
-        console.log("workouts in addWorkoutsToPage method", workouts);
         if (workouts == null) {
             return;
         }
@@ -109,19 +105,18 @@ class GetWorkoutHub extends BindingClass {
         const workoutsList = document.getElementById('workouts');
         workoutsList.innerHTML = '';
 
-
-//        let workoutHubHtml = '';
-//        workoutHistoryHtml += `<table id="workouts">
-//                                   <tr>
-//                                       <th>Date</th>
-//                                       <th>Workout Type</th>
-//                                       <th>Hours</th>
-//                                       <th>Minutes</th>
-//                                       <th>Seconds</th>
-//                                       <th>Distance(km)</th>
-//                                   </tr>
-//                               </table>`
         let workoutHubHtml = '';
+
+        workoutHubHtml += `<table id="workouts">
+                                   <tr>
+                                       <th>Date</th>
+                                       <th>Workout Type</th>
+                                       <th>Hours</th>
+                                       <th>Minutes</th>
+                                       <th>Seconds</th>
+                                       <th>Distance(km)</th>
+                                   </tr>
+                               </table>`
         let workout;
         for (workout of workouts.workoutModels) {
             console.log(workout.date);

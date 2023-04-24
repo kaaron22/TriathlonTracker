@@ -52,6 +52,21 @@ public class CreateWorkoutActivity {
                     "] contains illegal characters");
         }
 
+        if (createWorkoutRequest.getDate() == null || createWorkoutRequest.getWorkoutType() == null
+                || createWorkoutRequest.getDate().trim().isEmpty()
+                || createWorkoutRequest.getWorkoutType().trim().isEmpty()) {
+            log.info("Date and WorkoutType must be provided");
+            throw new InvalidAttributeValueException("Date and WorkoutType must be provided");
+        }
+
+        String workoutType = createWorkoutRequest.getWorkoutType().toUpperCase();
+        if (!workoutType.equals("RUNNING") && !workoutType.equals("BIKING") && !workoutType.equals("SWIMMING")) {
+            log.info("Invalid WorkoutType, Running, Biking and Swimming are the valid" +
+                    " options");
+            throw new InvalidAttributeValueException("Invalid WorkoutType, Running, Biking and Swimming are the valid" +
+                    " options");
+        }
+
         Triathlon newTriathlon = new Triathlon();
         newTriathlon.setWorkoutId(MusicPlaylistServiceUtils.generatePlaylistId());
         newTriathlon.setCustomerId(createWorkoutRequest.getCustomerId());

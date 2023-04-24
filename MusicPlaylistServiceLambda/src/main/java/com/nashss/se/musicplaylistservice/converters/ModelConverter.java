@@ -40,16 +40,16 @@ public class ModelConverter {
     }
 
     public List<WorkoutModel> toWorkoutModels(List<Triathlon> triathlonList) {
-        System.out.println(triathlonList);
+
         List<WorkoutModel> workoutModels = new ArrayList<>();
 
         for(Triathlon triathlon : triathlonList) {
-            System.out.println(triathlon);
             workoutModels.add(toWorkoutModel(triathlon));
         }
 
         return workoutModels;
     }
+
     /**
      * Converts a provided {@link Playlist} into a {@link PlaylistModel} representation.
      *

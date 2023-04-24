@@ -16,10 +16,10 @@ public class GetWorkoutLambda
     @Override
     public LambdaResponse handleRequest(LambdaRequest<GetWorkoutRequest> input, Context context) {
         return super.runActivity(
-                () -> input.fromPathAndQuery((path, query )->
+                () -> input.fromPath((path)->
                         GetWorkoutRequest.builder()
                                 .withCustomerId(path.get("customerId"))
-                                .withNumberOfDays(query.get("numberOfDays"))
+                                .withNumberOfDays(path.get("numberOfDays"))
                                 .build()),
 
                 (request, serviceComponent) ->

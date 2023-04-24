@@ -5,12 +5,15 @@ import com.nashss.se.musicplaylistservice.activity.results.GetWorkoutResult;
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.WorkoutDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Triathlon;
+import com.nashss.se.musicplaylistservice.dynamodb.models.TriathlonComparator;
 import com.nashss.se.musicplaylistservice.models.WorkoutModel;
 
+import com.nashss.se.musicplaylistservice.utils.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -53,8 +56,11 @@ public class GetWorkoutActivity {
         }
 
         List<Triathlon> workouts = workoutDao.getSevenDayHistory(getWorkoutRequest.getCustomerId(), numberOfDays);
+        List<Triathlon> workoutsCopy = CollectionUtils.copyToList(workouts);
+        Comparator<Triathlon> triathlonComparator = new TriathlonComparator().reversed();
+        workoutsCopy.sort(triathlonComparator);
 
-        List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(workouts);
+        List<WorkoutModel> workoutModels = new ModelConverter().toWorkoutModels(workoutsCopy);
         log.info("workoutModels converted");
         return GetWorkoutResult.builder()
                 .withWorkoutList(workoutModels)

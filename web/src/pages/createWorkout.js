@@ -34,8 +34,12 @@ class CreateWorkout extends BindingClass {
         evt.preventDefault();
 
         const errorMessageDisplay = document.getElementById('error-message');
+        const successMessageDisplay = document.getElementById('success-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
+        successMessageDisplay.innerText = ``;
+        successMessageDisplay.classList.add('hidden');
+
 
         const createButton = document.getElementById('create');
         const origButtonText = createButton.innerText;
@@ -49,27 +53,27 @@ class CreateWorkout extends BindingClass {
         const durationInSeconds = document.getElementById('seconds').value;
         const distance = document.getElementById('distance').value;
 
-        const workout = await this.client.createWorkout(workoutType, date, durationInHours, durationInMinutes,
-         durationInSeconds, distance, (error) => {
-            createButton.innerText = origButtonText;
-            errorMessageDisplay.innerText = `Error: ${error.message}`;
+        try {
+            const workout = await this.client.createWorkout(workoutType, date, durationInHours, durationInMinutes, durationInSeconds, distance);
+
+            this.dataStore.set('workout', workout);
+            successMessageDisplay.innerText = `Workout added successfully`;
+            successMessageDisplay.classList.remove('hidden');
+        } catch (error) {
+            const errorMessage = error.response?.data?.error_message || "Undefined Error";
+            errorMessageDisplay.innerText = `Error: ${errorMessage}`;
             errorMessageDisplay.classList.remove('hidden');
-        });
-        this.dataStore.set('workout', workout);
-
-        document.getElementById('create').innerText = 'Record Workout';
-        document.getElementById("create-workout-form").reset();
-    }
-
-    /**
-     * When the playlist is updated in the datastore, redirect to the view playlist page.
-     */
-    /*redirectToCreateWorkout() {
-        const workout = this.dataStore.get('workout');
-        if (workout != null) {
-            window.location.href = `/createWorkout.html`;
+        } finally {
+            createButton.innerText = origButtonText;
         }
-    }*/
+
+        setTimeout(() => {
+            document.getElementById('create').innerText = 'Record Workout';
+            document.getElementById("create-workout-form").reset();
+            successMessageDisplay.innerText = ``;
+            successMessageDisplay.classList.add('hidden');
+        }, 3000);
+    }
 }
 
 /**

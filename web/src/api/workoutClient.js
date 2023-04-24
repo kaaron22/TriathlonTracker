@@ -16,7 +16,7 @@ export default class WorkoutClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs',
-        'createPlaylist', 'createWorkout', 'sevenDayWorkout'];
+            'createPlaylist', 'createWorkout', 'getFullWorkoutHistoryByCustomer', 'sevenDayWorkout'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -82,6 +82,16 @@ export default class WorkoutClient extends BindingClass {
         try {
             const response = await this.axiosClient.get(`playlists/${id}`);
             return response.data.playlist;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getFullWorkoutHistoryByCustomer(customerId, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Must be logged in to view workout history");
+            const response = await this.axiosClient.get(`workouts/customers/${customerId}`);
+            return response.data;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -158,7 +168,7 @@ export default class WorkoutClient extends BindingClass {
      */
     async search(criteria, errorCallback) {
         try {
-            const queryParams = new URLSearchParams({ q: criteria })
+            const queryParams = new URLSearchParams({q: criteria})
             const queryString = queryParams.toString();
 
             const response = await this.axiosClient.get(`playlists/search?${queryString}`);
@@ -189,30 +199,31 @@ export default class WorkoutClient extends BindingClass {
         }
     }
 
-    async createWorkout(workoutType, date, durationInHours, durationInMinutes, durationInSeconds, distance,
-     errorCallBack) {
-        try {
-            const token = await this.getTokenOrThrow("Only authenticated users can create a workout.");
-            const response = await this.axiosClient.post(`workouts`, {
-                workoutType: workoutType,
-                date: date,
-                durationInHours: durationInHours,
-                durationInMinutes: durationInMinutes,
-                durationInSeconds: durationInSeconds,
-                distance: distance
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            return response.data.workout;
-        } catch (error) {
-            this.handleError(error, errorCallBack)
-        }
+    async createWorkout(workoutType, date, durationInHours, durationInMinutes, durationInSeconds, distance) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const token = await this.getTokenOrThrow("Only authenticated users can create a workout.");
+                const response = await this.axiosClient.post(`workouts`, {
+                    workoutType: workoutType,
+                    date: date,
+                    durationInHours: durationInHours,
+                    durationInMinutes: durationInMinutes,
+                    durationInSeconds: durationInSeconds,
+                    distance: distance
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                resolve(response.data.workout); // Resolve with the workout data on success
+            } catch (error) {
+                reject(error); // Reject with the error on failure
+            }
+        });
     }
      async sevenDayWorkout  (customerId, numberOfDays, errorCallback) {
             try {
-                    const response = await this.axiosClient.get(`workouts/${customerId}/history?numberOfDays=${numberOfDays}`);
+                    const response = await this.axiosClient.get(`workouts/customers/{customerId}/{numberOfDays}/recent`);
                     console.log(response)
                     return response.data;
               } catch (error) {
