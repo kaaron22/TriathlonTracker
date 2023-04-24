@@ -4,7 +4,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "3rSbv"},
-          "customerId": {"S": "jim@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "Jim Smith"},
           "date": {"S": "2023-04-14"},
           "workoutType": {"S": "BIKING"},
@@ -18,7 +18,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "8sFtj"},
-          "customerId": {"S": "john@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "John Johnson"},
           "date": {"S": "2023-04-13"},
           "workoutType": {"S": "SWIMMING"},
@@ -32,7 +32,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "6mHtk"},
-          "customerId": {"S": "jane@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "Jane Doe"},
           "date": {"S": "2023-04-12"},
           "workoutType": {"S": "RUNNING"},
@@ -46,7 +46,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "9zVfx"},
-          "customerId": {"S": "jim@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "Jim Smith"},
           "date": {"S": "2023-04-11"},
           "workoutType": {"S": "BIKING"},
@@ -60,7 +60,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "5dPbc"},
-          "customerId": {"S": "john@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "John Johnson"},
           "date": {"S": "2023-04-10"},
           "workoutType": {"S": "SWIMMING"},
@@ -75,7 +75,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "7qLhx"},
-          "customerId": {"S": "jane@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "Jane Doe"},
           "date": {"S": "2023-04-09"},
           "workoutType": {"S": "RUNNING"},
@@ -89,7 +89,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "2rDfg"},
-          "customerId": {"S": "jim@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "Jim Smith"},
           "date": {"S": "2023-04-08"},
           "workoutType": {"S": "BIKING"},
@@ -103,7 +103,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "4jXmt"},
-          "customerId": {"S": "john@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "John Johnson"},
           "date": {"S": "2023-04-07"},
           "workoutType": {"S": "SWIMMING"},
@@ -117,7 +117,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "1pNbk"},
-          "customerId": {"S": "jane@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "Jane Doe"},
           "date": {"S": "2023-04-06"},
           "workoutType": {"S": "RUNNING"},
@@ -131,7 +131,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "0sTjr"},
-          "customerId": {"S": "jim@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "Jim Smith"},
           "date": {"S": "2023-04-05"},
           "workoutType": {"S": "BIKING"},
@@ -145,7 +145,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "6mKlx"},
-          "customerId": {"S": "jane@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "Jane Doe"},
           "date": {"S": "2023-04-22"},
           "workoutType": {"S": "BIKING"},
@@ -159,7 +159,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "9pLdr"},
-          "customerId": {"S": "john@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "John Johnson"},
           "date": {"S": "2023-04-21"},
           "workoutType": {"S": "SWIMMING"},
@@ -173,7 +173,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "7hKtu"},
-          "customerId": {"S": "jim@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "Jim Smith"},
           "date": {"S": "2023-04-19"},
           "workoutType": {"S": "SWIMMING"},
@@ -187,7 +187,7 @@
       "PutRequest": {
         "Item": {
           "workoutId": {"S": "4dJfw"},
-          "customerId": {"S": "john@example.com"},
+          "customerId": {"S": "transent2@gmail.com"},
           "customerName": {"S": "John Johnson"},
           "date": {"S": "2023-04-18"},
           "workoutType": {"S": "BIKING"},

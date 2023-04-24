@@ -37,21 +37,16 @@ class GetWorkoutHub extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const customerId = identity.email;
-        console.log(customerId)
         document.getElementById('workouts').innerText = "Loading Workouts ...";
         const workouts = await this.client.sevenDayWorkout(customerId,"7")
         this.dataStore.set('workouts', workouts);
-        console.log("Workout object in clientLoaded()", workouts);
-        console.log("End clientLoaded()");
         this.addWorkoutsToPage();
 
     }
 
     async get7dayWorkout(evt) {
         const identity = await this.client.getIdentity();
-        console.log("Workouts data:", workouts);
         this.addWorkoutsToPage();
-        console.log("end get7dayWorkout()");
     }
 
      addWorkoutsToPage() {
