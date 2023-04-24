@@ -3,6 +3,8 @@ import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
 import Chart from 'chart.js/auto'
+import Authenticator from "../api/authenticator";
+
 /**
  * Logic needed for the get workout history page of the website.
  */
@@ -12,7 +14,7 @@ class GetWorkoutHub extends BindingClass {
         this.bindClassMethods(['clientLoaded', 'mount', 'get7dayWorkout', 'workoutTypeChart'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        // this.authenticator = new Authenticator();
+        this.authenticator = new Authenticator();
         console.log("getWorkoutHub constructor");
     }
 
@@ -78,12 +80,9 @@ class GetWorkoutHub extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const customerId = identity.email;
-        console.log(customerId)
         document.getElementById('workouts').innerText = "Loading Workouts ...";
         const workouts = await this.client.sevenDayWorkout(customerId,"7")
         this.dataStore.set('workouts', workouts);
-        console.log("Workout object in clientLoaded()", workouts);
-        console.log("End clientLoaded()");
         this.addWorkoutsToPage();
         this.workoutTypeChart();
 
@@ -91,9 +90,7 @@ class GetWorkoutHub extends BindingClass {
 
     async get7dayWorkout(evt) {
         const identity = await this.client.getIdentity();
-        console.log("Workouts data:", workouts);
         this.addWorkoutsToPage();
-        console.log("end get7dayWorkout()");
     }
 
      addWorkoutsToPage() {
