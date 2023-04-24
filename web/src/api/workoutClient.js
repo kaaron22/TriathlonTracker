@@ -16,7 +16,7 @@ export default class WorkoutClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs',
-            'createPlaylist', 'createWorkout', 'getFullWorkoutHistoryByCustomer', 'deleteWorkout'];
+            'createPlaylist', 'createWorkout', 'getFullWorkoutHistoryByCustomer', 'sevenDayWorkout', 'deleteWorkout'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -236,4 +236,14 @@ export default class WorkoutClient extends BindingClass {
             }
         });
     }
-}
+
+    async sevenDayWorkout  (customerId, numberOfDays, errorCallback) {
+            try {
+                    const response = await this.axiosClient.get(`workouts/customers/${customerId}/recent?numberOfDays=${numberOfDays}`);
+                    console.log(response)
+                    return response.data;
+              } catch (error) {
+                    this.handleError(error, errorCallback)
+                 }
+          }
+    }
