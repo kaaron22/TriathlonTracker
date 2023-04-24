@@ -39,6 +39,26 @@ class GetWorkoutHistory extends BindingClass {
         this.addWorkoutsToPage();
     }
 
+    async deleteWorkout(workoutId) {
+        const confirmation = confirm('Are you sure you want to delete this workout?');
+        if (!confirmation) {
+            return;
+        }
+
+        try {
+            await this.client.deleteWorkout(workoutId, (error) => {
+                console.error('Error deleting workout:', error)
+                alert('Error deleting workout');
+            });
+            alert('Workout deleted successfully');
+            await this.clientLoaded();
+        } catch (error) {
+            console.error('Error deleting workout:', error)
+            alert('Error deleting workout');
+        }
+    }
+
+
     addWorkoutsToPage() {
         const workouts = this.dataStore.get('workouts');
         if (workouts == null) {
@@ -74,13 +94,25 @@ class GetWorkoutHistory extends BindingClass {
                         <td class="workoutDurationInMinutes">${workout.durationInMinutes}</td>
                         <td class="workoutDurationInSeconds">${workout.durationInSeconds}</td>
                         <td class="distance">${workout.distance}</td>
+                        <td><button class="delete-button" data-workout-id="${workout.workoutId}")">Delete</button></td>
                     </tr>
                 </table>
             `;
         }
-
         // set page to display table built
         workoutsList.innerHTML = workoutHistoryHtml;
+        // bind the click event to the delete button
+        this.bindDeleteButtons();
+    }
+
+    bindDeleteButtons() {
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', async (event) => {
+                const workoutId = event.target.getAttribute('data-workout-id');
+                await this.deleteWorkout(workoutId);
+            });
+        });
     }
 }
 
