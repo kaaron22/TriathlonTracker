@@ -9,10 +9,10 @@ on:
 env:
 
   # STUDENTS: Set these environment variables 
-  API_BASE_URL: https://od8pgldpw8.execute-api.us-east-2.amazonaws.com/Prod/
+  API_BASE_URL: https://w2lt2q7ly2.execute-api.us-east-2.amazonaws.com/Prod/
   COGNITO_DOMAIN: triathlon-trainer-service-team-two.auth.us-east-2.amazoncognito.com
-  COGNITO_REDIRECT_SIGNIN: https://dh2kubvqp3uh0.cloudfront.net
-  COGNITO_REDIRECT_SIGNOUT: https://dh2kubvqp3uh0.cloudfront.net
+  COGNITO_REDIRECT_SIGNIN: https://d310ayw5l53fs.cloudfront.net
+  COGNITO_REDIRECT_SIGNOUT: https://d310ayw5l53fs.cloudfront.net
 
   COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
   COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
