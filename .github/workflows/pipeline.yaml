@@ -10,7 +10,7 @@ env:
 
   # STUDENTS: Set these environment variables 
   API_BASE_URL: https://3bqdb5oc23.execute-api.us-east-2.amazonaws.com/Prod/
-  COGNITO_DOMAIN: triathlon-trainer-service-team-two.auth.us-east-2.amazoncognito.com
+  COGNITO_DOMAIN: triathlon-service-team-two.auth.us-east-2.amazoncognito.com
   COGNITO_REDIRECT_SIGNIN: https://d3pmyol8ueo8iz.cloudfront.net
   COGNITO_REDIRECT_SIGNOUT: https://d3pmyol8ueo8iz.cloudfront.net
 
