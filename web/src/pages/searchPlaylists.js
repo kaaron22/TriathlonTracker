@@ -2,14 +2,14 @@ import WorkoutClient from '../api/workoutClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
-
+import Chart from 'chart.js/auto'
 /**
  * Logic needed for the get workout history page of the website.
  */
 class GetWorkoutHub extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'get7dayWorkout'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'get7dayWorkout', 'workoutTypeChart'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         // this.authenticator = new Authenticator();
@@ -26,23 +26,66 @@ class GetWorkoutHub extends BindingClass {
 
         this.clientLoaded();
 
-
-
-
-
     }
+    async workoutTypeChart() {
+        const identity = await this.client.getIdentity();
+        const result = await this.client.getTypes(identity.email,7);
+        console.log(result, " types result: ");
+        const data = {
+            labels: [
+            'Swimming',
+            'Running',
+            'Biking'
+            ],
+            datasets: [{
+            label: 'Workout Type Ratio',
+            data: [result.swimCount, result.bikeCount, result.runCount],
+            backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+            ],
+            hoverOffset: 4
+            }]
+        };
 
 
+
+    // Doughnut Chart Configuration
+    const config = {
+      type: 'doughnut',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          },
+          title: {
+            display: true,
+            text: 'Event Counts'
+          }
+        }
+      }
+    };
+
+    // Initialize Chart
+    const myChart = new Chart(
+      document.getElementById('typesChart'),
+      config
+    );
+    }
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const customerId = identity.email;
         console.log(customerId)
         document.getElementById('workouts').innerText = "Loading Workouts ...";
-        const workouts = await this.client.sevenDayWorkout(customerId,"7")
+        const workouts = await this.client.sevenDayWorkout(customerId,7)
         this.dataStore.set('workouts', workouts);
         console.log("Workout object in clientLoaded()", workouts);
         console.log("End clientLoaded()");
         this.addWorkoutsToPage();
+        this.workoutTypeChart();
 
     }
 

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chart.js": "^4.2.1",
+    "package": "^1.0.1"
+  }
+}

@@ -24,6 +24,8 @@ public interface ServiceComponent {
      */
     GetWorkoutActivity provideGetWorkoutActivity();
 
+    GetTypeWorkoutsActivity provideGetTypeWorkoutsActivity();
+
     /**
      * Provides the relevant activity.
      * @return AddSongToPlaylistActivity
