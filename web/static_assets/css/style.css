@@ -142,12 +142,20 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CS
 
 /* table styles */ 
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
 th, td {
+    border: 1px solid #ddd;
     padding: 8px;
-    text-align: center;
+    text-align: left;
 }
 
 th {
+    background-color: #d4e0e6;
+    font-weight: bold;
     border-bottom: 1px solid var(--primary-color);
 }
 
