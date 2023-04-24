@@ -2,6 +2,7 @@ import WorkoutClient from '../api/workoutClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
+import Authenticator from "../api/authenticator";
 
 /**
  * Logic needed for the get workout history page of the website.
@@ -12,7 +13,7 @@ class GetWorkoutHub extends BindingClass {
         this.bindClassMethods(['clientLoaded', 'mount', 'get7dayWorkout'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        // this.authenticator = new Authenticator();
+        this.authenticator = new Authenticator();
         console.log("getWorkoutHub constructor");
     }
 
