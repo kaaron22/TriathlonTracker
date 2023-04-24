@@ -16,7 +16,7 @@ export default class WorkoutClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs',
-            'createPlaylist', 'createWorkout', 'getFullWorkoutHistoryByCustomer'];
+            'createPlaylist', 'createWorkout', 'getFullWorkoutHistoryByCustomer', 'deleteWorkout'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -91,6 +91,21 @@ export default class WorkoutClient extends BindingClass {
         try {
             const token = await this.getTokenOrThrow("Must be logged in to view workout history");
             const response = await this.axiosClient.get(`workouts/customers/${customerId}`);
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async deleteWorkout(workoutId, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Must be logged in to delete a workout");
+            const response = await this.axiosClient.delete(`workouts/${workoutId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(response);
             return response.data;
         } catch (error) {
             this.handleError(error, errorCallback)
