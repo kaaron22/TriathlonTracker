@@ -28,8 +28,8 @@ module.exports = {
     viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
     searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
     getWorkoutHistory: path.resolve(__dirname, 'src', 'pages', 'getWorkoutHistory.js'),
-    getWorkout: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js')
-    getTypes: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
+
+
 
   },
   output: {

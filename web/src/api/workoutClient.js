@@ -239,7 +239,7 @@ export default class WorkoutClient extends BindingClass {
 
     async sevenDayWorkout  (customerId, numberOfDays, errorCallback) {
             try {
-                    const response = await this.axiosClient.get(`workouts/customers/{customerId}/{numberOfDays}/recent`);
+                    const response = await this.axiosClient.get(`workouts/customers/{customerId}/recent`);
                     console.log(response)
                     return response.data;
               } catch (error) {
@@ -248,7 +248,7 @@ export default class WorkoutClient extends BindingClass {
           }
       async getTypes  (customerId, numberOfDays, errorCallback) {
                  try {
-                         const response = await this.axiosClient.get(`workouts/${customerId}/history/{numberOfDays}/type`);
+                         const response = await this.axiosClient.get(`workouts/type/{customerId}/history`);
                          console.log(response)
                          return response.data;
                    } catch (error) {

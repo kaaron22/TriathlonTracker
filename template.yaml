@@ -403,7 +403,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /workouts/{customerId}/history/{numberOfDays}
+            Path: /workouts/customers/{customerId}/recent/
             Method: get
             Auth:
               Authorizer: 'NONE'
@@ -425,7 +425,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /workouts/{customerId}/history/{numberOfDays}/type
+            Path: /workouts/type/{customerId}/history/
             Method: get
             Auth:
               Authorizer: 'NONE'
