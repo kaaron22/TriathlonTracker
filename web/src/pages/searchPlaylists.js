@@ -29,7 +29,7 @@ class GetWorkoutHub extends BindingClass {
     }
     async workoutTypeChart() {
         const identity = await this.client.getIdentity();
-        const result = await this.client.getTypes(identity.email,7);
+        const result = await this.client.getTypes(identity.email,"7");
         console.log(result, " types result: ");
         const data = {
             labels: [
@@ -63,7 +63,7 @@ class GetWorkoutHub extends BindingClass {
           },
           title: {
             display: true,
-            text: 'Event Counts'
+            text: 'Workout by Types'
           }
         }
       }

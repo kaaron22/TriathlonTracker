@@ -63,8 +63,7 @@ public class WorkoutDao {
         DynamoDBQueryExpression<Triathlon> queryExpression = new DynamoDBQueryExpression<Triathlon>()
                 .withIndexName(CUSTOMER_ID_DATE_RANGE_INDEX)
                 .withConsistentRead(false)
-                .withKeyConditionExpression("customerId = :customerId")
-                .withFilterExpression("#dateAttr BETWEEN :startDate and :endDate")
+                .withKeyConditionExpression("customerId = :customerId and #dateAttr BETWEEN :startDate and :endDate")
                 .withExpressionAttributeValues(valueMap)
                 .withExpressionAttributeNames(nameMap);
 

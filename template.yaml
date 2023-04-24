@@ -425,7 +425,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /workouts/type/{customerId}/history/
+            Path: /workouts/type/{customerId}/recent/
             Method: get
             Auth:
               Authorizer: 'NONE'
