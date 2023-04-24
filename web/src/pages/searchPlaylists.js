@@ -2,7 +2,7 @@ import WorkoutClient from '../api/workoutClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
-import Chart from 'chart.js/auto'
+import Chart from 'chart.js/auto';
 import Authenticator from "../api/authenticator";
 
 /**
