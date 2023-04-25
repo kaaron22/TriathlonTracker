@@ -41,7 +41,7 @@ class GetWorkoutHub extends BindingClass {
             ],
             datasets: [{
             label: 'Workout Type Ratio',
-            data: [result.swimCount, result.bikeCount, result.runCount],
+            data: [result.swimCount, result.runCount, result.bikeCount],
             backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',
