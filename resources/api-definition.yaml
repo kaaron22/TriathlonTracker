@@ -8,12 +8,6 @@ servers:
   - url: http://localhost:3000
 
 tags:
-  - name: Playlists
-    description: Create, view, and update playlists
-
-  - name: Songs
-    description: View and add songs to playlists
-
   - name: Triathlon
     description: Create, view, and update triathlon workouts
 
@@ -114,207 +108,94 @@ paths:
         "400":
           description: An error indicating the workout could not be deleted
 
-  /playlists:
-    post:
-      tags:
-        - Playlists
-      summary: Create a new playlist (CreatePlaylistLambda)
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                customerId:
-                  type: string
-                tags:
-                  type: array
-                  items:
-                    type: string
-      responses:
-        "200":
-          description: A playlist object
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  customerId:
-                    type: string
-                  songCount:
-                    type: integer
-                  tags:
-                    type: array
-                    items:
-                      type: string
-
-  /playlists/{id}:
+  /workouts/customers/{customerId}:
     get:
+      summary: Get full workout history by customer ID
       tags:
-        - Playlists
-      summary: Get an existing playlist (GetPlaylistLambda)
+        - Triathlon
       parameters:
-        - name: id
+        - name: customerId
           in: path
-          description: ID of playlist to retrieve
+          description: ID of the customer to retrieve workout history
           required: true
           schema:
             type: string
       responses:
         "200":
-          description: PlaylistResponse
+          description: A list of workouts for the specified customer ID
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  customerId:
-                    type: string
-                  songCount:
-                    type: integer
-                  tags:
-                    type: array
-                    items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    workoutId:
                       type: string
-        "500":
-          description: "Invalid input parameters"
-
-    put:
-      tags:
-        - Playlists
-      summary: Update the name of an existing playlist (UpdatePlaylistLambda)
-      parameters:
-        - name: id
-          in: path
-          description: ID of playlist to retrieve
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                name:
-                  type: string
-                customerId:
-                  type: string
-
-      responses:
-        "200":
-          description: PlaylistResponse
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  customerId:
-                    type: string
-                  songCount:
-                    type: integer
-                  tags:
-                    type: array
-                    items:
+                    customerId:
                       type: string
-        "500":
-          description: "Invalid input parameters"
+                    customerName:
+                      type: string
+                    date:
+                      type: string
+                      format: date
+                    workoutType:
+                      type: string
+                    durationInHours:
+                      type: string
+                    durationInMinutes:
+                      type: string
+                    durationInSeconds:
+                      type: string
+                    distance:
+                      type: string
+        "400":
+          description: An error indicating the workout history could not be retrieved
 
-
-
-
-  /playlists/{id}/songs:
+  /workouts/type/{workoutType}/customers/{customerId}/recent/:
     get:
+      summary: Get the most recent workout of a specific type for a customer
       tags:
-        - Songs
-      summary: Retrieves a list of all songs in a playlist (GetPlaylistSongsLambda)
-      operationId: getSongs
+        - Triathlon
       parameters:
-        - name: id
+        - name: workoutType
           in: path
-          description: ID of playlist to return
+          description: Type of workout to retrieve (e.g. RUNNING, SWIMMING, BIKING)
+          required: true
+          schema:
+            type: string
+        - name: customerId
+          in: path
+          description: ID of the customer to retrieve the workout for
           required: true
           schema:
             type: string
       responses:
         "200":
-          description: A playlist object
+          description: The most recent workout of the specified type for the customer
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  songList:
-                    type: array
-                    items:
-                      properties:
-                        asin:
-                          type: string
-                        title:
-                          type: string
-                        album:
-                          type: string
-                        trackNumber:
-                          type: integer
-
-    post:
-      tags:
-        - Songs
-      summary: Add a song to a playlist (AddSongToPlaylistLambda)
-      operationId: addSong
-      parameters:
-        - name: id
-          in: path
-          description: ID of playlist to return
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                asin:
-                  type: string
-                trackNumber:
-                  type: integer
-                id:
-                  type: string
-
-      responses:
-        "200":
-          description: the song
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  songList:
-                    type: array
-                    items:
-                      properties:
-                        asin:
-                          type: string
-                        title:
-                          type: string
-                        album:
-                          type: string
-                        trackNumber:
-                          type: integer
+                  workoutId:
+                    type: string
+                  customerId:
+                    type: string
+                  customerName:
+                    type: string
+                  date:
+                    type: string
+                    format: date
+                  workoutType:
+                    type: string
+                  durationInHours:
+                    type: string
+                  durationInMinutes:
+                    type: string
+                  durationInSeconds:
+                    type: string
+                  distance:
+                    type: string
+        "400":
+          description: An error indicating the recent workout could not be retrieved
