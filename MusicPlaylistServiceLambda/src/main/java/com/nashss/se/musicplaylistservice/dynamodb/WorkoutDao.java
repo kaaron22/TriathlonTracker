@@ -46,6 +46,7 @@ public class WorkoutDao {
     public Triathlon getTriathlon(String workoutId) {
         return this.dynamoDbMapper.load(Triathlon.class, workoutId);
     }
+
     public List<Triathlon> getSevenDayHistory (String customerId, int numberOfDays) {
         LocalDate endDate = LocalDate.now();
         LocalDate startDate = endDate.minusDays(numberOfDays);
@@ -82,6 +83,7 @@ public class WorkoutDao {
 
         return dynamoDbMapper.query(Triathlon.class, queryExpression);
     }
+
     public Map<String,Integer> getWorkoutTypeNum (String customerId, int numberOfDays) {
 
         Map<String,Integer> workoutByType = new HashMap<>();
@@ -114,6 +116,7 @@ public class WorkoutDao {
         }
         return workoutByType;
     }
+
     /**
      * Saves (creates or updates) the given playlist.
      *
@@ -124,6 +127,7 @@ public class WorkoutDao {
         this.dynamoDbMapper.save(workout);
         return workout;
     }
+
     public void deleteTriathlon(Triathlon workout) {
         dynamoDbMapper.delete(workout);
     }
