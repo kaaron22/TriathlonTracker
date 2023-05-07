@@ -8,7 +8,7 @@ This project challenged us to apply those skills as a team, while starting with 
 
 Please see the [design document](resources/design-document.md) for details of our initial user stories, API endpoint designs, and DynamoDB table designs, among other details that informed our end goals.
 
-This project is very much a work-in-progress. While there are desired features and computer science concepts we were unable to fully implement by the project due date, along with further testing and debugging that would certainly need to occur in the real-world, we are very proud of the amount we learned and what we were able to accomplish, particularly in such a short amount of time. The learning continues, as always!
+This project is very much a work-in-progress. While there are desired features and computer science concepts we were unable to fully implement by the project due date, further testing and debugging that would certainly need to occur in the real-world, and even some remaining remnants of the initial MusicPlaylistService that was provided to us for an example, we are very proud of the amount we learned and what we were able to accomplish, particularly in such a short amount of time. The learning continues, as always!
 
 The CloudFront website is available to peruse  [here](https://d3pmyol8ueo8iz.cloudfront.net/) (for a limited time, as determined by NSS). It will require account sign up, which utilizes AWS Cognito, after which you can add  "completed" workouts, view a history of workouts, and delete workouts (more details/instructions to come).
 
