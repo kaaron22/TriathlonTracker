@@ -1,3 +1,19 @@
+# TriathlonTracker
+
+Hello and welcome to TriathlonTracker! We designed and developed this application for our mid-course team project while attending Nashville Software School's (NSS) nine-month Software Engineering [program](https://nashvillesoftwareschool.com/programs/software-engineering).
+
+The SE program is based on Amazon Technical Academy's curriculum and is the result of collaboration between NSS and Amazon. It is focused on learning/applying computer science concepts and back-end technologies using Java and AWS, including object-oriented programming, algorithms and data structures, concurrent programming, numerous AWS services, etc.
+
+This project challenged us to apply those skills as a team, while starting with a greater level of ambiguity, but additionally challenged us to learn and implement new technologies in a short period of time (3-4 weeks), namely HTML, CSS, and JavaScript, as well as several AWS services that we had yet to work with, such as AWS Lambda, AWS CloudFront, AWS CodePipeline, etc.
+
+Please see the [design document](resources/design-document.md) for details of our initial user stories, API endpoint designs, and DynamoDB table designs, among other details that informed our end goals.
+
+This project is very much a work-in-progress. While there are desired features and computer science concepts we were unable to fully implement by the project due date, along with further testing and debugging that would certainly need to occur in the real-world, we are very proud of the amount we learned and what we were able to accomplish, particularly in such a short amount of time. The learning continues, as always!
+
+The CloudFront website is available to peruse  [here](https://d3pmyol8ueo8iz.cloudfront.net/) (for a limited time, as determined by NSS). It will require account sign up, which utilizes AWS Cognito, after which you can add  "completed" workouts, view a history of workouts, and delete workouts (more details/instructions to come).
+
+The remainder of this document consists of the original README contents.
+
 # Unit 5 Project Intro
 
 Welcome to the Unit 5 Project. This project is a starting point that you'll be making extensive changes to as you design and build your own application. The code provided here is a starting point meant to remind you of patterns that we've been using, as well as show you a few new patterns that you might find useful. This document has 2 main sections:
